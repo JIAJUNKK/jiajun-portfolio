@@ -1,0 +1,60 @@
+@import "../../app.scss";
+.hero {
+  height: calc(100vh - 100px);
+  overflow: hidden;
+  position: relative;
+  margin-left: 10%;
+  max-width: 80%;
+  .wrapper {
+    max-width: 80%;
+    height: 100%;
+
+    .textContainer {
+      width: 100%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      h2 {
+        font-size: 20px;
+        color: #005b96;
+        letter-spacing: 10px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .buttons {
+        button {
+          padding: 20px;
+          border: 1px solid white;
+          border-radius: 10px;
+          background-color: transparent;
+          color: white;
+          margin-right: 20px;
+          cursor: pointer;
+          font-weight: 300;
+        }
+      }
+
+      img {
+        width: 50px;
+      }
+    }
+  }
+
+  .imageContainer {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

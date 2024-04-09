@@ -1,0 +1,15 @@
+@import "../../app.scss";
+
+.techStack{
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    .wrapper{
+        margin-left: 1%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 70%;
+    }
+
+}
