@@ -7,6 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+
   h1 {
     font-size: 100px;
 
@@ -41,9 +43,6 @@
       background-size: contain;
       background-repeat: no-repeat;
     }
-  }
-  &.hide-planets .planets {
-    display: none;
   }
   .stars {
     background-image: url("/stars.png");

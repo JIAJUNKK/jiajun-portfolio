@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motio
 import "./about.scss";
 
 const HighlightText = ({ highlightedContent }) => {
-  const contentRef = useRef(); // Separate useRef for each instance
+  const contentRef = useRef(); 
 
   const { scrollYProgress } = useScroll({
     target: contentRef,
@@ -25,7 +25,7 @@ const HighlightText = ({ highlightedContent }) => {
   );
 };
 
-const ScrollText = () => {
+const About = () => {
   return (
     <div className="outer">
       <div className="inner">
@@ -55,4 +55,4 @@ const ScrollText = () => {
   );
 };
 
-export default ScrollText;
+export default About;
