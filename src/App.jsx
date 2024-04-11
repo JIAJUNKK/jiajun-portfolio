@@ -5,7 +5,8 @@ import Cursor from "./components/cursor/Cursor";
 import Hero from "./components/hero/Hero";
 import Navbar from "./components/navbar/Navbar";
 import Parallax from "./components/parallax/Parallax";
-import Portfolio from "./components/experience/Experience";
+import Experience from "./components/experience/Experience";
+import Projects from "./components/projects/Projects";
 
 const App = () => {
   return (
@@ -24,13 +25,14 @@ const App = () => {
       <section id="Experience">
         <Parallax type="experience" />
       </section>
-      <Portfolio />
+      <Experience />
+      <section id="Projects">
+        <Parallax type="projects" />
+      </section>
       <section id="Contact">
         <Contact />
       </section>
-      {/* Framer Motion Crash Course */}
-      {/* <Test/>
-    <Test/> */}
+
     </div>
   );
 };

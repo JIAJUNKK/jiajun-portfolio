@@ -1,6 +1,6 @@
 import "./hero.scss";
 import { motion } from "framer-motion";
-import { textVariants } from "../motion.js";
+import { textVariants } from "../../constants/motion";
 import TechStack from "../techstack/TechStack";
 
 const Hero = () => {
