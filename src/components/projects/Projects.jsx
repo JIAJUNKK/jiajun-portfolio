@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { experiences } from "../../constants";
+import { projects } from "../../constants";
+import './projects.scss';
 
-const Single = ({ item }) => {
+const Single = ({ project }) => {
   const ref = useRef();
 
   const { scrollYProgress } = useScroll({
@@ -16,11 +17,23 @@ const Single = ({ item }) => {
       <div className="container">
         <div className="wrapper">
           <div className="imageContainer" ref={ref}>
-            <img src={item.img} alt="" />
+            <img src={project.img} alt="" />
           </div>
           <motion.div className="textContainer" style={{y}}>
-            <h2>{item.title}</h2>
-            <p>{item.desc}</p>
+            <h2>{project.title}</h2>
+
+            <ul>
+              {project.description.map((desc, index) => (
+                <li
+                  key={`project-desc-${index}`}
+                  className=''
+                >
+                  {desc}
+                </li>
+              ))}
+            </ul>
+
+
             <button>See Demo</button>
           </motion.div>
         </div>
@@ -48,9 +61,13 @@ const Projects = () => {
         <h1>Projects</h1>
         <motion.div style={{ scaleX }} className="progressBar"></motion.div>
       </div>
-      {experiences.map((item) => (
-        <Single item={item} key={item.id} />
-      ))}
+
+      <div>
+        {projects.map((project) => (
+          <Single project={project} key={project.id} />
+        ))}
+      </div>
+
     </div>
   );
 };

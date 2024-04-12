@@ -26,7 +26,7 @@ export const experiences = [
       title: "Robocon Team Member",
       company_name: "HUMAC | Sunway University, Malaysia 🇲🇾",
       icon: "/companies/sunway.png",
-      iconBg: "#",
+      iconBg: "#383E56",
       date: "April 2022 - April 2023",
       description: [
         "Contributed and designed a ring tosser robot for 2023 ABU Robocon using Blender.",
@@ -36,4 +36,39 @@ export const experiences = [
 
 ];
 
-export default {experiences}
+export const projects = [
+    {
+      id: 1,
+      title: "7 Mantap",
+      img: "/7Mantap.png",
+      description: [
+        "Leveraged REST API to establish connection to the MongoDB.",
+        "Integrated with Stripe's API to facilitate secure checkout.",
+        "Enhanced UX by interpreting the users' data in the database.",
+        "Empowered users with comprehensive post-purchase support, including email confirmations, access to order history for tracking, and the ability to manage personal details seamlessly.",
+      ],   
+    },
+    {
+      id: 2,
+      title: "Health Buddy",
+      img: "/healthBuddy.png",
+      description: [
+        "Finalised the UI/UX requirements and implemented those as a design lead of a team of 5",
+        "Set up Firebase server for Health Buddy’s backend.",
+        "Enable real time update to track users’ progress with maximum delay of 1 second.",
+        "Developed the app both front-ended and back-ended.",
+      ],    
+    },
+    {
+      id: 3,
+      title: "Instagram Follower Tracker",
+      img: "https://images.pexels.com/photos/6894528/pexels-photo-6894528.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      description: [
+        "Implemented a Python and Selenium application aimed at identifying individuals who don’t follow back me on Instagram.",
+        "Utilised Python file writing function to improve the efficiency by at least 20%.",
+      ],    
+    },
+    
+];
+  
+export default {experiences, projects}

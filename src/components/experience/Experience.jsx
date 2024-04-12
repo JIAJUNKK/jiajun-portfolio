@@ -75,8 +75,7 @@ const Experience = () => {
       <div className=''>
         <VerticalTimeline
             lineColor= {'black'}
-        >
-          
+        >          
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={`experience-${index}`}

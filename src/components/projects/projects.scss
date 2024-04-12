@@ -2,7 +2,7 @@
 
 .portfolio {
   position: relative;
-
+  
   .progress {
     position: sticky;
     top: 0;
@@ -47,10 +47,12 @@
       .imageContainer {
         flex: 1;
         height: 50%;
+        border: 3px solid #011f4b;
 
         @include mobile {
           width: 100%;
           max-height: 300px;
+          border: none;
         }
 
         img {
@@ -85,12 +87,14 @@
           }
         }
 
-        p {
+        ul {
           color: gray;
           font-size: 20px;
 
           @include mobile {
             font-size: 16px;
+            text-align: left;
+            margin-left: 5%;
           }
         }
 

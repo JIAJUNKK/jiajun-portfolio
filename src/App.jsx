@@ -25,10 +25,14 @@ const App = () => {
       <section id="Experience">
         <Parallax type="experience" />
       </section>
-      <Experience />
+        <Experience />
+
       <section id="Projects">
         <Parallax type="projects" />
       </section>
+
+        <Projects/>
+      
       <section id="Contact">
         <Contact />
       </section>
