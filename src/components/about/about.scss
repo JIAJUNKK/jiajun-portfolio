@@ -1,17 +1,21 @@
 .outer {
-  display: flex;
+  display: flex; 
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: 0%;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-
+  margin: auto;
+  width: 80%;
+  img{
+    width: 20%;
+    border-radius: 10px;
+    margin: 0 10% 0 10%;
+  }
   .inner{
-    width: 70%;
+    width: 50%;
+    margin: 0 10% 0 0;
     p {
       line-height: 2;
-      font-size: 30px;
+      font-size: 20px;
       color: #b3cde0;
     }
   }
@@ -19,6 +23,7 @@
 }
 
 .text-container {
+  display: inline;
   position: relative;
 
   .highlighted-text:before {
@@ -27,7 +32,7 @@
   .highlighted-text {
     color: #011f4b;
     width: 100%;
-    position: absolute;
+    position: relative;
     left: 0;
     z-index: 0;
     transition: clip-path 0.8s ease;
