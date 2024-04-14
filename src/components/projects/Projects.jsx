@@ -13,7 +13,7 @@ const Single = ({ project }) => {
   const y = useTransform(scrollYProgress, [0, 1], [-300, 300]);
 
   return (
-    <section >
+    <section class="project-section">
       <div className="container">
         <div className="wrapper">
           <div className="imageContainer" ref={ref}>
@@ -31,10 +31,14 @@ const Single = ({ project }) => {
                   {desc}
                 </li>
               ))}
-            </ul>
+            </ul>      
 
-
-            <button>See Demo</button>
+            <a className="source-code-button-container" href={project.githubLink} target="_blank">
+              <div className="source-code-button">
+                  <img src="/github.svg"></img>
+              </div>    
+              <h3>View Source Code {'</>'}</h3>
+            </a>
           </motion.div>
         </div>
       </div>
@@ -67,8 +71,9 @@ const Projects = () => {
           <Single project={project} key={project.id} />
         ))}
       </div>
-
     </div>
+
+
   );
 };
 

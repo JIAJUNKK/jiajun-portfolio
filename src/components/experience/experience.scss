@@ -5,13 +5,11 @@
   justify-content: center; align-self: center; align-items: center;
   margin: auto;
   max-width: 80%;
-  
-  .progress {
-    padding-top: 50px;
-    text-align: center;
-    color: #FF8E00;
-    font-size: 36px;
+  height: 200vh;
 
+  @include mobile{
+    margin-top: -10%;
+    height: 220vh;
   }
 }
 

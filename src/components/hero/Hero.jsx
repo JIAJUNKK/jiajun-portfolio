@@ -18,7 +18,7 @@ const Hero = () => {
             Full Stack Developer | Software Engineer 👋🏻
           </motion.h1>
           <motion.h3 variants={textVariants}>
-            Hi, I'm Jia Jun. A passionate software engineering from Malaysia 🇲🇾
+            Hi, I'm Jia Jun. A passionate software engineering student from Malaysia 🇲🇾
           </motion.h3>
           <br></br>
 

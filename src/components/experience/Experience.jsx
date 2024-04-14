@@ -11,6 +11,7 @@ import "react-vertical-timeline-component/style.min.css";
 
 const ExperienceCard = ({ experience }) => {
   return (
+    
     <VerticalTimelineElement
       className="experience-card"
       contentStyle={{
@@ -67,12 +68,8 @@ const Experience = () => {
   });
 
   return (
-    <div className="experience">
-      <div className="progress">
-        <h1>Experience</h1>
-      </div>
-
-      <div className=''>
+    <section className="experience">
+      <div className="vertical-time-line">
         <VerticalTimeline
             lineColor= {'black'}
         >          
@@ -84,7 +81,7 @@ const Experience = () => {
           ))}
         </VerticalTimeline>
       </div>
-    </div>
+    </section>
   );
 };
 

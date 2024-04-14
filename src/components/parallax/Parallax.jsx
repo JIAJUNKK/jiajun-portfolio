@@ -2,6 +2,7 @@ import { useRef } from "react";
 import "./parallax.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+
 const Parallax = ({ type }) => {
   const ref = useRef();
 
@@ -10,8 +11,21 @@ const Parallax = ({ type }) => {
     offset: ["start start", "end start"],
   });
 
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "500%"]);
+
+  const aboutMeText = useTransform(scrollYProgress, [0, 1], ["0%", "420%"]);
+  const experienceText = useTransform(scrollYProgress, [0, 1], ["0%", "400%"]);
+  const projectsText = useTransform(scrollYProgress, [0, 1], ["0%", "300%"]);
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const textMotion = (type) =>{
+    if (type === "about"){
+      return aboutMeText
+    }else if (type === "experience"){
+      return experienceText
+    }else if (type === "projects"){
+      return projectsText
+    }
+  }
 
   return (
     <div
@@ -19,11 +33,14 @@ const Parallax = ({ type }) => {
       ref={ref}
       style={{background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(208,229,245,1) 35%, rgba(189,215,235,1) 100%)"}}
     >
-      <motion.h1 style={{ y: yText }}>
+      <motion.h1 
+        style={{ y: textMotion(type)}}
+      >
         {type === "about" && "About Me"}
         {type === "experience" && "Experience"}
         {type === "projects" && "Projects"}
       </motion.h1>
+      
       <motion.div className="mountains"></motion.div>
       <motion.div
         className="planets"
