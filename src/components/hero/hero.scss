@@ -5,9 +5,20 @@
   position: relative;
   margin-left: 10%;
   max-width: 80%;
+
+  @include mobile{
+    max-width: 100%;
+    margin-left: 0;
+  }
+
   .wrapper {
     max-width: 80%;
     height: 100%;
+
+    @include mobile{
+      max-width: 100%;
+      height: 90%;
+    }
 
     .textContainer {
       width: 100%;
@@ -16,31 +27,26 @@
       flex-direction: column;
       justify-content: center;
       gap: 20px;
-      h2 {
-        font-size: 20px;
-        color: #005b96;
-        letter-spacing: 10px;
+
+      @include mobile{
+        height: 50%;
+        align-items: center;
+        text-align: center;
       }
 
       h1 {
         font-size: 40px;
-      }
-
-      .buttons {
-        button {
-          padding: 20px;
-          border: 1px solid white;
-          border-radius: 10px;
-          background-color: transparent;
-          color: white;
-          margin-right: 20px;
-          cursor: pointer;
-          font-weight: 300;
+        @include mobile{
+          font-size: 30px;
         }
       }
-
-      img {
-        width: 50px;
+      h3{
+        margin-bottom: 5%;
+        @include mobile{
+          width: 80%;
+          font-size: 16px;
+          margin-bottom: -2%;
+        }
       }
     }
   }
@@ -50,6 +56,13 @@
     position: absolute;
     top: 0;
     right: 0;
+
+    @include mobile{
+      display: flex;
+      height: 50%; 
+      bottom: 0; top: unset;
+      margin-right: 20%;
+    }
     
     img{
       width: 100%;

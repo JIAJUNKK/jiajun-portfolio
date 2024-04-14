@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
 
-        <Sidebar/>
+      <Sidebar/>
 
       <div className="wrapper">
         <motion.span
