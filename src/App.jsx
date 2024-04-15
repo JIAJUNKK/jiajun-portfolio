@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar";
 import Parallax from "./components/parallax/Parallax";
 import Experience from "./components/experience/Experience";
 import Projects from "./components/projects/Projects";
+import TechStack from "./components/techstack/TechStack";
 
 const App = () => {
   useEffect(() => {
@@ -33,6 +34,7 @@ const App = () => {
       <section id="Home">
         <Navbar />
         <Hero />
+        <TechStack/>
       </section>
       <section id="About">
         <Parallax type="about" />

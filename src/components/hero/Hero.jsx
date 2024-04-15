@@ -1,7 +1,6 @@
 import "./hero.scss";
 import { motion } from "framer-motion";
 import { textVariants } from "../../constants/motion";
-import TechStack from "../techstack/TechStack";
 
 const Hero = () => {
   return (
@@ -19,9 +18,6 @@ const Hero = () => {
           <motion.h3 variants={textVariants}>
             Hi, I'm Jia Jun. A passionate software engineering student from Malaysia 🇲🇾
           </motion.h3>
-
-          <TechStack/>
-
         </motion.div>
       </div>
 
