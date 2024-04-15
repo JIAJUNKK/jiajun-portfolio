@@ -10,15 +10,17 @@ const Single = ({ project }) => {
     target: ref,
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [-300, 300]);
+  const y = useTransform(scrollYProgress, [0, 1], [-350, 300]);
 
   return (
     <section class="project-section">
       <div className="container">
         <div className="wrapper">
+
           <div className="imageContainer" ref={ref}>
             <img src={project.img} alt="" />
           </div>
+
           <motion.div className="textContainer" style={{y}}>
             <h2>{project.title}</h2>
 
@@ -34,12 +36,10 @@ const Single = ({ project }) => {
             </ul>      
 
             <a className="source-code-button-container" href={project.githubLink} target="_blank">
-              <div className="source-code-button">
-                  <img src="/github.svg"></img>
-              </div>    
               <h3>View Source Code {'</>'}</h3>
             </a>
           </motion.div>
+
         </div>
       </div>
     </section>
