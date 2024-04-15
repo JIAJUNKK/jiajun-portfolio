@@ -32,6 +32,8 @@ const About = () => {
       <img src="/aboutMe-study.jpeg"></img>
 
       <div className="inner">
+        <h1>About Me 👨🏻‍💻 </h1>
+        <h2>Software Enigeering Student</h2>
         <p>
           I am an undergraduate student aspiring to, {' '}
           <HighlightText highlightedContent={"secure internship opportunities"} /> 
