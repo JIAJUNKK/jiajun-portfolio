@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import "./parallax.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
-
+import { useMediaQuery } from "react-responsive";
 
 const Parallax = ({ type }) => {
   const ref = useRef();
@@ -11,9 +11,11 @@ const Parallax = ({ type }) => {
     offset: ["start start", "end start"],
   });
 
+  const isMobile = useMediaQuery({ query: "(max-width: 738px)" }); 
 
-  const aboutMeText = useTransform(scrollYProgress, [0, 1], ["0%", "420%"]);
-  const experienceText = useTransform(scrollYProgress, [0, 1], ["0%", "400%"]);
+
+  const aboutMeText = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "580%" : "420%"]);
+  const experienceText = useTransform(scrollYProgress, [0, 1], ["0%", isMobile? "580%": "400%"]);
   const projectsText = useTransform(scrollYProgress, [0, 1], ["0%", "250%"]);
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 

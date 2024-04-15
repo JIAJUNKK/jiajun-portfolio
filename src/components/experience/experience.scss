@@ -12,6 +12,11 @@
     margin-top: 0%;
     height: 220vh;
   }
+  .vertical-time-line{
+    @include mobile{
+      margin-top: 50%;
+    }
+  }
 }
 
 .experience-card{

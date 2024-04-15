@@ -10,6 +10,7 @@
   margin-top: 5%;
 
   @include mobile{
+    margin-top: 20%;
     flex-direction: column;
   }
   

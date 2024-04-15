@@ -24,23 +24,31 @@ const Contact = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const isInView = useInView(ref, { margin: "-100px" });
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setSuccess(false);
+    setError(false);
+    setLoading(true);
 
+    console.log(formRef.current)
     emailjs
       .sendForm(
-        "service_94y20xo",
-        "template_v10u2oh",
+        "service_fzkwrnn",
+        "template_72r5xt2",
         formRef.current,
-        "pX_2hasGmGcuvjXIW"
+        "CO2EZMjdFCdGg-h0K"
       )
       .then(
         (result) => {
+          setLoading(false);
           setSuccess(true)
         },
         (error) => {
+          setLoading(false);
           setError(true);
         }
       );
@@ -96,19 +104,24 @@ const Contact = () => {
             />
           </svg>
         </motion.div>
-        <motion.form
-          ref={formRef}
+
+        <motion.form 
+          ref={formRef} 
           onSubmit={sendEmail}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 4, duration: 1 }}
         >
-          <input type="text" required placeholder="Name" name="name"/>
-          <input type="email" required placeholder="Email" name="email"/>
-          <textarea rows={8} placeholder="Message" name="message"/>
-          <button>Submit</button>
-          {error && "Error"}
-          {success && "Success"}
+          <input type="text" required placeholder="Name" name="user_name" />
+          <input type="email" required placeholder="Email" name="user_email" />
+          <textarea rows={8} placeholder="Message" name="message" />
+          <button>
+            {loading ? "Sending..." : "Submit"}
+          </button>
+          <div className="message-state">
+            {error && "Something went wrong 🥲"}
+            {success && "Message sent successfully ✅"}
+          </div>
         </motion.form>
       </div>
     </motion.div>
