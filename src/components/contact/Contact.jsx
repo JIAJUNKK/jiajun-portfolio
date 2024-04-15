@@ -35,10 +35,10 @@ const Contact = () => {
     setLoading(true);
     emailjs
       .sendForm(
-        "service_fzkwrnn",
-        "template_72r5xt2",
+        process.env.MY_SERVICE_ID,
+        process.env.MY_TEMPLATE_ID,
         formRef.current,
-        "CO2EZMjdFCdGg-h0K"
+        process.env.MY_PUBLIC_KEY
       )
       .then(
         (result) => {
