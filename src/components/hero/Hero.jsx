@@ -24,7 +24,7 @@ const Hero = () => {
 
         </motion.div>
       </div>
-      
+
       <motion.div 
         className="imageContainer" 
         variants={textVariants}
