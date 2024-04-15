@@ -14,7 +14,7 @@ const Parallax = ({ type }) => {
 
   const aboutMeText = useTransform(scrollYProgress, [0, 1], ["0%", "420%"]);
   const experienceText = useTransform(scrollYProgress, [0, 1], ["0%", "400%"]);
-  const projectsText = useTransform(scrollYProgress, [0, 1], ["0%", "300%"]);
+  const projectsText = useTransform(scrollYProgress, [0, 1], ["0%", "250%"]);
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const textMotion = (type) =>{

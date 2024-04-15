@@ -64,7 +64,7 @@ export const projects = [
     {
       id: 3,
       title: "Instagram Follower Tracker",
-      img: "https://images.pexels.com/photos/6894528/pexels-photo-6894528.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      img: "/instagram_follower_tracker.png",
       description: [
         "Implemented a Python and Selenium application aimed at identifying individuals who don’t follow back user on Instagram.",
         "Utilised Python file writing function to improve the efficiency by at least 20%.",

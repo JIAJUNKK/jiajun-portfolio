@@ -7,7 +7,7 @@
     left: 0;
     padding-top: 50px;
     text-align: center;
-    color: #FF8E00;
+    color: #011f4b;
     font-size: 36px;
 
     @include mobile {
@@ -17,7 +17,7 @@
 
     .progressBar {
       height: 10px;
-      background-color: #011f4b;
+      background-color: #FF8E00;
     }
   }
 
@@ -44,8 +44,6 @@
       .imageContainer {
         flex: 1;
         height: 50%;
-        border: 3px solid #011f4b;
-
         @include mobile {
           width: 100%;
           max-height: 300px;
@@ -78,6 +76,7 @@
 
         h2 {
           font-size: 72px;
+          color: #FF8E00;
 
           @include mobile {
             font-size: 36px;
@@ -102,6 +101,10 @@
           border: 2px solid #011f4b; border-radius: 10px;
           width: 40%; height: 50px;
 
+          @include mobile{
+            width: 80%;
+            justify-content: space-around;
+          }
           .source-code-button {
             display: flex; flex-direction: row;
             background-color: white;
@@ -112,6 +115,10 @@
               object-fit: contain;
             }
           }
+        }
+        .source-code-button-container:hover{
+          transform: scale(1.1);
+          transition-delay: 0.1s;
         }
 
 
