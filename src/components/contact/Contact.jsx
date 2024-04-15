@@ -33,8 +33,6 @@ const Contact = () => {
     setSuccess(false);
     setError(false);
     setLoading(true);
-
-    console.log(formRef.current)
     emailjs
       .sendForm(
         "service_fzkwrnn",
