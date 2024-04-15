@@ -35,10 +35,10 @@ const Contact = () => {
     setLoading(true);
     emailjs
       .sendForm(
-        process.env.MY_SERVICE_ID,
-        process.env.MY_TEMPLATE_ID,
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         formRef.current,
-        process.env.MY_PUBLIC_KEY
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       )
       .then(
         (result) => {
