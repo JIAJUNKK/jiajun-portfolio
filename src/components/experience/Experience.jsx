@@ -69,6 +69,10 @@ const Experience = () => {
 
   return (
     <section className="experience">
+      <div className="experience-header">
+        <h2>Things I have done so far ✅</h2>
+        <h1>Experience</h1>
+      </div>
       <div className="vertical-time-line">
         <VerticalTimeline
             lineColor= {'black'}

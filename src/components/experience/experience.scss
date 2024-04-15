@@ -4,16 +4,17 @@
   display: flex; flex-direction: column;
   justify-content: center; align-self: center; align-items: center;
   margin: auto;
-  max-width: 80%;
 
   @include mobile{
     width: 100%;
-    margin-top: 0%;
-    height: 190vh;
   }
-  .vertical-time-line{
-    @include mobile{
-      margin-top: 0%;
+  .experience-header{
+    text-align: center;
+    h2{
+      font-size: 20px;
+    }
+    h1{
+      font-size: 60px;
     }
   }
 }
@@ -48,7 +49,6 @@
     list-style-type: disc;
     margin-left: 1.25rem; 
     margin-bottom: 1.25rem; 
-
     li{
       font-size: 16px;
       padding-left: 1px; 
