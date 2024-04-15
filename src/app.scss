@@ -1,6 +1,7 @@
 html{
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  
   @media (max-width: 738px) {
     scroll-snap-type: none;
   }

@@ -12,6 +12,7 @@
     position: absolute;
     font-size: 100px;
     @include mobile {
+      position: relative; width: 10000vw; 
       font-size: 72px;
       text-align: center;
     }

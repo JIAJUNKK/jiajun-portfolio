@@ -10,7 +10,7 @@
   margin-top: 5%;
 
   @include mobile{
-    margin-top: 20%;
+    margin-top: 10%;
     flex-direction: column;
   }
   
@@ -19,7 +19,7 @@
     border-radius: 10px;
     margin: 0 10% 0 10%;
     @include mobile {      
-      width: 90%; height: 200px;
+      width: 80%; height: 250px;
     }
   }
   .inner{
@@ -27,7 +27,8 @@
     margin: 0 10% 0 0;
 
     @include mobile{
-      width: 90%;
+      text-align: center;
+      width: 80%;
       margin: 0 0 10% 0;
     }
     p {

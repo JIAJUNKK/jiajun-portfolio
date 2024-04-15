@@ -54,7 +54,7 @@
 
   .imageContainer {
     width: 40%; height: 20%;
-    background-color: black;
+    background-color: #005b96;
     border-radius: 50%;
 
     @include mobile{
@@ -69,8 +69,8 @@
 
     img{
       width: 100%; 
-      background-color: #bbbbbb;
-      border: 3px solid #011f4b;
+      background-color: #a8daf9;
+      border: 3px solid #005b96;
       border-radius: 50%;
     }
   }
