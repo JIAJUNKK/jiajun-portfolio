@@ -5,7 +5,7 @@ import emailjs from "@emailjs/browser";
 
 const variants = {
   initial: {
-    y: 500,
+    y: 100,
     opacity: 0,
   },
   animate: {
@@ -79,7 +79,7 @@ const Contact = () => {
           whileInView={{ opacity: 0 }}
           transition={{ delay: 3, duration: 1 }}
         >
-          <svg width="450px" height="450px" viewBox="0 0 32.666 32.666">
+          <svg width="500px" height="500px" viewBox= "-5 -1 40 40">
             <motion.path
               strokeWidth={0.2}
               fill="none"

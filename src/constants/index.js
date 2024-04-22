@@ -63,6 +63,17 @@ export const projects = [
     },
     {
       id: 3,
+      title: "Bomb Sweeper",
+      img: "/bombSweeper.png",
+      description: [
+        "Implemented the famous bomb sweeper game using Java.Swing.",
+        "Enhanced the code's efficiency using recursion.",
+        "Implemented adaptive difficulty algorithm for a balanced gaming experience, increasing player engagement by 50% and extending average playtime by 30%, catering to all player skill levels.",
+      ],    
+      githubLink: "https://github.com/JIAJUNKK/BombSweeper",
+    },
+    {
+      id: 4,
       title: "Instagram Follower Tracker",
       img: "/instagram_follower_tracker.png",
       description: [
