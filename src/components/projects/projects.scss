@@ -8,7 +8,6 @@
     text-align: center;
     color: #011f4b;
     font-size: 36px;
-    
     @include mobile {
       background-color: white;
       bottom: 0;
@@ -33,7 +32,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 50px;
+      gap: 100px;
 
       @include mobile {
         gap: 0px;
@@ -75,7 +74,7 @@
         }
 
         h2 {
-          font-size: 72px;
+          font-size: 50px;
           color: #FF8E00;
 
           @include mobile {
@@ -86,7 +85,7 @@
         
         ul {
           color: gray;
-          font-size: 20px;
+          font-size: 16px;
 
           @include mobile {
             font-size: 16px;
@@ -94,22 +93,30 @@
             margin-left: 5%;
           }
         }
-        .source-code-button-container{
-          display: flex; align-items: center; justify-content: space-around;
-          cursor: pointer;
-          border: 2px solid #011f4b; border-radius: 10px;
-          width: 40%; height: 50px;
+        .button-container{
+          display: flex; flex-direction: row; justify-content: space-between;          
+          padding: 4%;
+          gap: 30px;
 
-          @include mobile{
-            margin-top: 10%;
-            width: 80%;
-            justify-content: space-around;
+          .source-code-button-container{
+            display: flex; align-items: center; justify-content: space-around;
+            cursor: pointer;
+            border: 2px solid #011f4b; border-radius: 10px;
+            height: 50px; 
+            width: 50%;
+            
+            @include mobile{
+              width: auto;
+              padding: 1px;
+            }
+          }
+          .source-code-button-container:hover{
+            transition-delay: 0.1s;
+            background-color: #011f4b;
+            color: white;
           }
         }
-        .source-code-button-container:hover{
-          transform: scale(1.1);
-          transition-delay: 0.1s;
-        }
+
 
 
       }

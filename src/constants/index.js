@@ -48,6 +48,7 @@ export const projects = [
         "Empowered users with comprehensive post-purchase support, including email confirmations, access to order history for tracking, and the ability to manage personal details seamlessly.",
       ],   
       githubLink: "https://github.com/JIAJUNKK/7Mantap",
+      liveDemoLink: "https://7mantap.vercel.app/", 
     },
     {
       id: 2,

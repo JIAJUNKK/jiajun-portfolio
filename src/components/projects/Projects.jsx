@@ -1,16 +1,20 @@
-import { useRef } from "react";
+import { useRef, useState} from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { projects } from "../../constants";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+
 import './projects.scss';
 
 const Single = ({ project }) => {
   const ref = useRef();
+  const liveDemoExist = (project.liveDemoLink && project.liveDemoLink !== "");
 
   const { scrollYProgress } = useScroll({
     target: ref,
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [-350, 300]);
+  const y = useTransform(scrollYProgress, [0, 1], [-390, 200]);
 
   return (
     <section class="project-section">
@@ -35,9 +39,18 @@ const Single = ({ project }) => {
               ))}
             </ul>      
 
+          <div className="button-container">
             <a className="source-code-button-container" href={project.githubLink} target="_blank">
-              <h3>View Source Code {'</>'}</h3>
+              <h3>Source Code {'</>'}</h3>
             </a>
+
+            {liveDemoExist && (
+              <a className="source-code-button-container" href={project.liveDemoLink} target="_blank">
+                <h3>Live Demo <FontAwesomeIcon icon={faArrowUpRightFromSquare}/></h3>
+              </a>
+            )}
+          </div>
+
           </motion.div>
 
         </div>
