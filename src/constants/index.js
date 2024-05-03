@@ -24,7 +24,7 @@ export const experiences = [
     },
     {
       title: "Robocon Team Member",
-      company_name: "HUMAC | Sunway University, Malaysia 🇲🇾",
+      company_name: "H.O.M.E Lab | Sunway University, Malaysia 🇲🇾",
       icon: "/companies/sunway.png",
       iconBg: "#383E56",
       date: "April 2022 - April 2023",
