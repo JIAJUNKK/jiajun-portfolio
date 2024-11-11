@@ -7,14 +7,27 @@ export const experiences = [
       date: "October 2023 - Present",
       description: [
         "Pursuing Bachelor's Degree in Computer Software Engineering.",
-        "Relevant Modules: Operating Systems, Advanced Programming, Human Computer Interactions, Software Design, Database, Networking",
+        "Predicted Grade: 1:1, First Class Honours",
+        "Relevant Modules: Operating Systems, Advanced Programming, Human Computer Interactions, Software Design, Database, Networking, Artificial Intelligence, Distributed System",
+      ],
+    },
+    {
+      title: "Web Developer Intern",
+      company_name: "Logical BI Limited, Lancaster 🇬🇧",
+      icon: "/companies/logicalBI.png",
+      iconBg: "#E6DEDD",
+      date: "November 2024 - Present",
+      description: [
+        "Developed a full-stack web solution using React, Firebase, and Stripe (secure payment processing).",
+        "Integrated MailerLite for automated email campaigns, Zapier for workflow automation between Stripe, Xero, and Skoll, and ensured seamless invoicing and community engagement.",
+        "Automated user registration, payment processing, and invoicing, significantly reducing manual operations and improving customer experience",
       ],
     },
     {
         title: "International Student Ambassador",
         company_name: "Lancaster University, United Kingdom 🇬🇧",
         icon: "/companies/lancaster.png",
-        iconBg: "#E6DEDD",
+        iconBg: "#383E56",
         date: "November 2023 - Present",
         description: [
           "Answered questions and doubts from over 300 prospective students for Lancaster University.",
@@ -26,7 +39,7 @@ export const experiences = [
       title: "Robocon Team Member",
       company_name: "H.O.M.E Lab | Sunway University, Malaysia 🇲🇾",
       icon: "/companies/sunway.png",
-      iconBg: "#383E56",
+      iconBg: "#E6DEDD",
       date: "April 2022 - April 2023",
       description: [
         "Contributed and designed a ring tosser robot for 2023 ABU Robocon using Blender.",
@@ -40,7 +53,7 @@ export const projects = [
     {
       id: 1,
       title: "7 Mantap",
-      img: "/7Mantap.png",
+      img: "/projects/7Mantap.png",
       description: [
         "Leveraged REST API to establish connection to the MongoDB.",
         "Integrated with Stripe's API to facilitate secure checkout.",
@@ -53,7 +66,7 @@ export const projects = [
     {
       id: 2,
       title: "Health Buddy",
-      img: "/healthBuddy.png",
+      img: "/projects/healthBuddy.png",
       description: [
         "Finalised the UI/UX requirements and implemented those as a design lead of a team of 5",
         "Set up Firebase server for Health Buddy’s backend.",
@@ -64,8 +77,18 @@ export const projects = [
     },
     {
       id: 3,
+      title: "Tian Ye Cushion",
+      img: "/projects/tianye.png",
+      description: [
+        "Customised a website for a client in Malaysia using React, JS, SCCS and Firebase",
+        "Allowed the client to easily update product descriptions, prices, and images using Firebase, minimizing the need for manual intervention.",
+      ],   
+      liveDemoLink: "https://tianyecushion.vercel.app/",
+    },
+    {
+      id: 4,
       title: "Bomb Sweeper",
-      img: "/bombSweeper.png",
+      img: "/projects/bombSweeper.png",
       description: [
         "Implemented the famous bomb sweeper game using Java.Swing.",
         "Enhanced the code's efficiency using recursion.",
@@ -74,9 +97,9 @@ export const projects = [
       githubLink: "https://github.com/JIAJUNKK/BombSweeper",
     },
     {
-      id: 4,
+      id: 5,
       title: "Instagram Follower Tracker",
-      img: "/instagram_follower_tracker.png",
+      img: "/projects/instagram_follower_tracker.png",
       description: [
         "Implemented a Python and Selenium application aimed at identifying individuals who don’t follow back user on Instagram.",
         "Utilised Python file writing function to improve the efficiency by at least 20%.",

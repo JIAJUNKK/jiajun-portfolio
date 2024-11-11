@@ -20,16 +20,22 @@
 }
 
 .experience-card{
+  .experience-date{
+    margin: 0 2% 0 2%;
+  }
   .icon{
     display: flex;
     justify-content: center; align-self: center; 
     width: 100%; height: 100%;
+    padding: 10%;
   
     .icon-image{
+      display: flex;
+      justify-self: center;
+      align-self: center;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      margin-top: 5%;
     }
   }
   

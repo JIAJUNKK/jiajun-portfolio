@@ -9,6 +9,7 @@ import './projects.scss';
 const Single = ({ project }) => {
   const ref = useRef();
   const liveDemoExist = (project.liveDemoLink && project.liveDemoLink !== "");
+  const sourceCodeExist = (project.githubLink && project.githubLink !== "");
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -40,10 +41,12 @@ const Single = ({ project }) => {
             </ul>      
 
           <div className="button-container">
-            <a className="source-code-button-container" href={project.githubLink} target="_blank">
-              <h3>Source Code {'</>'}</h3>
-            </a>
-
+            {sourceCodeExist && (
+              <a className="source-code-button-container" href={project.githubLink} target="_blank">
+                <h3>Source Code {'</>'}</h3>
+              </a>
+            )}
+            
             {liveDemoExist && (
               <a className="source-code-button-container" href={project.liveDemoLink} target="_blank">
                 <h3>Live Demo <FontAwesomeIcon icon={faArrowUpRightFromSquare}/></h3>

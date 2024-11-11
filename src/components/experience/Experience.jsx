@@ -24,6 +24,7 @@ const ExperienceCard = ({ experience }) => {
       date={
         experience.date
       }
+      dateClassName={"experience-date"}
       iconStyle={{ background: experience.iconBg}}
       icon={
         <div className='icon'>
