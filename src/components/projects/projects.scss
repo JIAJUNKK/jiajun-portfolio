@@ -8,6 +8,8 @@
     text-align: center;
     color: #011f4b;
     font-size: 36px;
+    background-color: white;
+    z-index: 999;
     @include mobile {
       background-color: white;
       bottom: 0;
