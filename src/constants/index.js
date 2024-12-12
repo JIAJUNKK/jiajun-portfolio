@@ -18,9 +18,9 @@ export const experiences = [
       iconBg: "#E6DEDD",
       date: "November 2024 - Present",
       description: [
-        "Developed a full-stack web solution using React, Firebase, and Stripe (secure payment processing).",
-        "Integrated MailerLite for automated email campaigns, Zapier for workflow automation between Stripe, Xero, and Skoll, and ensured seamless invoicing and community engagement.",
-        "Automated user registration, payment processing, and invoicing, significantly reducing manual operations and improving customer experience",
+        "Designed and developed an interactive community platform, allowing members to participate in events, post content, upload videos, and interact with one another.",
+        "Automated user registration, payment processing, and invoicing, significantly reducing manual operations and improving customer experience.",
+        "Minimised development costs by exclusively utilising Firebase and Stripe without relying on additional third-party services, optimizing budget efficiency",
       ],
     },
     {
