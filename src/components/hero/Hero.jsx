@@ -1,5 +1,5 @@
 import "./hero.scss";
-import CircularText from "../../../reactBitsComponent/CircularText/CircularText";
+import CircularText from "../../reactBitsComponent/CircularText/CircularText";
 import { motion } from "framer-motion";
 import { textVariants } from "../../constants/motion";
 
