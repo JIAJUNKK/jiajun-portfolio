@@ -14,6 +14,7 @@
     bottom: 0;
     width: 400px;
     background: $primary;
+    color: $light;
 
     @include mobile {
       width: 400px;
