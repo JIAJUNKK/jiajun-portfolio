@@ -1,3 +1,16 @@
+$primary: #011f4b;
+$primary-text-color: #011f4b;
+$secondary: #415A77;
+$tertiary: #778DA9;
+$highlight: #005b96;
+
+$light: white;
+$light-text-color: #b3cde0;
+$light-background: white;
+$neutral-light: #E0E1DD;
+
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 * {
   padding: 0;
   margin: 0;
@@ -6,8 +19,8 @@
 }
 
 body {
-  background-color: white;
-  color: #011f4b;
+  background-color: $light-background;
+  color: $primary-text-color;
   overflow-x: hidden;
 }
 
@@ -22,7 +35,10 @@ section {
   overflow: hidden;
   width: 80%;
   margin: auto;
-  margin-bottom: 20%;
+  margin-bottom: 40%;
+  &:last-child {
+    margin-bottom: 20%;
+  }
   @media (max-width: 600px) {
     width: 100%;
   }

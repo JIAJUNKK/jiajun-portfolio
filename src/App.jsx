@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import "./app.scss";
-import About from "./components/about/About";
+import AboutMe from "./components/aboutMe/AboutMe";
 import Contact from "./components/contact/Contact";
 import Cursor from "./components/cursor/Cursor";
 import Hero from "./components/hero/Hero";
@@ -20,7 +19,7 @@ const App = () => {
       </section>
 
       <section id="About">
-        <About/>
+        <AboutMe />
       </section>
 
       <section id="Experience">
