@@ -65,18 +65,30 @@ export const projects = [
     },
     {
       id: 2,
+      title: "J Expense",
+      img: "/projects/J-Expense.png",
+      description: [
+        "BEST USED IN MOBILE",
+        "Developed a mobile-friendly expense tracking application using Angular and TypeScript, ensuring a modern and responsive user experience.",
+        "Integrated Firebase Firestore for secure, real-time data storage, enabling instant updates on expenses.",
+        "Implemented a real-time currency update feature, allowing users to track expenses in multiple currencies with automatic rate adjustments.",
+        "Engineered a progressive web app (PWA) structure, making J-Expense installable directly from the web.",
+      ],   
+      liveDemoLink: "https://j-expense-tracker.vercel.app/", 
+    },
+    {
+      id: 3,
       title: "Health Buddy",
       img: "/projects/healthBuddy.png",
       description: [
         "Finalised the UI/UX requirements and implemented those as a design lead of a team of 5",
-        "Set up Firebase server for Health Buddy’s backend.",
-        "Enable real time update to track users’ progress with maximum delay of 1 second.",
+        "Set up Firebase server for Health Buddy's backend.",
+        "Enable real time update to track users' progress with maximum delay of 1 second.",
       ],   
       githubLink: "https://github.com/JIAJUNKK/HealthBuddy",
- 
     },
     {
-      id: 3,
+      id: 4,
       title: "Tian Ye Cushion",
       img: "/projects/tianye.png",
       description: [
@@ -86,7 +98,7 @@ export const projects = [
       liveDemoLink: "https://tianyecushion.vercel.app/",
     },
     {
-      id: 4,
+      id: 5,
       title: "Bomb Sweeper",
       img: "/projects/bombSweeper.png",
       description: [
@@ -97,7 +109,7 @@ export const projects = [
       githubLink: "https://github.com/JIAJUNKK/BombSweeper",
     },
     {
-      id: 5,
+      id: 6,
       title: "Instagram Follower Tracker",
       img: "/projects/instagram_follower_tracker.png",
       description: [
