@@ -1,127 +1,135 @@
-@import "../../app.scss";
+@use "../../app/theme" as *;
 
 .portfolio {
-  .progress {
-    position: sticky;
-    top: 100px;
-    left: 0;
-    text-align: center;
-    color: $primary-text-color;
-    font-size: 36px;
-    background-color: $light;
-    z-index: 999;
-    @include mobile {
-      bottom: 0;
-      font-size: 24px;
-    }
+    .progress {
+        position: sticky;
+        top: 100px;
+        left: 0;
+        text-align: center;
+        color: $primary-text-color;
+        font-size: 36px;
+        background-color: $light;
+        z-index: 999;
 
-    .progressBar {
-      height: 10px;
-      background-color: $tertiary;
-    }
-  }
-
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    
-    .wrapper {
-      height: 100%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 100px;
-
-      @include mobile {
-        gap: 0px;
-        flex-direction: column;
-      }
-
-      .imageContainer {
-        flex: 1;
-        height: 50%;
         @include mobile {
-          width: 100%;
-          max-height: 300px;
-          border: none;
+            bottom: 0;
+            font-size: 24px;
         }
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-
-          @include mobile {
-            object-fit: contain;
-          }
+        .progressBar {
+            height: 10px;
+            background-color: $tertiary;
         }
-      }
+    }
 
-      .textContainer {
-        flex: 1;
+    .container {
         display: flex;
-        flex-direction: column;
-        gap: 30px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
 
-        @include mobile {
-          gap: 0px;
-          transform: none !important;
-          padding: 10px;
-          align-items: center;
-          text-align: center;
-        }
+        .wrapper {
+            height: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
 
-        h2 {
-          font-size: 50px;
-          color: $tertiary;
-
-          @include mobile {
-            font-size: 36px;
-          }
-        }
-
-        
-        ul {
-          color: $tertiary;
-          font-size: 16px;
-
-          @include mobile {
-            font-size: 16px;
-            text-align: left;
-            margin-left: 5%;
-          }
-        }
-        .button-container{
-          display: flex; flex-direction: row; justify-content: space-between;          
-          padding: 4%;
-          gap: 30px;
-
-          .source-code-button-container{
-            display: flex; align-items: center; justify-content: space-around;
-            cursor: pointer;
-            border: 2px solid $primary; border-radius: 10px;
-            height: 50px; 
-            width: 50%;
-            transition: background-color 0.5s, color 0.5s;
-
-            &:hover{
-              background-color: $primary;
-              color: $light;
+            @include mobile {
+                gap: 0px;
+                flex-direction: column;
             }
-            
-            @include mobile{
-              width: auto;
-              padding: 1px;
+
+            .imageContainer {
+                flex: 1;
+                height: 50%;
+
+                @include mobile {
+                    width: 100%;
+                    max-height: 300px;
+                    border: none;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+
+                    @include mobile {
+                        object-fit: contain;
+                    }
+                }
             }
-          }
+
+            .textContainer {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+
+                @include mobile {
+                    gap: 0px;
+                    transform: none !important;
+                    padding: 10px;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                h2 {
+                    font-size: 50px;
+                    color: $tertiary;
+
+                    @include mobile {
+                        font-size: 36px;
+                    }
+                }
+
+
+                ul {
+                    color: $tertiary;
+                    font-size: 16px;
+
+                    @include mobile {
+                        font-size: 16px;
+                        text-align: left;
+                        margin-left: 5%;
+                    }
+                }
+
+                .button-container {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    padding: 4%;
+                    gap: 30px;
+
+                    .source-code-button-container {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-around;
+                        cursor: pointer;
+                        border: 2px solid $primary;
+                        border-radius: 10px;
+                        height: 50px;
+                        width: 50%;
+                        transition: background-color 0.5s, color 0.5s;
+
+                        &:hover {
+                            background-color: $primary;
+                            color: $light;
+                        }
+
+                        @include mobile {
+                            width: auto;
+                            padding: 1px;
+                        }
+                    }
+                }
+
+
+
+            }
         }
-
-
-
-      }
     }
-  }
 }

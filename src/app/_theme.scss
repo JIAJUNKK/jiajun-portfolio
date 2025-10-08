@@ -1,0 +1,30 @@
+$primary: #011f4b;
+$primary-text-color: #011f4b;
+$secondary: #415A77;
+$tertiary: #778DA9;
+$highlight: #005b96;
+
+$light: white;
+$light-text-color: #b3cde0;
+$light-background: white;
+$neutral-light: #E0E1DD;
+
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+@mixin mobile {
+    @media (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (max-width: 1366px) {
+        @content;
+    }
+}
