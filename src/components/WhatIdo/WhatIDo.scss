@@ -1,0 +1,145 @@
+@use "../../app/theme" as *;
+
+$left-col-min: 120px;
+$left-col-max: 220px;
+
+.what-i-do-rows {
+    width: min(1200px, 92vw);
+    margin: 0 auto;
+    padding: clamp(48px, 8vw, 120px) 0;
+    color: $primary-text-color;
+
+    .rows__head {
+        margin-bottom: clamp(12px, 3vw, 24px);
+
+        .rows__title {
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.1;
+            margin: 0;
+        }
+    }
+
+    .rows__stage {
+        position: relative;
+        height: 100svh;
+        overflow: hidden;
+
+        .rows__card {
+            position: absolute;
+            inset: 0;
+            background: $light;
+            border-top: 1px solid $primary;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10vw;
+            padding-top: 32px;
+            will-change: transform;
+
+            .rows__numRow {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+                flex: 0 0 clamp($left-col-min, 22vw, $left-col-max);
+                min-width: clamp($left-col-min, 22vw, $left-col-max);
+
+                @include mobile {
+                    min-width: 0px;
+                }
+
+                .rows__num {
+                    font-size: clamp(24px, 5vw, 42px);
+                    font-weight: 600;
+                    letter-spacing: .02em;
+                }
+            }
+
+            .rows__content {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex: 1 1 auto;
+                min-width: 0;
+
+                .rows__h3 {
+                    font-size: clamp(26px, 4.2vw, 56px);
+                    line-height: 1.1;
+                    margin-bottom: 5vh;
+                }
+
+                .rows__body {
+                    max-width: 62ch;
+                    margin: 0 0 18px 0;
+                }
+
+                .rows__bullets {
+                    display: grid;
+                    gap: 14px;
+                    max-width: 68ch;
+
+                    .rows__bullet {
+                        display: grid;
+                        grid-template-columns: auto 1fr;
+                        align-items: center;
+                        gap: 14px;
+                        padding: 12px 0;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+
+                        .rows__bulletIndex {
+                            font-feature-settings: "tnum";
+                        }
+
+                        .rows__bulletLabel {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include mobile {
+        .rows__stage {
+            height: 100svh;
+        }
+
+        .rows__stage .rows__card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: 0.1fr min-content auto;
+            gap: 8px 16px;
+            padding-top: 16px;
+            position: absolute;
+            inset: 0;
+        }
+
+        .rows__stage .rows__card .rows__numRow {
+            grid-column: 0.5;
+            grid-row: 1;
+        }
+
+        .rows__stage .rows__card .rows__content {
+            display: contents;
+        }
+
+        .rows__stage .rows__card .rows__content .rows__h3 {
+            grid-column: 2;
+            grid-row: 1;
+            margin: 0 0 8px 0;
+        }
+
+        .rows__stage .rows__card .rows__content .rows__body {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            margin: 0 0 12px 0;
+        }
+
+        .rows__stage .rows__card .rows__content .rows__bullets {
+            grid-column: 1 / -1;
+            grid-row: 3;
+        }
+    }
+}
