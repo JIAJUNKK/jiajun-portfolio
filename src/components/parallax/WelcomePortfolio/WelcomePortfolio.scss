@@ -1,0 +1,17 @@
+@use "../../../app.scss" as *;
+
+.welcome-portfolio-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50vh;
+    margin-top: 50vh;
+
+    .introduction-text {
+        font-size: 4rem;
+        font-weight: bold;
+        text-align: center;
+        color: $primary;
+    }
+}

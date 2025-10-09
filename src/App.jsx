@@ -1,4 +1,6 @@
 import "./app/base.scss";
+import WelcomePortfolio from "./components/parallax/WelcomePortfolio/WelcomePortfolio";
+import WhatIDo from "./components/WhatIdo/WhatIDo";
 import AboutMe from "./components/aboutMe/AboutMe";
 import Contact from "./components/contact/Contact";
 import Cursor from "./components/cursor/Cursor";
@@ -18,15 +20,19 @@ const App = () => {
                 <TechStack />
             </section>
 
-            <section id="About">
-                <AboutMe />
-            </section>
+            <WelcomePortfolio />
+
+            <WhatIDo />
 
             <section id="Experience">
                 <Experience />
             </section>
 
             <Projects />
+
+            <section id="About">
+                <AboutMe />
+            </section>
 
             <section id="Contact">
                 <Contact />
