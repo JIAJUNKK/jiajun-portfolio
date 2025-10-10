@@ -47,14 +47,35 @@ export const SERVICES = [
 
 export const experiences = [
     {
+        title: "Full Stack Web Developer",
+        company_name: "Hedera, United Kingdom 🇬🇧",
+        icon: "/companies/hedera.png",
+        iconBg: "#012616",
+        date: "October 2025 - Present",
+        description: [
+        ],
+    },
+    {
+        title: "International Student Ambassador",
+        company_name: "Lancaster University, United Kingdom 🇬🇧",
+        icon: "/companies/lancaster.png",
+        iconBg: "white",
+        date: "November 2023 - October 2025",
+        description: [
+            "Answered questions and shared crucial information for over 300 prospective Lancaster University students.",
+            "Delivered over 50 campus and accommodation tours to prospective students.",
+            "Coordinated Offer Holder Event's venue with a team of ambassadors and ensured the seamless execution of the event, accommodating over 5000 visitors per event",
+        ],
+    },
+    {
         title: "Student",
         company_name: "Lancaster University, United Kingdom 🇬🇧",
         icon: "/companies/lancaster.png",
-        iconBg: "#383E56",
-        date: "October 2023 - Present",
+        iconBg: "white",
+        date: "October 2023 - July 2025",
         description: [
-            "Pursuing Bachelor's Degree in Computer Software Engineering.",
-            "Predicted Grade: 1:1, First Class Honours",
+            "Bachelor's Degree in Software Engineering.",
+            "Grade: 1:1, First Class Honours",
             "Relevant Modules: Operating Systems, Advanced Programming, Human Computer Interactions, Software Design, Database, Networking, Artificial Intelligence, Distributed System",
         ],
     },
@@ -62,8 +83,8 @@ export const experiences = [
         title: "Web Developer Intern",
         company_name: "Logical BI Limited, Lancaster 🇬🇧",
         icon: "/companies/logicalBI.png",
-        iconBg: "#E6DEDD",
-        date: "November 2024 - Present",
+        iconBg: "white",
+        date: "November 2024 - Febuary 2025",
         description: [
             "Designed and developed an interactive community platform, allowing members to participate in events, post content, upload videos, and interact with one another.",
             "Automated user registration, payment processing, and invoicing, significantly reducing manual operations and improving customer experience.",
@@ -71,22 +92,10 @@ export const experiences = [
         ],
     },
     {
-        title: "International Student Ambassador",
-        company_name: "Lancaster University, United Kingdom 🇬🇧",
-        icon: "/companies/lancaster.png",
-        iconBg: "#383E56",
-        date: "November 2023 - Present",
-        description: [
-            "Answered questions and doubts from over 300 prospective students for Lancaster University.",
-            "Delivered visitors with over 25 campus and accommodation tours to prospective students.",
-            " Coordinated Offer Holder Event’s venue with a team of ambassadors and ensured the seamless execution of the event, accommodating over 5000 visitors.",
-        ],
-    },
-    {
         title: "Robocon Team Member",
         company_name: "H.O.M.E Lab | Sunway University, Malaysia 🇲🇾",
         icon: "/companies/sunway.png",
-        iconBg: "#E6DEDD",
+        iconBg: "white",
         date: "April 2022 - April 2023",
         description: [
             "Contributed and designed a ring tosser robot for 2023 ABU Robocon using Blender.",
