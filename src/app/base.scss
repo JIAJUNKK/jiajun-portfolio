@@ -7,10 +7,23 @@
     font-family: "DM Sans", sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: $light-background;
     color: $primary-text-color;
     overflow-x: hidden;
+}
+
+:root {
+    --nav-offset: 224px;
+}
+
+
+section[id] {
+    scroll-margin-top: var(--nav-offset);
 }
 
 a {
