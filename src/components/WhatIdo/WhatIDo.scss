@@ -4,24 +4,15 @@ $left-col-min: 120px;
 $left-col-max: 220px;
 
 .what-i-do-rows {
-    width: min(1200px, 92vw);
+    width: 100%;
     margin: 0 auto;
     padding: clamp(48px, 8vw, 120px) 0;
     color: $primary-text-color;
 
-    .rows__head {
-        margin-bottom: clamp(12px, 3vw, 24px);
-
-        .rows__title {
-            font-size: clamp(28px, 4vw, 44px);
-            line-height: 1.1;
-            margin: 0;
-        }
-    }
-
     .rows__stage {
         position: relative;
-        height: 100svh;
+        height: 150svh;
+        width: 100%;
         overflow: hidden;
 
         .rows__card {
@@ -71,7 +62,7 @@ $left-col-max: 220px;
                 }
 
                 .rows__body {
-                    max-width: 62ch;
+                    font-size: 20px;
                     margin: 0 0 18px 0;
                 }
 

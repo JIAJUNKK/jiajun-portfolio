@@ -60,7 +60,7 @@ export default function WhatIDo({ services = SERVICES }) {
                 const cards = cardsRef.current.filter(Boolean);
                 if (!cards.length) return;
 
-                const STACK_GAP = 70;
+                const STACK_GAP = 65;
                 const SCROLL_PER_CARD = 420;
 
                 cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
@@ -99,14 +99,6 @@ export default function WhatIDo({ services = SERVICES }) {
 
     return (
         <div className="what-i-do-rows" ref={rootRef} aria-labelledby="what-title">
-            <div className="rows__head">
-                <ScrollVelocity
-                    texts={['What I Do', 'Scroll Down']}
-                    velocity={100}
-                    className="custom-scroll-text"
-                />
-            </div>
-
             <div className="rows__stage" ref={stageRef}>
                 {services.map((s, i) => (
                     <article
