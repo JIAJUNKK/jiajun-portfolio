@@ -1,6 +1,5 @@
 @use "../../app/theme" as *;
-
-@use "../../app/theme" as *;
+@use "../../app/variable" as *; // for $fs-h1 etc.
 
 .sidebar-toggle {
     position: fixed;
@@ -19,20 +18,18 @@
         place-items: center;
         transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
 
-        // CLOSED state: solid $primary so strokes can be white
         &[data-open="false"] {
-            background: $primary;
-            color: $light;
+            background: $primary; // solid when closed
+            color: $light; // SVG strokes inherit this
             -webkit-backdrop-filter: none;
             backdrop-filter: none;
         }
 
-        // OPEN state: match your glassy feel used elsewhere
         &[data-open="true"] {
             background:
                 linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot),
                 $glass-bg;
-            color: $primary-text-color;
+            color: $primary-text-color; // SVG strokes inherit this
             -webkit-backdrop-filter: blur(14px) saturate(140%);
             backdrop-filter: blur(14px) saturate(140%);
         }
@@ -42,7 +39,6 @@
         }
     }
 }
-
 
 .sidebar-overlay {
     position: fixed;
@@ -55,8 +51,7 @@
         top: 0;
         left: 0;
         height: 100vh;
-        width: min(420px, 86vw);
-
+        width: min(420px, 86vw); // desktop/tablet default
         background:
             linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot),
             $glass-bg;
@@ -64,7 +59,6 @@
         border-right: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: $box-shadow;
 
-        /* Blur + subtle pop */
         -webkit-backdrop-filter: blur(14px) saturate(140%);
         backdrop-filter: blur(14px) saturate(140%);
 
@@ -82,11 +76,26 @@
             text-align: center;
 
             a {
-                font-size: clamp(20px, 3.5vw, 36px);
+                font-size: $fs-h2; // ← use h1 scale
+                line-height: 1.05;
                 color: $primary-text-color;
                 text-decoration: none;
-                line-height: 1.2;
+                display: inline-block;
             }
+        }
+    }
+
+    // Full-screen on mobile
+    @include mobile {
+        .sidebar-bg {
+            width: 100vw; // cover full width
+            height: 100dvh; // cover full height including mobile UI chrome
+            border-right: none; // no edge seam on full-screen
+            box-shadow: none;
+        }
+
+        .links {
+            padding: 40px 24px; // a bit more breathing room
         }
     }
 }
