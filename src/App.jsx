@@ -1,5 +1,7 @@
 import "./app/base.scss";
 import WelcomePortfolio from "./components/parallax/WelcomePortfolio/WelcomePortfolio";
+import ScrollVelocity from "./reactBitsComponent/ScrollVelocity/ScrollVelocity";
+
 import WhatIDo from "./components/WhatIdo/WhatIDo";
 import AboutMe from "./components/aboutMe/AboutMe";
 import Contact from "./components/contact/Contact";
@@ -20,15 +22,30 @@ const App = () => {
                 <TechStack />
             </section>
 
-            <WelcomePortfolio />
+            {/** 
+            <section>
+                <WelcomePortfolio />
+            </section>
+            */}
 
-            <WhatIDo />
+
+
+            <section id="What-I-Do">
+                <ScrollVelocity
+                    texts={['What I Do', 'Scroll Down']}
+                    velocity={120}
+                    className="custom-scroll-text"
+                />
+                <WhatIDo />
+            </section>
 
             <section id="Experience">
                 <Experience />
             </section>
 
-            <Projects />
+            <section id="Projects">
+                <Projects />
+            </section>
 
             <section id="About">
                 <AboutMe />
