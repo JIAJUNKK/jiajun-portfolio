@@ -112,7 +112,7 @@ const AboutMe = () => {
                 </div>
 
                 <div className="text-container">
-                    <h1>About Me 👨🏻‍💻</h1>
+                    <p className="about-title" role="heading" aria-level="2">About Me 👨🏻‍💻</p>
                     <h2>Full Stack Web Developer</h2>
 
                     <p ref={textRef}>

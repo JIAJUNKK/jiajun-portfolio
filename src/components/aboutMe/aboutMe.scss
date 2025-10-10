@@ -1,4 +1,5 @@
 @use "../../app/theme" as *;
+@use "../../app/variable" as *;
 
 .about-us {
     display: flex;
@@ -14,11 +15,21 @@
     justify-content: center;
     gap: 5%;
     align-items: center;
-    margin: auto;
 
     @include mobile {
-        margin-top: 10%;
-        flex-direction: column;
+        /* Mobile: turn the wrapper into a grid so we can
+       order: title -> subtitle -> card -> body */
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "subtitle"
+            "card"
+            "body";
+        row-gap: 12px;
+        padding-inline: $mobile-side-padding;
+        align-items: start;
+        justify-items: center;
     }
 
     .image-container {
@@ -26,6 +37,16 @@
         flex: 1.5;
         height: auto;
         padding: 0 3vw;
+
+        @include mobile {
+            grid-area: card;
+            margin: $mobile-margin 0;
+            padding: 0;
+            justify-content: center;
+            width: 100%;
+            max-width: 520px;
+            /* optional clamp for nicer mobile */
+        }
     }
 
     .text-container {
@@ -42,56 +63,51 @@
             }
         }
 
-        h1 {
-            @include mobile {
-                text-align: center;
-                margin-top: 10%;
-                font-size: 20px;
-            }
+        .about-title {
+            font-size: $fs-p;
+            line-height: 1.1;
+            margin: 0 0 0.25em 0;
         }
 
         h2 {
-            text-align: left;
+            font-size: $fs-h2;
+            line-height: 1.15;
             color: $secondary;
-            font-size: 40px;
-            margin-bottom: 5%;
-
-            @include mobile {
-                text-align: center;
-                font-size: 30px;
-            }
+            margin: 0 0 5%;
         }
 
         p {
-            line-height: 1.5;
-            font-size: 18px;
+            font-size: $fs-p;
+            line-height: 1.6;
             color: $tertiary;
+            max-width: 70ch;
+        }
 
-            @include mobile {
-                font-size: 16px;
+        /* Mobile: flatten children into the parent's grid */
+        @include mobile {
+            display: contents;
+
+            .about-title {
+                grid-area: title;
+                text-align: center;
+                margin-top: 10px;
+                padding: 0;
+            }
+
+            h2 {
+                grid-area: subtitle;
+                text-align: center;
+                margin-bottom: 8px;
+                padding: 0;
+            }
+
+            p {
+                grid-area: body;
+                padding: 0;
+                /* we already padded .outer */
+                text-align: left;
+                width: 100%;
             }
         }
-    }
-}
-
-h2 {
-    font-size: 3rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 1.5rem;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    h2 {
-        font-size: 2rem;
-    }
-
-    p {
-        font-size: 1.2rem;
     }
 }

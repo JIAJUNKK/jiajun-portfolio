@@ -71,7 +71,7 @@ const Experience = () => {
     return (
         <div className="experience">
             <div className="experience-header">
-                <h2>Things I have done so far ✅</h2>
+                <p>Things I have done so far ✅</p>
                 <h1>Experience</h1>
             </div>
             <div className="vertical-time-line">

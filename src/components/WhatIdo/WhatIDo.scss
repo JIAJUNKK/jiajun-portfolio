@@ -1,4 +1,5 @@
 @use "../../app/theme" as *;
+@use "../../app/variable" as *;
 
 $left-col-min: 120px;
 $left-col-max: 220px;
@@ -25,7 +26,7 @@ $left-col-max: 220px;
             justify-content: space-between;
             align-items: flex-start;
             gap: 10vw;
-            padding-top: 32px;
+            padding-inline: $mobile-padding;
             will-change: transform;
 
             .rows__numRow {
@@ -37,11 +38,11 @@ $left-col-max: 220px;
                 min-width: clamp($left-col-min, 22vw, $left-col-max);
 
                 @include mobile {
-                    min-width: 0px;
+                    min-width: 0;
                 }
 
                 .rows__num {
-                    font-size: clamp(24px, 5vw, 42px);
+                    font-size: $fs-num;
                     font-weight: 600;
                     letter-spacing: .02em;
                 }
@@ -56,13 +57,13 @@ $left-col-max: 220px;
                 min-width: 0;
 
                 .rows__h3 {
-                    font-size: clamp(26px, 4.2vw, 56px);
+                    font-size: $fs-h3;
                     line-height: 1.1;
                     margin-bottom: 5vh;
                 }
 
                 .rows__body {
-                    font-size: 20px;
+                    font-size: $fs-p;
                     margin: 0 0 18px 0;
                 }
 
@@ -85,6 +86,7 @@ $left-col-max: 220px;
 
                         .rows__bulletLabel {
                             font-weight: 600;
+                            font-size: $fs-p;
                         }
                     }
                 }
