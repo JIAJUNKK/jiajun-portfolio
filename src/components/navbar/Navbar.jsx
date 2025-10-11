@@ -65,6 +65,29 @@ const Navbar = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (!window.visualViewport) return;
+
+        let raf = 0;
+        const apply = () => {
+            raf = 0;
+            const vv = window.visualViewport;
+            const top = Math.max(0, vv?.offsetTop || 0);
+            document.documentElement.style.setProperty('--vv-top', `${top}px`);
+        };
+        const onVV = () => { if (!raf) raf = requestAnimationFrame(apply); };
+
+        visualViewport.addEventListener('scroll', onVV);
+        visualViewport.addEventListener('resize', onVV);
+        apply();
+
+        return () => {
+            visualViewport.removeEventListener('scroll', onVV);
+            visualViewport.removeEventListener('resize', onVV);
+            if (raf) cancelAnimationFrame(raf);
+        };
+    }, []);
+
     return (
         <div className="navbar">
             <Sidebar />

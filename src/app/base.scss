@@ -20,6 +20,7 @@ body {
 :root {
     --nav-offset: 224px;
     --nav-h: 100px;
+    --vv-top: 0px;
 }
 
 
@@ -67,4 +68,6 @@ section {
     /* Must sit ABOVE normal page content (so it can blur it),
      but BELOW the navbar and sticky header text. */
     z-index: 1000;
+    transform: translateY(var(--vv-top));
+
 }
