@@ -1,25 +1,27 @@
 .circular-text {
-    margin: 0 auto;
+    position: absolute;
+    inset: 0;
+    margin: 0;
     border-radius: 50%;
-    width: 350px;
-    position: relative;
-    height: 350px;
-    font-weight: bold;
-    font-weight: 900;
-    text-align: center;
+    font-weight: 800;
+    /* match what you want measured */
+    /* Make spacing stable & predictable */
+    letter-spacing: 0;
+    /* JS does tracking; keep this at 0 */
+    font-kerning: none;
+    text-rendering: geometricPrecision;
+
     cursor: pointer;
     transform-origin: 50% 50%;
-    -webkit-transform-origin: 50% 50%;
-    padding: auto;
-  }
-  
-  .circular-text span {
+}
+
+.circular-text span {
     position: absolute;
-    display: inline-block;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    font-size: 24px;
-    transition: all 0.5s cubic-bezier(0, 0, 0, 1);
-  }
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+    user-select: none;
+    pointer-events: none;
+    font-size: 1rem;
+
+}

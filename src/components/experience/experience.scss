@@ -1,64 +1,96 @@
-@import "../../app.scss";
+@use "../../app/theme" as *;
+@use "../../app/variable" as *;
 
 .experience {
-  display: flex; flex-direction: column;
-  justify-content: center; align-self: center; align-items: center;
-  margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    margin: 0 auto;
 
-  @include mobile{
-    width: 100%;
-  }
-  .experience-header{
-    text-align: center;
-    h2{
-      font-size: 20px;
+    /* optional side breathing room */
+    padding-inline: clamp($mobile-side-padding, 6vw, 48px);
+
+    @include mobile {
+        width: 100%;
+        padding-inline: $mobile-side-padding;
     }
-    h1{
-      font-size: 60px;
+
+    .experience-header {
+        text-align: center;
+
+        p {
+            font-size: $fs-p;
+            line-height: 1.2;
+            margin: 0 0 0.25em 0;
+        }
+
+        h1 {
+            font-size: $fs-h1;
+            line-height: 1.1;
+            margin: 0;
+        }
     }
-  }
 }
 
-.experience-card{
-  .experience-date{
-    margin: 0 2% 0 2%;
-  }
-  .icon{
-    display: flex;
-    justify-content: center; align-self: center; 
-    width: 100%; height: 100%;
-    padding: 10%;
-  
-    .icon-image{
-      display: flex;
-      justify-self: center;
-      align-self: center;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-  
-  .experience-card-header{
-    h3{
-      font-size: 24px;
-      font-weight: bold;
+/* Card overrides */
+.experience-card {
+    .experience-date {
+        margin: 0 2% 0 2%;
+        font-size: $fs-small;
+        color: $secondary;
+        letter-spacing: 0.02em;
     }
 
-    p{
-      margin: 0; 
-      font-size: 18px;
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        width: 100%;
+        height: 100%;
+        padding: 10%;
+
+        .icon-image {
+            display: flex;
+            justify-self: center;
+            align-self: center;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     }
-  }
-  ul{
-    margin-top: 1.25rem; 
-    list-style-type: disc;
-    margin-left: 1.25rem; 
-    margin-bottom: 1.25rem; 
-    li{
-      font-size: 16px;
-      padding-left: 1px; 
-      letter-spacing: 0.05em;
+
+    .experience-card-header {
+        h4 {
+            font-size: $fs-h4;
+            font-weight: 700;
+            line-height: 1.15;
+            margin: 0 0 0.25em 0;
+        }
+
+        p {
+            margin: 0;
+            font-size: $fs-p;
+            line-height: 1.3;
+            color: $primary-text-color;
+            opacity: 0.9;
+        }
     }
-  }
+
+    ul {
+        margin-top: 1.25rem;
+        list-style-type: disc;
+        margin-left: 1.25rem;
+        margin-bottom: 1.25rem;
+
+        li {
+            font-size: $fs-small;
+            /* use shared paragraph size */
+            line-height: 1.5;
+            padding-left: 1px;
+            letter-spacing: 0.02em;
+            /* slightly tighter than 0.05em */
+        }
+    }
 }

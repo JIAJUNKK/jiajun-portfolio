@@ -1,56 +1,101 @@
-@import "../../app.scss";
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: $light-background;
-  
-  .bg {
-    z-index: 999;
+@use "../../app/theme" as *;
+@use "../../app/variable" as *; // for $fs-h1 etc.
+
+.sidebar-toggle {
     position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 400px;
-    background: $primary;
-    color: $light;
+    top: 24px;
+    left: 24px;
+    z-index: 11000;
+    line-height: 0;
 
-    @include mobile {
-      width: 400px;
-    }
+    .sidebar-toggle-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
 
-    .links {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-
-      a {
-        font-size: 40px;
-
-        @include mobile {
-          font-size: 20px;
+        &[data-open="false"] {
+            background: $primary; // solid when closed
+            color: $light; // SVG strokes inherit this
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
         }
-      }
-    }
-  }
 
-  button {
-    z-index: 999;
+        &[data-open="true"] {
+            background:
+                linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot),
+                $glass-bg;
+            color: $primary-text-color; // SVG strokes inherit this
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            backdrop-filter: blur(14px) saturate(140%);
+        }
+
+        &:active {
+            transform: translateY(0.5px);
+        }
+    }
+}
+
+.sidebar-overlay {
     position: fixed;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
+    inset: 0;
+    z-index: 10000;
+    pointer-events: none;
+
+    .sidebar-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: min(420px, 86vw); // desktop/tablet default
+        background:
+            linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot),
+            $glass-bg;
+        color: $primary-text-color;
+        border-right: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: $box-shadow;
+
+        -webkit-backdrop-filter: blur(14px) saturate(140%);
+        backdrop-filter: blur(14px) saturate(140%);
+
+        overflow: hidden;
+        will-change: clip-path;
+        pointer-events: auto;
+
+        .links {
+            min-height: 100dvh;
+            display: grid;
+            place-content: center;
+            justify-items: center;
+            gap: 24px;
+            padding: 28px;
+            text-align: center;
+
+            a {
+                font-size: $fs-h2; // ← use h1 scale
+                line-height: 1.05;
+                color: $primary-text-color;
+                text-decoration: none;
+                display: inline-block;
+            }
+        }
+    }
+
+    // Full-screen on mobile
+    @include mobile {
+        .sidebar-bg {
+            width: 100vw; // cover full width
+            height: 100dvh; // cover full height including mobile UI chrome
+            border-right: none; // no edge seam on full-screen
+            box-shadow: none;
+        }
+
+        .links {
+            padding: 40px 24px; // a bit more breathing room
+        }
+    }
 }
