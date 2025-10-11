@@ -108,6 +108,16 @@ export const experiences = [
 export const projects = [
     {
         id: 1,
+        title: "Fleming Howland",
+        img: "/projects/FlemingHowland.png",
+        description: [
+            "Reduced translation costs by ~78% through automating the workflow with a custom Python script",
+            "Developed reusable blocks for website."
+        ],
+        liveDemoLink: "https://fleminghowland.com/",
+    },
+    {
+        id: 2,
         title: "7 Mantap",
         img: "/projects/7Mantap.png",
         description: [
@@ -120,7 +130,7 @@ export const projects = [
         // liveDemoLink: "https://7mantap.vercel.app/",
     },
     {
-        id: 2,
+        id: 3,
         title: "J Expense",
         img: "/projects/J-Expense.png",
         description: [
@@ -133,7 +143,7 @@ export const projects = [
         liveDemoLink: "https://j-expense-tracker.vercel.app/",
     },
     {
-        id: 3,
+        id: 4,
         title: "Health Buddy",
         img: "/projects/healthBuddy.png",
         description: [
