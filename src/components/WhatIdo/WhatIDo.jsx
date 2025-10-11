@@ -2,9 +2,10 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SERVICES } from "../../constants";
-import ScrollVelocity from "../../reactBitsComponent/ScrollVelocity/ScrollVelocity";
 import "./WhatIDo.scss";
 
+ScrollTrigger.config({ ignoreMobileResize: true });      // GSAP 3.12+
+if (ScrollTrigger.isTouch) ScrollTrigger.normalizeScroll(true);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WhatIDo({ services = SERVICES }) {

@@ -4,6 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProfileCard from "../../reactBitsComponent/ProfileCard/ProfileCard";
 import "./aboutMe.scss";
 
+ScrollTrigger.config({ ignoreMobileResize: true });
+if (ScrollTrigger.isTouch) ScrollTrigger.normalizeScroll(true);
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutMe = () => {
@@ -106,7 +108,7 @@ const AboutMe = () => {
                         showBehindGradient={false}
                         showUserInfo={true}
                         enableTilt={true}
-                        enableMobileTilt={false}
+                        enableMobileTilt={true}
                         onContactClick={() => smoothScrollTo("Contact")}
                     />
                 </div>
