@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 const ToggleButton = ({ setOpen, isOpen }) => {
-    const stroke = isOpen ? "#011f4b" : "#ffffff"; // open: navy, closed: white
+    const stroke = "#011f4b";
 
     return (
         <button
