@@ -35,20 +35,64 @@ const CircularText = ({
     const [angles, setAngles] = useState([]);
 
     // --- auto-fit radius from target element (image) ---
-    useLayoutEffect(() => {
+    // "use client"
+    useEffect(() => {
         if (radiusProp) {
             setRadius(radiusProp);
             return;
         }
-        const el = targetRef?.current;
-        if (!el || typeof ResizeObserver === "undefined") return;
 
-        const ro = new ResizeObserver(([entry]) => {
-            const w = entry.contentRect.width;
-            setRadius(w / 2 + gap);
-        });
-        ro.observe(el);
-        return () => ro.disconnect();
+        const el = targetRef?.current;
+        if (!el) return;
+
+        // Prefer offsetWidth so transforms from framer-motion don’t skew size
+        const readWidth = () => (el instanceof HTMLElement && el.offsetWidth) || el.getBoundingClientRect().width || 0;
+
+        const update = () => {
+            const w = readWidth();
+            if (w > 0) setRadius(w / 2 + gap);
+        };
+
+        // 1) Run once immediately
+        update();
+
+        // 2) If it's an IMG, wait for the actual pixels
+        let imgLoadCleanup = () => { };
+        if (el.tagName === "IMG") {
+            const img = /** @type {HTMLImageElement} */ (el);
+            // decode() fires even for cached images in many browsers
+            if ("decode" in img) {
+                img.decode().then(update).catch(() => { }); // ignore decoding errors
+            }
+            if (!img.complete) {
+                const onLoad = () => update();
+                img.addEventListener("load", onLoad, { once: true });
+                imgLoadCleanup = () => img.removeEventListener("load", onLoad);
+            }
+        }
+
+        // 3) Observe both the image and its parent container
+        let ro;
+        if (typeof ResizeObserver !== "undefined") {
+            ro = new ResizeObserver(() => update());
+            ro.observe(el);
+            if (el.parentElement) ro.observe(el.parentElement);
+        }
+
+        // 4) Last-ditch fallback: poll briefly in case RO never fires in prod
+        const pollId = setInterval(() => {
+            const w = readWidth();
+            if (w > 0) {
+                setRadius(w / 2 + gap);
+                clearInterval(pollId);
+            }
+        }, 250);
+
+        return () => {
+            imgLoadCleanup();
+            ro?.disconnect();
+            clearInterval(pollId);
+        };
     }, [targetRef, gap, radiusProp]);
 
     // --- compute angles by glyph width (arc-length spacing) ---
