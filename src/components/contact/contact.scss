@@ -1,88 +1,116 @@
 @use "../../app/theme" as *;
+@use "../../app/variable" as *;
 
 .contact {
     height: 100%;
     max-width: 1366px;
     margin: auto;
     display: flex;
-    align-items: center;
     gap: 50px;
 
     @include mobile {
         width: 100%;
-        padding: 10px;
         flex-direction: column;
+        gap: 24px;
+        padding-inline: $mobile-side-padding;
     }
 
     .textContainer {
-        flex: 1;
         display: flex;
         flex-direction: column;
         gap: 40px;
 
         @include mobile {
-            gap: 20px;
+            gap: 16px;
             text-align: center;
             align-items: center;
-            margin-top: 70px;
+            margin-top: 40px;
         }
 
         h1 {
-            font-size: 100px;
-            line-height: 88px;
+            font-size: $fs-h1;
+            line-height: 1.05;
+            margin: 0;
 
             @include mobile {
-                font-size: 36px;
+                line-height: 1.1;
             }
         }
 
-        span {
-            font-weight: 300;
+        .item {
+            display: grid;
+            gap: 6px;
+
+            h2 {
+                font-size: $fs-h2;
+                margin: 0;
+                line-height: 1.1;
+            }
+
+            .all-letters {
+                font-size: $fs-p;
+                font-weight: 500;
+            }
         }
     }
 
     .formContainer {
-        flex: 1;
         position: relative;
+        width: 100%;
 
         @include mobile {
-            padding: 50px;
-            width: 100%;
+            padding-inline: 0;
+            /* outer has the side padding already */
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
 
             input,
             textarea {
-                padding: 20px;
+                padding: $mobile-padding;
                 background-color: transparent;
                 border: 2px solid $primary;
                 color: $primary-text-color;
-                border-radius: 5px;
+                border-radius: 6px;
+                font-size: $fs-p;
 
                 @include mobile {
-                    padding: 10px;
+                    padding: $mobile-padding;
                 }
             }
 
+            textarea {
+                line-height: 1.4;
+            }
+
             button {
-                padding: 20px;
+                padding: $mobile-padding;
                 border: none;
                 background-color: $tertiary;
                 color: $light;
                 cursor: pointer;
-                font-weight: bold;
-                font-size: 1rem;
+                font-weight: 700;
+                font-size: $fs-p;
+                border-radius: 6px;
+                transition: transform .06s ease, opacity .2s ease;
 
-                @include mobile {
-                    padding: 10px;
+                &:disabled {
+                    opacity: .7;
+                    cursor: not-allowed;
+                }
+
+                &:active:not(:disabled) {
+                    transform: translateY(1px);
                 }
             }
 
             .message-state {
+                font-size: $fs-small;
+                min-height: 1.25em;
+
                 @include mobile {
                     text-align: center;
                 }
