@@ -117,7 +117,7 @@ export const projects = [
             "Empowered users with comprehensive post-purchase support, including email confirmations, access to order history for tracking, and the ability to manage personal details seamlessly.",
         ],
         githubLink: "https://github.com/JIAJUNKK/7Mantap",
-        liveDemoLink: "https://7mantap.vercel.app/",
+        // liveDemoLink: "https://7mantap.vercel.app/",
     },
     {
         id: 2,
@@ -144,16 +144,6 @@ export const projects = [
         githubLink: "https://github.com/JIAJUNKK/HealthBuddy",
     },
     {
-        id: 4,
-        title: "Tian Ye Cushion",
-        img: "/projects/tianye.png",
-        description: [
-            "Customised a website for a client in Malaysia using React, JS, SCCS and Firebase",
-            "Allowed the client to easily update product descriptions, prices, and images using Firebase, minimising the need for manual intervention.",
-        ],
-        liveDemoLink: "https://tianyecushion.vercel.app/",
-    },
-    {
         id: 5,
         title: "Bomb Sweeper",
         img: "/projects/bombSweeper.png",
@@ -164,17 +154,6 @@ export const projects = [
         ],
         githubLink: "https://github.com/JIAJUNKK/BombSweeper",
     },
-    {
-        id: 6,
-        title: "Instagram Follower Tracker",
-        img: "/projects/instagram_follower_tracker.png",
-        description: [
-            "Implemented a Python and Selenium application aimed at identifying individuals who don’t follow back user on Instagram.",
-            "Utilised Python file writing function to improve the efficiency by at least 20%.",
-        ],
-        githubLink: "https://github.com/JIAJUNKK/instagram_follower_tracker",
-    },
-
 ];
 
 export default { SERVICES, experiences, projects }

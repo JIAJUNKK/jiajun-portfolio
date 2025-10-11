@@ -18,7 +18,7 @@ const Single = ({ project }) => {
     const y = useTransform(scrollYProgress, [0, 1], [-390, 200]);
 
     return (
-        <div class="project-section">
+        <section className="project-section">
             <div className="container">
                 <div className="wrapper">
 
@@ -58,7 +58,7 @@ const Single = ({ project }) => {
 
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
@@ -79,17 +79,15 @@ const Projects = () => {
         <div id="Projects" className="portfolio" ref={ref}>
             <div className="progress">
                 <h1>Projects</h1>
-                <motion.div style={{ scaleX }} className="progressBar"></motion.div>
+                <motion.div style={{ scaleX }} className="progressBar" />
             </div>
 
-            <div>
+            <div className="list">   {/* <- add class */}
                 {projects.map((project) => (
                     <Single project={project} key={project.id} />
                 ))}
             </div>
         </div>
-
-
     );
 };
 
