@@ -10,22 +10,11 @@ const getRotationTransition = (duration, from, loop = true) => ({
     type: "tween",
     repeat: loop ? Infinity : 0,
 });
-
 const getTransition = (duration, from) => ({
     rotate: getRotationTransition(duration, from),
     scale: { type: "spring", damping: 20, stiffness: 300 },
 });
 
-/**
- * Props:
- * - text: string
- * - spinDuration: number (seconds)
- * - onHover: "slowDown" | "speedUp" | "pause" | "goBonkers" | undefined
- * - className: string
- * - targetRef: ref to the IMG (or any element) we should wrap around
- * - gap: number (px) distance from the image edge to the text ring
- * - radius: number (px) optional fixed radius override
- */
 const CircularText = ({
     text,
     spinDuration = 35,
@@ -34,13 +23,18 @@ const CircularText = ({
     targetRef,
     gap = 16,
     radius: radiusProp,
+    tracking = 0,          // px added after each glyph (use negative to pack tighter)
+    startAngle = -90,      // center at top by default
 }) => {
     const letters = Array.from(text || "");
     const controls = useAnimation();
+    const containerRef = useRef(null);
+
     const [currentRotation, setCurrentRotation] = useState(0);
     const [radius, setRadius] = useState(radiusProp ?? 150);
+    const [angles, setAngles] = useState([]);
 
-    // Auto-fit to target element (image) width
+    // --- auto-fit radius from target element (image) ---
     useLayoutEffect(() => {
         if (radiusProp) {
             setRadius(radiusProp);
@@ -51,14 +45,53 @@ const CircularText = ({
 
         const ro = new ResizeObserver(([entry]) => {
             const w = entry.contentRect.width;
-            // Ring radius = half image width + gap
             setRadius(w / 2 + gap);
         });
         ro.observe(el);
         return () => ro.disconnect();
     }, [targetRef, gap, radiusProp]);
 
-    // Spin baseline
+    // --- compute angles by glyph width (arc-length spacing) ---
+    const computeAngles = () => {
+        const root = containerRef.current;
+        if (!root || letters.length === 0) return setAngles([]);
+
+        const cs = window.getComputedStyle(root);
+        const fSize = parseFloat(cs.fontSize) || 16;
+        const fWeight = cs.fontWeight || "700";
+        const fFamily = cs.fontFamily || "inherit";
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.font = `${fWeight} ${fSize}px ${fFamily}`;
+
+        const widths = letters.map((ch) => ctx.measureText(ch === "\n" ? " " : ch).width);
+        const totalWidth =
+            widths.reduce((a, b) => a + b, 0) + tracking * Math.max(letters.length - 1, 0);
+
+        const degPerPx = 360 / Math.max(totalWidth, 1);
+        let accPx = 0;
+        const a = widths.map((w, i) => {
+            const angle = startAngle + accPx * degPerPx;
+            accPx += w + (i < widths.length - 1 ? tracking : 0);
+            return angle;
+        });
+        setAngles(a);
+    };
+
+    useLayoutEffect(() => {
+        computeAngles();
+        const ro = new ResizeObserver(computeAngles);
+        if (containerRef.current) ro.observe(containerRef.current);
+        window.addEventListener("resize", computeAngles);
+        return () => {
+            ro.disconnect();
+            window.removeEventListener("resize", computeAngles);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [text, tracking, startAngle]);
+
+    // --- spin baseline + hover controls ---
     useEffect(() => {
         controls.start({
             rotate: currentRotation + 360,
@@ -94,7 +127,6 @@ const CircularText = ({
             transition: getTransition(dur, currentRotation),
         });
     };
-
     const handleHoverEnd = () => {
         controls.start({
             rotate: currentRotation + 360,
@@ -103,13 +135,14 @@ const CircularText = ({
         });
     };
 
-    // Heuristic font size that scales with ring size + letter count
+    // scale font relative to radius & amount of text
     const fontSizePx = Math.round(
         Math.max(10, Math.min(28, (radius * 0.7) / Math.max(letters.length, 12)))
     );
 
     return (
         <motion.div
+            ref={containerRef}
             initial={{ rotate: 0 }}
             className={`circular-text ${className}`}
             animate={controls}
@@ -123,14 +156,10 @@ const CircularText = ({
             style={{ fontSize: `${fontSizePx}px` }}
         >
             {letters.map((letter, i) => {
-                const angleDeg = (360 / letters.length) * i;
-                // Place each char on a circle: rotate -> move outwards -> rotate back 90deg so letters are upright
+                const angleDeg = angles[i] ?? startAngle;
                 const transform = `rotate(${angleDeg}deg) translate(${radius}px) rotate(90deg)`;
                 return (
-                    <span
-                        key={`${letter}-${i}`}
-                        style={{ transform, WebkitTransform: transform }}
-                    >
+                    <span key={`${letter}-${i}`} style={{ transform, WebkitTransform: transform }}>
                         {letter}
                     </span>
                 );

@@ -30,7 +30,7 @@ const Hero = () => {
                 animate="animate"
             >
                 <CircularText
-                    text="JIAJUN • JIAJUN • JIAJUN • JIAJUN • "
+                    text="JIAJUN • JIAJUN • JIAJUN • JIAJUN • JIAJUN • JIAJUN • JIAJUN • JIAJUN • "
                     onHover="slowDown"
                     spinDuration={15}
                     className="circular-text"
