@@ -33,7 +33,7 @@ const App = () => {
             <section id="What-I-Do">
                 <ScrollVelocity
                     texts={['What I Do', 'Scroll Down']}
-                    velocity={120}
+                    velocity={50}
                     className="custom-scroll-text"
                 />
                 <WhatIDo />
