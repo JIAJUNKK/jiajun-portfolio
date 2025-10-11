@@ -16,84 +16,103 @@ export default function WhatIDo({ services = SERVICES }) {
         const NAV_H = document.querySelector(".navbar")?.offsetHeight || 100;
         const OFFSET = NAV_H + 24;
 
-        const mm = gsap.matchMedia();
-        const ctx = gsap.context(() => {
-            mm.add("(min-width: 1025px)", () => {
-                const cards = cardsRef.current.filter(Boolean);
-                if (!cards.length) return;
+        const ready = async () => {
+            try { await (document.fonts?.ready ?? Promise.resolve()); } catch { }
+            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+        };
 
-                const STACK_GAP = 120;
-                const SCROLL_PER_CARD = 420;
+        let mm = null;
+        let ctx = null;
+        let killed = false;
 
-                cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
+        const init = async () => {
+            await ready();
+            if (killed) return;
+            mm = gsap.matchMedia();
+            ctx = gsap.context(() => {
+                mm.add("(min-width: 1025px)", () => {
+                    const cards = cardsRef.current.filter(Boolean);
+                    if (!cards.length) return;
 
-                const tl = gsap.timeline({
-                    defaults: { ease: "power1.out" },
-                    scrollTrigger: {
-                        trigger: stageRef.current,
-                        start: () => `top top+=${OFFSET}`,
-                        // add extra runway so release feels natural
-                        end: () =>
-                            `+=${cards.length * SCROLL_PER_CARD + Math.round(window.innerHeight * 0.5)}`,
-                        scrub: 0.7,
-                        pin: true,
-                        pinSpacing: true,
-                        fastScrollEnd: false,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                    },
+                    const STACK_GAP = 90;
+                    const SCROLL_PER_CARD = 420;
+
+                    cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
+
+                    const tl = gsap.timeline({
+                        defaults: { ease: "power1.out" },
+                        scrollTrigger: {
+                            trigger: stageRef.current,
+                            start: () => `top top+=${OFFSET}`,
+                            // add extra runway so release feels natural
+                            end: () =>
+                                `+=${cards.length * SCROLL_PER_CARD + Math.round(window.innerHeight * 0.5)}`,
+                            scrub: 0.7,
+                            pin: true,
+                            pinSpacing: true,
+                            fastScrollEnd: false,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true,
+                        },
+                    });
+
+                    cards.forEach((card, i) => {
+                        tl.fromTo(
+                            card,
+                            { y: "110%", immediateRender: false },
+                            { y: i * STACK_GAP, duration: 0.9, ease: "power1.out" },
+                            i
+                        );
+                    });
+
+                    return () => tl.scrollTrigger?.kill();
                 });
+                // Mobile & tablets
+                mm.add("(max-width: 1024px)", () => {
+                    const cards = cardsRef.current.filter(Boolean);
+                    if (!cards.length) return;
 
-                cards.forEach((card, i) => {
-                    tl.fromTo(
-                        card,
-                        { y: "110%", immediateRender: false },
-                        { y: i * STACK_GAP, duration: 0.9, ease: "power1.out" },
-                        i
-                    );
+                    const STACK_GAP = 65;
+                    const SCROLL_PER_CARD = 420;
+
+                    cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
+
+                    const tl = gsap.timeline({
+                        defaults: { ease: "power1.out" },
+                        scrollTrigger: {
+                            trigger: stageRef.current,
+                            start: () => `top top+=${OFFSET}`,
+                            end: `+=${cards.length * SCROLL_PER_CARD}`,
+                            scrub: 0.8,
+                            pin: true,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true,
+                        },
+                    });
+
+                    cards.forEach((card, i) => {
+                        tl.fromTo(
+                            card,
+                            { y: "110%", immediateRender: false },
+                            { y: i * STACK_GAP, duration: 0.9, ease: "power1.out" },
+                            i
+                        );
+                    });
+
+                    return () => tl.scrollTrigger?.kill();
                 });
+            }, rootRef);
 
-                return () => tl.scrollTrigger?.kill();
-            });
-            // Mobile & tablets
-            mm.add("(max-width: 1024px)", () => {
-                const cards = cardsRef.current.filter(Boolean);
-                if (!cards.length) return;
+            ScrollTrigger.refresh();
+            requestAnimationFrame(() => { if (!killed) ScrollTrigger.refresh(); });
+        };
 
-                const STACK_GAP = 65;
-                const SCROLL_PER_CARD = 420;
-
-                cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
-
-                const tl = gsap.timeline({
-                    defaults: { ease: "power1.out" },
-                    scrollTrigger: {
-                        trigger: stageRef.current,
-                        start: () => `top top+=${OFFSET}`,
-                        end: `+=${cards.length * SCROLL_PER_CARD}`,
-                        scrub: 0.8,
-                        pin: true,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                    },
-                });
-
-                cards.forEach((card, i) => {
-                    tl.fromTo(
-                        card,
-                        { y: "110%", immediateRender: false },
-                        { y: i * STACK_GAP, duration: 0.9, ease: "power1.out" },
-                        i
-                    );
-                });
-
-                return () => tl.scrollTrigger?.kill();
-            });
-        }, rootRef);
+        init();
 
         return () => {
-            mm.revert();
-            ctx.revert();
+            killed = true;
+            ctx?.revert();
+            mm?.revert();
         };
     }, []);
 
