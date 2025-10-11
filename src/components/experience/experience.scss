@@ -62,8 +62,8 @@
     }
 
     .experience-card-header {
-        h3 {
-            font-size: $fs-h3;
+        h4 {
+            font-size: $fs-h4;
             font-weight: 700;
             line-height: 1.15;
             margin: 0 0 0.25em 0;
@@ -85,7 +85,7 @@
         margin-bottom: 1.25rem;
 
         li {
-            font-size: $fs-p;
+            font-size: $fs-small;
             /* use shared paragraph size */
             line-height: 1.5;
             padding-left: 1px;

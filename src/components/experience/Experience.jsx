@@ -37,7 +37,7 @@ const ExperienceCard = ({ experience }) => {
             }
         >
             <div className="experience-card-header">
-                <h3>{experience.title}</h3>
+                <h4>{experience.title}</h4>
                 <p>{experience.company_name}</p>
             </div>
 
