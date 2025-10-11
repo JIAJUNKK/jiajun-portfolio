@@ -45,3 +45,25 @@ section {
         width: 100%;
     }
 }
+
+/* Global glass slab that provides the blur for navbar + sticky header */
+#glass-slab {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    /* JS sets height dynamically */
+    height: var(--nav-h);
+
+    /* Make the blur visible (Safari needs tiny alpha) */
+    background-color: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+    pointer-events: none;
+
+    /* Must sit ABOVE normal page content (so it can blur it),
+     but BELOW the navbar and sticky header text. */
+    z-index: 1000;
+}

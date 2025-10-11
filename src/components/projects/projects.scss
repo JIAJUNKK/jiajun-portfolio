@@ -6,15 +6,25 @@ section#Projects {
 }
 
 .portfolio {
+    position: relative;
+
     .progress {
         position: sticky;
-        top: 100px;
+        top: var(--nav-h);
+        /* sits right under navbar */
         left: 0;
+        height: var(--nav-h);
         text-align: center;
         color: $primary-text-color;
         font-size: 36px;
-        background-color: $light;
-        z-index: 999;
+
+        /* Must be above the slab so text stays crisp */
+        z-index: 1001;
+
+        /* IMPORTANT: no blur/tint here — the slab handles it */
+        background: transparent;
+        border: 0;
+        box-shadow: none;
 
         @include mobile {
             bottom: 0;
@@ -50,6 +60,8 @@ section#Projects {
             .imageContainer {
                 flex: 1;
                 height: 50%;
+                border-radius: 12px;
+                overflow: hidden;
 
                 @include mobile {
                     width: 100%;
@@ -91,7 +103,6 @@ section#Projects {
                     }
                 }
 
-
                 ul {
                     color: $tertiary;
                     font-size: 16px;
@@ -132,9 +143,6 @@ section#Projects {
                         }
                     }
                 }
-
-
-
             }
         }
     }

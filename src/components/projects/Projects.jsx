@@ -77,6 +77,7 @@ const Projects = () => {
 
     return (
         <div id="Projects" className="portfolio" ref={ref}>
+            <div id="projects-sentinel" aria-hidden="true" />
             <div className="progress">
                 <h1>Projects</h1>
                 <motion.div style={{ scaleX }} className="progressBar" />

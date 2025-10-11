@@ -1,25 +1,31 @@
 @use "../../app/theme" as *;
 
 .navbar {
-    height: 100px;
+    height: var(--nav-h);
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
     z-index: 9999;
+    /* above slab and sticky header */
 
-    // match Sidebar glass & blur
-    background:
-        linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot),
-        $glass-bg;
-    color: $primary-text-color;
+    /* Transparent — the slab behind does the blur */
+    background: transparent;
+
+    /* Keep a divider & shadow when NOT over projects */
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: $box-shadow;
 
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    &.over-projects {
+        /* Seamless with slab when sticky header is present */
+        border-bottom: 0 !important;
+        box-shadow: none !important;
+    }
 
     .wrapper {
+        position: relative;
+        z-index: 1;
+        /* above the slab */
         max-width: 80%;
         margin: 0 auto;
         height: 100%;
