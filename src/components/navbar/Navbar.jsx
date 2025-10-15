@@ -46,6 +46,7 @@ const Navbar = () => {
 
             // visual tweak: drop navbar shadow when sticky header is present
             nav?.classList.toggle("over-projects", stuck);
+            progress?.classList.toggle("is-stuck", stuck);
         };
 
         const onScrollOrResize = () => {

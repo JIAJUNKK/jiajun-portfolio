@@ -19,7 +19,7 @@ section#Projects {
         font-size: 36px;
 
         /* Must be above the slab so text stays crisp */
-        z-index: 1001;
+        z-index: 0;
 
         /* IMPORTANT: no blur/tint here — the slab handles it */
         background: transparent;
@@ -35,6 +35,11 @@ section#Projects {
             height: 10px;
             background-color: $tertiary;
         }
+
+    }
+
+    .is-stuck {
+        z-index: 1001;
     }
 
     .container {
