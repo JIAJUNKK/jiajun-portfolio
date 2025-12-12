@@ -17,6 +17,16 @@ body {
     overflow-x: hidden;
 }
 
+html,
+body {
+    cursor: default;
+}
+
+/* Force everything to use arrow by default */
+* {
+    cursor: default !important;
+}
+
 :root {
     --nav-offset: 224px;
     --nav-h: 100px;

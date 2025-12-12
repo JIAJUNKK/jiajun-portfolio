@@ -3,10 +3,26 @@
 .cursor {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    border: 3px solid $primary;
+    border-radius: 999px;
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 999;
+    pointer-events: none;
+
+    // Glassmorphism look
+    background: linear-gradient(135deg,
+            rgba($primary, 0.25),
+            rgba(255, 255, 255, 0.08));
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 18px 45px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+
+    // Make it feel like a glowing glass orb
+    mix-blend-mode: screen;
+
 
     @include mobile {
         display: none;
