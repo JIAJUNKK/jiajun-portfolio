@@ -1,0 +1,62 @@
+// src/pages/FlemingHowland.scss
+@use "../../app/theme" as *;
+
+/* Only this page hides the native scrollbar */
+body.fh-no-scrollbar {
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+body.fh-no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.fh-page {
+    background: #fafafa;
+    min-height: 100vh;
+    color: #111827;
+}
+
+.fh-page__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4.5rem;
+
+    @media (max-width: 768px) {
+        padding-top: 5.5rem;
+        padding-bottom: 3.5rem;
+    }
+}
+
+/* FOOTER */
+
+.fh-footer {
+    margin-top: 2rem;
+    padding-top: 2.1rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.4rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.fh-footer__title {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.fh-footer__text {
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+.fh-footer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
