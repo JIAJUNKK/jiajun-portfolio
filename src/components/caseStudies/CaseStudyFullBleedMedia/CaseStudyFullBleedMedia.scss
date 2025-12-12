@@ -1,0 +1,36 @@
+// src/components/caseStudies/CaseStudyFullBleedMedia/CaseStudyFullBleedMedia.scss
+@use "../../../app/theme" as *;
+
+.fh-fullbleed {
+    width: 100vw;
+    margin: 3.5rem 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f5f5f5;
+}
+
+.fh-fullbleed--light {
+    background: #ffffff;
+}
+
+.fh-fullbleed__frame {
+    width: 100%;
+    max-height: 640px;
+    overflow: hidden;
+
+    img,
+    video {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.fh-fullbleed__caption {
+    max-width: 1040px;
+    margin: 0.7rem auto 0;
+    padding: 0 1.5rem 0.2rem;
+    font-size: 0.86rem;
+    color: #6b7280;
+}

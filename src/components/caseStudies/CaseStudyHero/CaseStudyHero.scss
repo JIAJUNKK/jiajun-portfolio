@@ -1,0 +1,198 @@
+// src/components/caseStudies/CaseStudyHero/CaseStudyHero.scss
+@use "../../../app/theme" as *;
+
+.fh-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-bottom: 4.5rem;
+}
+
+.fh-hero__tagline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.fh-hero__category {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: rgba($primary, 0.08);
+    border: 1px solid rgba($primary, 0.18);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #111827;
+}
+
+.fh-hero__meta {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.fh-hero__grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.4rem;
+    }
+}
+
+
+
+.fh-hero__stack {
+    margin-top: 0.4rem;
+}
+
+.fh-hero__stack-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    margin-top: 0.35rem;
+
+    img {
+        height: 50px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+        opacity: 0.9;
+        transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+
+        &:hover {
+            transform: translateY(-1px) scale(1.03);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        justify-content: flex-start;
+    }
+}
+
+.fh-hero__text h1 {
+    font-size: clamp(2.6rem, 4vw, 3.1rem);
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.9rem;
+}
+
+.fh-hero__lede {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #4b5563;
+    max-width: 36rem;
+}
+
+.fh-hero__meta-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+    font-size: 0.92rem;
+
+    >div {
+        min-width: 9rem;
+    }
+}
+
+.fh-hero__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #9ca3af;
+    margin-bottom: 0.18rem;
+}
+
+.fh-hero__value {
+    color: #111827;
+}
+
+.fh-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.9rem;
+}
+
+.fh-hero__image-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+    /* Let framer transforms do their thing */
+    transform-origin: center center;
+
+    @media (min-width: 900px) {
+        position: relative;
+        z-index: 2;
+    }
+
+    @media (max-width: 900px) {
+        justify-content: center;
+    }
+}
+
+.fh-hero__image-frame {
+    width: 100%;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 22px 45px rgba(15, 23, 42, 0.18);
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 900px) {
+        max-width: 100%;
+    }
+}
+
+/* Buttons reused in footer too */
+.fh-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.18s ease-out;
+    white-space: nowrap;
+}
+
+.fh-button--primary {
+    background: $primary;
+    color: #ffffff;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.2);
+
+    &:hover {
+        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.25);
+        transform: translateY(-1px);
+    }
+}
+
+.fh-button--ghost {
+    background: #ffffff;
+    color: #111827;
+    border-color: #e5e7eb;
+
+    &:hover {
+        background: #f9fafb;
+        transform: translateY(-1px);
+    }
+}

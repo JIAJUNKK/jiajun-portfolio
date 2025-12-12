@@ -1,0 +1,58 @@
+// src/components/caseStudies/CaseStudyStoryTwoColumn/CaseStudyStoryTwoColumn.scss
+@use "../../../app/theme" as *;
+
+.fh-body__prose {
+    max-width: 44rem;
+    margin-bottom: 2rem;
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: 0.98rem;
+        line-height: 1.9;
+        color: #374151;
+
+        &:not(:last-child) {
+            margin-bottom: 0.9rem;
+        }
+    }
+}
+
+.fh-body__columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.4rem;
+
+    @media (max-width: 900px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.fh-body__block h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.fh-body__block p {
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+}
+
+.fh-body__block ul {
+    padding-left: 1.1rem;
+    font-size: 0.96rem;
+    color: #374151;
+
+    li {
+        margin-bottom: 0.35rem;
+    }
+}
+
+.fh-body--bottom {
+    margin-top: 1rem;
+}
