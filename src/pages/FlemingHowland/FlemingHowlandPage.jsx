@@ -9,7 +9,7 @@ import CaseStudyStoryTwoColumn from "../../components/caseStudies/CaseStudyStory
 import CaseStudyWorkflow from "../../components/caseStudies/CaseStudyWorkflow/CaseStudyWorkflow";
 import CaseStudyFullBleedMedia from "../../components/caseStudies/CaseStudyFullBleedMedia/CaseStudyFullBleedMedia";
 import CaseStudyScrollIndicator from "../../components/caseStudies/CaseStudyScrollIndicator/CaseStudyScrollIndicator";
-
+import CaseStudyImageSwitcherFullBleed from "../../components/caseStudies/CaseStudyImageSwitcherFullBleed/CaseStudyImageSwitcherFullBleed";
 import "./FlemingHowland.scss";
 
 const FlemingHowlandPage = () => {
@@ -67,7 +67,10 @@ const FlemingHowlandPage = () => {
 
     return (
         <main className="fh-page">
+            <CaseStudyScrollIndicator />
+
             <div className="fh-page__inner">
+
                 <CaseStudyHero
                     ref={heroRef}
                     category="Client project · E-commerce"
@@ -110,46 +113,73 @@ const FlemingHowlandPage = () => {
                     stats={[
                         {
                             value: "≈78%",
-                            label:
-                                "reduction in translation spend on recurring updates",
+                            label: "reduction in translation spend on recurring updates",
+                            badge: "Automation",
+                            graph: { type: "bar", progress: 0.78 },
                         },
                         {
                             value: "Hours → minutes",
-                            label:
-                                "to roll out new copy across language variants",
-                        },
-                        {
-                            value: "Reusable blocks",
-                            label:
-                                "components the team can assemble without dev help",
+                            label: "to roll out new copy across language variants",
+                            badge: "Speed",
+                            graph: { type: "spark", bars: 7 },
                         },
                     ]}
                 />
 
                 <CaseStudyStoryTwoColumn
                     eyebrow="The story"
-                    title="Making long-form storytelling work across languages."
+                    title="Designing a translation system that respects craft and brand voice."
                     introParagraphs={[
-                        "Fleming Howland is a luxury furniture brand with a strong visual identity and long-form product stories. Each page mixes narrative copy, specification detail and photography.",
-                        "Before this project, every language lived as a separate copy of the site. Updating content meant jumping into the CMS, finding each translation and manually pasting text into the right fields. It worked, but it was slow, easy to break and expensive as the site grew.",
+                        "Fleming Howland’s products don’t read like a generic catalogue. They have names, stories and material descriptions that are tightly tied to the brand’s tone of voice. That makes them hard to translate well — you can’t just run everything through a plugin and hope it still feels like Fleming Howland.",
+                        "The existing setup relied heavily on WPML, plus a lot of manual PHP-based translations. Some product names couldn’t be translated at all, and many auto-translations felt off-brand or simply wrong. Keeping everything consistent across languages meant editing the same content in multiple places and maintaining thousands of lines of translation code by hand."
                     ]}
                     leftBlock={{
-                        title: "The challenge",
-                        body: "Keep the richness of the content, without turning every update into a multi-day task. The team needed:",
+                        title: "The translation challenge",
+                        body: "We needed a way to scale multi-language content without losing the brand’s tone, or relying on developers to touch PHP every time copy changed. In practice, that meant:",
                         bullets: [
-                            "less copy-paste work in the CMS",
-                            "better alignment between language versions",
-                            "a process translators and marketers could follow without touching templates",
-                        ],
+                            "avoiding literal translations for product names and brand phrases that shouldn’t change",
+                            "fixing WPML translations that were technically correct but off-tone for Fleming Howland",
+                            "removing the need to maintain thousands of lines of manual translation arrays in PHP",
+                            "giving the team a simple way to review and adjust translations in bulk"
+                        ]
                     }}
                     rightBlock={{
-                        title: "The solution",
-                        body: "I built a small translation pipeline around WordPress, plus a component-based layout system. The pipeline handles structured content and mapping; the components help the team build pages from a set of reliable building blocks.",
+                        title: "Coding the brand into the workflow",
+                        body:
+                            "Working closely with the director, I turned their preferred wording and examples into a set of concrete rules and instructions. I then wired those into a Python script that strips structured content out into Excel, applies the translation logic, and feeds the result back into the site. After a few iterations, we improved translation accuracy from roughly 70% to around 95% in our internal checks. That allowed us to delete thousands of lines of manual PHP translation code and lean on a cleaner combination of Weglot plus the Python pipeline for brand-safe language across the site."
                     }}
                 />
-            </div>
 
-            <div className="fh-page__inner">
+                <CaseStudyImageSwitcherFullBleed
+                    images={[
+                        {
+                            src: "/caseStudies/FH/FH-ENG.png",
+                            label: "English",
+                            shortLabel: "EN",
+                            code: "EN",
+                        },
+                        {
+                            src: "/caseStudies/FH/FH-ES.png",
+                            label: "Spanish",
+                            shortLabel: "ES",
+                            code: "ES",
+                        },
+                        {
+                            src: "/caseStudies/FH/FH-FR.png",
+                            label: "French",
+                            shortLabel: "FR",
+                            code: "FR",
+                        },
+                        {
+                            src: "/caseStudies/FH/FH-DE.png",
+                            label: "German",
+                            shortLabel: "DE",
+                            code: "DE",
+                        },
+                    ]}
+                    caption="Four language variants of the same product story, generated and checked through the Python + Weglot translation workflow."
+                />
+
                 <CaseStudyWorkflow
                     eyebrow="Approach"
                     title="How the translation workflow fits into their week."
@@ -161,21 +191,25 @@ const FlemingHowlandPage = () => {
                         "Re-import to language variants. Updated copy is mapped back onto existing pages and language versions automatically.",
                     ]}
                 />
-            </div>
 
-            <CaseStudyFullBleedMedia
-                className="fh-fullbleed--light"
-                caption="A quick walkthrough of the internal translation tooling used by the team."
-            >
-                <video
-                    src="/projects/FlemingHowland-workflow-demo.mp4"
-                    muted
-                    loop
-                    controls
+                <CaseStudyStoryTwoColumn
+                    eyebrow="Beyond translation"
+                    title="Helping the team find answers faster."
+                    introParagraphs={[
+                        "Once the language system felt solid, we looked at how the team was actually finding information day to day. A lot of time was being spent searching the site, digging through internal docs or asking the same questions in Slack.",
+                    ]}
+                    leftBlock={{
+                        title: "AI knowledge assistant",
+                        body:
+                            "To reduce that friction, I built a lightweight AI chatbot for Fleming Howland using a Cloudflare Worker, an OpenAI model and an OpenAI vector store. The bot is tuned on product information and internal documentation so the marketing and customer service teams can ask questions in plain language and get relevant answers back in a few seconds, instead of hunting through pages or handbooks."
+                    }}
+                    rightBlock={{
+                        title: "Supporting UI & moodboard work",
+                        body:
+                            "Alongside the language and tooling work, I also contributed to frontend implementation across the marketing site and a bespoke moodboard experience. That included wiring up the moodboard UI, refining layouts and interactions, and making sure new components felt consistent with the existing brand system."
+                    }}
                 />
-            </CaseStudyFullBleedMedia>
 
-            <div className="fh-page__inner">
                 <CaseStudyStoryTwoColumn
                     className="fh-body--bottom"
                     introParagraphs={[]}
@@ -236,8 +270,6 @@ const FlemingHowlandPage = () => {
                     </div>
                 </motion.footer>
             </div>
-
-            <CaseStudyScrollIndicator />
         </main>
     );
 };

@@ -8,6 +8,14 @@
     margin-bottom: 4.5rem;
 }
 
+.fh-hero-intro-wrapper {
+    max-width: 80%;
+    margin: 120px auto 0;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
 .fh-hero__tagline {
     display: flex;
     flex-wrap: wrap;
@@ -36,8 +44,7 @@
 .fh-hero__grid {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    gap: 15%;
 
     @media (max-width: 900px) {
         flex-direction: column;
@@ -46,7 +53,11 @@
     }
 }
 
-
+.fh-hero__grid-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .fh-hero__stack {
     margin-top: 0.4rem;

@@ -1,0 +1,129 @@
+@use "../../../app/theme" as *;
+
+.fh-image-switcher {
+    background: #fafafa;
+}
+
+.fh-image-switcher .fh-fullbleed__frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 64px;
+
+    @media (max-width: 768px) {
+        padding: 32px;
+    }
+}
+
+.fh-image-switcher__inner {
+    width: 100%;
+}
+
+/* two-column layout: image left, text + pills right */
+.fh-image-switcher__content {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 2.5rem;
+    align-items: center;
+
+    @media (max-width: 900px) {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 1.8rem;
+    }
+}
+
+.fh-image-switcher__main {
+    position: relative;
+    border-radius: 1.4rem;
+    overflow: hidden;
+}
+
+/* fixed aspect ratio so height doesn't jump between images */
+.fh-image-switcher__img-stack {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; // tweak if your screenshots are taller/shorter
+}
+
+/* all images stacked; only active one is visible */
+.fh-image-switcher__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.fh-image-switcher__img.is-active {
+    opacity: 1;
+}
+
+/* little language tag in the corner of the image */
+.fh-image-switcher__badge {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f9fafb;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* RIGHT COLUMN */
+.fh-image-switcher__side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+}
+
+.fh-image-switcher__side-caption {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: $secondary;
+}
+
+/* controls */
+
+.fh-image-switcher__controls {
+    margin-top: 0.2rem;
+    display: flex;
+    gap: 0.6rem;
+    flex-direction: column;
+}
+
+.fh-image-switcher__pill {
+    border: none;
+    background: $light-background;
+    color: $primary;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fh-image-switcher__pill-code {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.fh-image-switcher__pill-label {
+    font-size: 16px;
+}
+
+/* active state */
+.fh-image-switcher__pill--active {
+    background: $primary;
+    color: $light;
+    border-color: transparent;
+}
