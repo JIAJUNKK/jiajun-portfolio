@@ -12,6 +12,8 @@
     display: flex;
     align-items: stretch;
     justify-content: center;
+    mix-blend-mode: difference;
+
 
     @media (max-width: 768px) {
         display: none;
@@ -30,5 +32,6 @@
         transform-origin: top center;
         border-radius: inherit;
         background: $primary;
+        background: $light;
     }
 }
