@@ -9,7 +9,7 @@ import CaseStudyStoryTwoColumn from "../../components/caseStudies/CaseStudyStory
 import CaseStudyWorkflow from "../../components/caseStudies/CaseStudyWorkflow/CaseStudyWorkflow";
 import CaseStudyFullBleedMedia from "../../components/caseStudies/CaseStudyFullBleedMedia/CaseStudyFullBleedMedia";
 import CaseStudyScrollIndicator from "../../components/caseStudies/CaseStudyScrollIndicator/CaseStudyScrollIndicator";
-import CaseStudyImageSwitcherFullBleed from "../../components/caseStudies/CaseStudyImageSwitcherFullBleed/CaseStudyImageSwitcherFullBleed";
+import CaseStudyImageSwitcher from "../../components/caseStudies/CaseStudyImageSwitcher/CaseStudyImageSwitcher";
 import "./FlemingHowland.scss";
 
 const FlemingHowlandPage = () => {
@@ -150,7 +150,7 @@ const FlemingHowlandPage = () => {
                     }}
                 />
 
-                <CaseStudyImageSwitcherFullBleed
+                <CaseStudyImageSwitcher
                     images={[
                         {
                             src: "/caseStudies/FH/FH-ENG.png",
