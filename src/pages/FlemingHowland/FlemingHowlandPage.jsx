@@ -24,7 +24,7 @@ const FlemingHowlandPage = () => {
 
     const { scrollYProgress: heroScrollYProgress } = useScroll({
         target: heroRef,
-        offset: ["start start", "end end"],
+        offset: ["start start", "end start"],
     });
 
     // ---- IMAGE MORPH EFFECT ----
@@ -35,11 +35,14 @@ const FlemingHowlandPage = () => {
         [0, -40, -120]
     );
 
-    // Start a bit smaller, then grow to feel like a full-width spread
+    const SCALE_START = 0.14;   // matches your opacity/clip reveal
+    const SCALE_END = 0.5;
+    const SCALE_MAX = 1.4;
+
     const heroImageScale = useTransform(
         heroScrollYProgress,
-        [0, 1],
-        [1, 1.5]
+        [0, SCALE_START, SCALE_END, 1],
+        [1, 1, SCALE_MAX, SCALE_MAX]
     );
 
     // Slide from right → centre as you scroll
@@ -47,6 +50,23 @@ const FlemingHowlandPage = () => {
         heroScrollYProgress,
         [0, 1],
         [0, 0] // tweak if you want a stronger slide
+    );
+
+    const heroImageOpacity = useTransform(
+        heroScrollYProgress,
+        [0, 0.14, 0.2],
+        [0, 0, 1]
+    );
+
+    // Fully hidden until ~14%, then "opens" downward
+    const heroImageClip = useTransform(
+        heroScrollYProgress,
+        [0, 0.14, 0.26],
+        [
+            "inset(100% 0% 0% 0% round 24px)",
+            "inset(100% 0% 0% 0% round 24px)",
+            "inset(0% 0% 0% 0% round 24px)",
+        ]
     );
 
     // Slightly soften the card → flatter, more "full-bleed" feel
@@ -57,6 +77,8 @@ const FlemingHowlandPage = () => {
     );
 
     const heroImageMotionStyle = {
+        opacity: heroImageOpacity,
+        clipPath: heroImageClip,
         y: heroImageY,
         x: heroImageX,
         scale: heroImageScale,

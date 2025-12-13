@@ -164,12 +164,15 @@ const CaseStudyHero = forwardRef(
                         className="case-study-hero__image-wrap"
                         style={heroImageMotionStyle}
                     >
-                        <div className="case-study-hero__image-frame">
+                        <motion.div
+                            className="case-study-hero__image-frame"
+                            style={heroImageMotionStyle}
+                        >
                             <img
                                 src={heroImageSrc}
                                 alt={heroImageAlt || title}
                             />
-                        </div>
+                        </motion.div>
                     </motion.div>
                 )}
             </header>
