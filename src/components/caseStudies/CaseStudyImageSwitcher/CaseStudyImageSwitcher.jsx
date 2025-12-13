@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyImageSwitcher.scss";
 
@@ -7,15 +7,18 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const active = images[activeIndex] || images[0];
 
+    const ref = useRef(null);
+    const inView = useInView(ref, { amount: 0.3, once: false });
+
     if (!active) return null;
 
     return (
         <CaseStudySection>
             <motion.figure
+                ref={ref}
                 className="case-study-image-switcher"
                 initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
                 transition={{ duration: 1, ease: [0.19, 0.6, 0.22, 1] }}
             >
                 <div className="case-study-image-switcher__inner">
@@ -44,9 +47,7 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
                         {/* RIGHT – text + controls */}
                         <div className="case-study-image-switcher__side">
                             {caption && (
-                                <p className="case-study-image-switcher__caption">
-                                    {caption}
-                                </p>
+                                <p className="case-study-image-switcher__caption">{caption}</p>
                             )}
 
                             <div className="case-study-image-switcher__controls">

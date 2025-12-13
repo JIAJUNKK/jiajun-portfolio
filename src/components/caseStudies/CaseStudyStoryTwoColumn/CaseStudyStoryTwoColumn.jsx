@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+// src/components/caseStudies/CaseStudyStoryTwoColumn/CaseStudyStoryTwoColumn.jsx
+import { useMemo, useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyStoryTwoColumn.scss";
 
@@ -16,32 +17,59 @@ const CaseStudyStoryTwoColumn = ({
     rightBlock,
     className = "",
 }) => {
-    const cards = [
-        leftBlock && { id: "left", ...leftBlock },
-        rightBlock && { id: "right", ...rightBlock },
-    ].filter(Boolean);
+    const cards = useMemo(
+        () =>
+            [
+                leftBlock && { id: "left", ...leftBlock },
+                rightBlock && { id: "right", ...rightBlock },
+            ].filter(Boolean),
+        [leftBlock, rightBlock]
+    );
 
     const [activeIndex, setActiveIndex] = useState(0);
+
+    // In-view trigger (Option C)
+    const sectionRef = useRef(null);
+    const inView = useInView(sectionRef, { amount: 0.35, once: false });
+
+    // Keep activeIndex safe if cards length changes
+    useEffect(() => {
+        if (activeIndex >= cards.length) setActiveIndex(0);
+    }, [cards.length, activeIndex]);
 
     const hasIntro =
         eyebrow || title || (introParagraphs && introParagraphs.length > 0);
 
     return (
         <CaseStudySection className={`case-study-story ${className}`}>
-            <div className="case-study-story__layout">
+            <div ref={sectionRef} className="case-study-story__layout">
                 {/* LEFT: prose / story copy */}
                 {hasIntro && (
-                    <div className="case-study-story__prose">
+                    <motion.div
+                        className="case-study-story__prose"
+                        initial={{ opacity: 0, x: -28 }}
+                        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -28 }}
+                        transition={{ duration: 0.55, ease: [0.19, 0.6, 0.22, 1] }}
+                    >
                         {eyebrow && <p className="case-study-eyebrow">{eyebrow}</p>}
                         {title && <h2>{title}</h2>}
                         {introParagraphs.map((text, index) => (
                             <p key={index}>{text}</p>
                         ))}
-                    </div>
+                    </motion.div>
                 )}
 
                 {/* RIGHT: stacked cards */}
-                <div className="case-study-story__card-column">
+                <motion.div
+                    className="case-study-story__card-column"
+                    initial={{ opacity: 0, x: 28 }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 28 }}
+                    transition={{
+                        duration: 0.55,
+                        delay: 0.06,
+                        ease: [0.19, 0.6, 0.22, 1],
+                    }}
+                >
                     {cards.length > 1 && (
                         <div className="case-study-story__stack-toggle">
                             {cards.map((card, index) => (
@@ -52,7 +80,6 @@ const CaseStudyStoryTwoColumn = ({
                                         "case-study-pill case-study-story__toggle-pill" +
                                         (activeIndex === index ? " is-active" : "")
                                     }
-
                                     onClick={() => setActiveIndex(index)}
                                 >
                                     <span className="case-study-story__toggle-label">
@@ -68,10 +95,7 @@ const CaseStudyStoryTwoColumn = ({
                             <div className="case-study-story__card-stack">
                                 {cards.map((card, index) => {
                                     const total = cards.length;
-
-                                    // 0 = active, 1 = just behind, 2 = further back...
-                                    const relIndex =
-                                        (index - activeIndex + total) % total;
+                                    const relIndex = (index - activeIndex + total) % total;
 
                                     const depth = Math.min(relIndex, 3);
                                     const isActive = depth === 0;
@@ -83,9 +107,9 @@ const CaseStudyStoryTwoColumn = ({
                                                 "case-study-card case-study-story__card" +
                                                 (isActive ? " is-active" : " is-back")
                                             }
+                                            // important: keep your stack animation logic
                                             initial={false}
                                             animate={{
-                                                // stack goes "up" behind the active card
                                                 y: -depth * 20,
                                                 scale: 1 - depth * 0.04,
                                                 opacity: 1,
@@ -95,9 +119,7 @@ const CaseStudyStoryTwoColumn = ({
                                                         : "0 10px 26px rgba(15,23,42,0.08)",
                                             }}
                                             transition={cardTransition}
-                                            style={{
-                                                zIndex: total - depth,
-                                            }}
+                                            style={{ zIndex: total - depth }}
                                         >
                                             {isActive && (
                                                 <div className="case-study-story__block">
@@ -106,11 +128,9 @@ const CaseStudyStoryTwoColumn = ({
                                                     {Array.isArray(card.bullets) &&
                                                         card.bullets.length > 0 && (
                                                             <ul>
-                                                                {card.bullets.map(
-                                                                    (item, bulletIndex) => (
-                                                                        <li key={bulletIndex}>{item}</li>
-                                                                    )
-                                                                )}
+                                                                {card.bullets.map((item, bulletIndex) => (
+                                                                    <li key={bulletIndex}>{item}</li>
+                                                                ))}
                                                             </ul>
                                                         )}
                                                 </div>
@@ -121,7 +141,7 @@ const CaseStudyStoryTwoColumn = ({
                             </div>
                         )}
                     </div>
-                </div>
+                </motion.div>
             </div>
         </CaseStudySection>
     );

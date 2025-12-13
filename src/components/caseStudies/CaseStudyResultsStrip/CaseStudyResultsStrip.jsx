@@ -1,5 +1,6 @@
 // src/components/caseStudies/CaseStudyResultsStrip/CaseStudyResultsStrip.jsx
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyResultsStrip.scss";
 
@@ -73,15 +74,17 @@ const renderGraph = (graph) => {
 };
 
 const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
+    const ref = useRef(null);
+    const inView = useInView(ref, { amount: 0.4, once: false });
+
     return (
         <CaseStudySection className="case-study-results">
-            <div className="case-study-results__layout">
+            <div ref={ref} className="case-study-results__layout">
                 {/* LEFT */}
                 <motion.div
                     className="case-study-results__left"
                     initial={{ opacity: 0, x: -32 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -32 }}
                     transition={{ duration: 0.6, ease: [0.19, 0.6, 0.22, 1] }}
                 >
                     {eyebrow && (
@@ -97,7 +100,7 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
                                 className="case-study-card case-study-results__item"
                                 initial={{ opacity: 0, y: 12 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.4 }}
+                                viewport={{ once: false, amount: 0.4 }}
                                 transition={{
                                     duration: 0.45,
                                     delay: index * 0.06,
@@ -133,13 +136,8 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
                 <motion.div
                     className="case-study-results__right"
                     initial={{ opacity: 0, x: 32 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{
-                        duration: 0.6,
-                        delay: 0.08,
-                        ease: [0.19, 0.6, 0.22, 1],
-                    }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 32 }}
+                    transition={{ duration: 0.6, delay: 0.08, ease: [0.19, 0.6, 0.22, 1] }}
                 >
                     {title && (
                         <h2 className="case-study-results__title">
