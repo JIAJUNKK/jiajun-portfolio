@@ -4,8 +4,8 @@ import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import FlemingHowlandPage from "./pages/FlemingHowland/FlemingHowlandPage";
 
-import "./app/base.scss";
-import "./app/layout.scss";
+import "./styles/base.scss";
+import "./styles/layout.scss";
 
 const App = () => {
     return (
