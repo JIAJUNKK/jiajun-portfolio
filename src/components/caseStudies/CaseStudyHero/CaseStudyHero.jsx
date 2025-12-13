@@ -1,4 +1,3 @@
-// src/components/caseStudies/CaseStudyHero/CaseStudyHero.jsx
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -9,8 +8,8 @@ const renderCta = (cta, variant) => {
 
     const className =
         variant === "primary"
-            ? "fh-button fh-button--primary"
-            : "fh-button fh-button--ghost";
+            ? "case-study-button case-study-button--primary"
+            : "case-study-button case-study-button--ghost";
 
     if (cta.external) {
         return (
@@ -40,7 +39,7 @@ const CaseStudyHero = forwardRef(
             title,
             lede,
             metaItems = [],
-            stackIcons = [],          // <- NEW / UPDATED
+            stackIcons = [],
             primaryCta,
             secondaryCta,
             heroImageSrc,
@@ -54,61 +53,71 @@ const CaseStudyHero = forwardRef(
             (stackIcons && stackIcons.length > 0);
 
         return (
-            <header ref={ref} className="fh-hero">
-
-                <div className="fh-hero-intro-wrapper">
+            <header ref={ref} className="case-study-hero">
+                <div className="case-study-hero__intro">
                     <motion.div
-                        className="fh-hero__tagline"
+                        className="case-study-hero__tagline"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
                     >
                         {category && (
-                            <span className="fh-hero__category">{category}</span>
+                            <span className="case-study-hero__category">
+                                {category}
+                            </span>
                         )}
                         {metaLine && (
-                            <span className="fh-hero__meta">{metaLine}</span>
+                            <span className="case-study-hero__meta">
+                                {metaLine}
+                            </span>
                         )}
                     </motion.div>
 
                     <motion.div
-                        className="fh-hero__grid"
+                        className="case-study-hero__grid"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.08 }}
                     >
-                        <div className="fh-hero__grid-left">
-                            <div className="fh-hero__text">
+                        <div className="case-study-hero__grid-left">
+                            <div className="case-study-hero__text">
                                 {title && <h1>{title}</h1>}
-                                {lede && <p className="fh-hero__lede">{lede}</p>}
+                                {lede && (
+                                    <p className="case-study-hero__lede">
+                                        {lede}
+                                    </p>
+                                )}
                             </div>
-                            <div className="fh-hero__ctas">
+
+                            <div className="case-study-hero__ctas">
                                 {renderCta(primaryCta, "primary")}
                                 {renderCta(secondaryCta, "ghost")}
                             </div>
                         </div>
 
                         {hasMeta && (
-                            <div className="fh-hero__meta-grid">
+                            <div className="case-study-hero__meta-grid">
                                 {metaItems.map((item) => (
                                     <div key={item.label}>
-                                        <p className="fh-hero__label">
+                                        <p className="case-study-hero__label">
                                             {item.label}
                                         </p>
-                                        <p className="fh-hero__value">
+                                        <p className="case-study-hero__value">
                                             {item.value}
                                         </p>
                                     </div>
                                 ))}
 
                                 {stackIcons && stackIcons.length > 0 && (
-                                    <div className="fh-hero__stack">
-                                        <p className="fh-hero__label">Stack</p>
-                                        <div className="fh-hero__stack-icons">
+                                    <div className="case-study-hero__stack">
+                                        <p className="case-study-hero__label">
+                                            Stack
+                                        </p>
+                                        <div className="case-study-hero__stack-icons">
                                             {stackIcons.map((icon) => {
-                                                // String form: "javascript" or "firebase.png"
                                                 if (typeof icon === "string") {
-                                                    const hasExt = icon.includes(".");
+                                                    const hasExt =
+                                                        icon.includes(".");
                                                     const filename = hasExt
                                                         ? icon
                                                         : `${icon}.svg`;
@@ -126,7 +135,6 @@ const CaseStudyHero = forwardRef(
                                                     );
                                                 }
 
-                                                // Object form: { src, alt?, key? }
                                                 return (
                                                     <img
                                                         key={
@@ -150,12 +158,13 @@ const CaseStudyHero = forwardRef(
                         )}
                     </motion.div>
                 </div>
+
                 {heroImageSrc && (
                     <motion.div
-                        className="fh-hero__image-wrap"
+                        className="case-study-hero__image-wrap"
                         style={heroImageMotionStyle}
                     >
-                        <div className="fh-hero__image-frame">
+                        <div className="case-study-hero__image-frame">
                             <img
                                 src={heroImageSrc}
                                 alt={heroImageAlt || title}

@@ -7,7 +7,6 @@ import CaseStudyHero from "../../components/caseStudies/CaseStudyHero/CaseStudyH
 import CaseStudyResultsStrip from "../../components/caseStudies/CaseStudyResultsStrip/CaseStudyResultsStrip";
 import CaseStudyStoryTwoColumn from "../../components/caseStudies/CaseStudyStoryTwoColumn/CaseStudyStoryTwoColumn";
 import CaseStudyWorkflow from "../../components/caseStudies/CaseStudyWorkflow/CaseStudyWorkflow";
-import CaseStudyFullBleedMedia from "../../components/caseStudies/CaseStudyFullBleedMedia/CaseStudyFullBleedMedia";
 import CaseStudyScrollIndicator from "../../components/caseStudies/CaseStudyScrollIndicator/CaseStudyScrollIndicator";
 import CaseStudyImageSwitcher from "../../components/caseStudies/CaseStudyImageSwitcher/CaseStudyImageSwitcher";
 import "./FlemingHowland.scss";
@@ -207,29 +206,6 @@ const FlemingHowlandPage = () => {
                         title: "Supporting UI & moodboard work",
                         body:
                             "Alongside the language and tooling work, I also contributed to frontend implementation across the marketing site and a bespoke moodboard experience. That included wiring up the moodboard UI, refining layouts and interactions, and making sure new components felt consistent with the existing brand system."
-                    }}
-                />
-
-                <CaseStudyStoryTwoColumn
-                    className="fh-body--bottom"
-                    introParagraphs={[]}
-                    leftBlock={{
-                        title: "Frontend & component work",
-                        body: "Alongside the workflow, I focused on giving the marketing team composable pieces they could re-use.",
-                        bullets: [
-                            "Story sections, feature blocks and image layouts that can be mixed to create new pages.",
-                            "Layouts tuned for different copy lengths per language, so translations don't break the design.",
-                            "A consistent spacing and type scale so new pages still feel on-brand.",
-                        ],
-                    }}
-                    rightBlock={{
-                        title: "What I took away",
-                        body: "",
-                        bullets: [
-                            "Translation tools work best when they mirror how the team already reviews and approves content.",
-                            "Clean IDs and validation logic prevent subtle content mismatches later.",
-                            "Reusable components only land if they feel natural for non-technical people to combine.",
-                        ],
                     }}
                 />
 

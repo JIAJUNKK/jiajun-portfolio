@@ -1,58 +1,146 @@
-// src/components/caseStudies/CaseStudyStoryTwoColumn/CaseStudyStoryTwoColumn.scss
 @use "../../../app/theme" as *;
 
-.fh-body__prose {
-    max-width: 44rem;
-    margin-bottom: 2rem;
+.case-study-story {
+    &__layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2.8rem;
+        align-items: flex-start;
 
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+        @media (max-width: 900px) {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2rem;
+        }
     }
 
-    p {
-        font-size: 0.98rem;
-        line-height: 1.9;
-        color: #374151;
+    &__prose {
+        max-width: 44rem;
 
-        &:not(:last-child) {
-            margin-bottom: 0.9rem;
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 0.98rem;
+            line-height: 1.9;
+            color: #374151;
+
+            &:not(:last-child) {
+                margin-bottom: 0.9rem;
+            }
+        }
+    }
+
+    /* RIGHT COLUMN: toggle + stacked cards */
+    &__card-column {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        align-items: stretch;
+    }
+
+    &__stack-toggle {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        align-self: flex-start;
+    }
+
+    &__toggle-pill {
+        border-radius: 999px;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        transition:
+            background 0.18s ease-out,
+            color 0.18s ease-out,
+            box-shadow 0.18s ease-out,
+            transform 0.18s ease-out;
+
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        &--active {
+            background: $primary;
+            color: #ffffff;
+            border-color: transparent;
+        }
+    }
+
+    &__toggle-label {
+        font-weight: 500;
+    }
+
+    /* Stacked cards – height comes from tallest card */
+    &__card-shell {
+        position: relative;
+    }
+
+    &__card-stack {
+        display: grid;
+        /* all cards share the same cell remembering grid-area below */
+    }
+
+    &__card {
+        grid-area: 1 / 1;
+        border-radius: 1.2rem;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        padding: 1.4rem 1.5rem;
+        transform-origin: center center;
+        will-change: transform, opacity, box-shadow;
+
+        &--active {
+            .case-study-story__block {
+                opacity: 1;
+            }
+        }
+
+        &--back {
+            .case-study-story__block {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+    }
+
+    &__block {
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        p {
+            font-size: 0.96rem;
+            line-height: 1.7;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            padding-left: 1.1rem;
+            font-size: 0.96rem;
+            color: #374151;
+
+            li {
+                margin-bottom: 0.35rem;
+            }
         }
     }
 }
 
-.fh-body__columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.4rem;
-
-    @media (max-width: 900px) {
-        grid-template-columns: minmax(0, 1fr);
-    }
-}
-
-.fh-body__block h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-}
-
-.fh-body__block p {
-    font-size: 0.96rem;
-    line-height: 1.7;
-    color: #4b5563;
-    margin-bottom: 0.5rem;
-}
-
-.fh-body__block ul {
-    padding-left: 1.1rem;
-    font-size: 0.96rem;
-    color: #374151;
-
-    li {
-        margin-bottom: 0.35rem;
-    }
-}
-
-.fh-body--bottom {
-    margin-top: 1rem;
+/* This one is shared across case-study components */
+.case-study-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #9ca3af;
+    margin-bottom: 0.6rem;
 }

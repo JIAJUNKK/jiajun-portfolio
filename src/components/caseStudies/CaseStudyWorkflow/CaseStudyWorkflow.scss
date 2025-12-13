@@ -1,52 +1,205 @@
-// src/components/caseStudies/CaseStudyWorkflow/CaseStudyWorkflow.scss
 @use "../../../app/theme" as *;
 
-.fh-section-header {
-    max-width: 40rem;
-    margin-bottom: 1.6rem;
-
-    h2 {
-        font-size: 1.4rem;
-        margin-bottom: 0.4rem;
+.case-study-workflow {
+    &__header {
+        max-width: 56rem;
+        margin-bottom: 1.6rem;
     }
 
-    p {
+    &__header-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1.2rem;
+        align-items: flex-start;
+
+        @media (max-width: 900px) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+
+    &__header-copy {
+        max-width: 40rem;
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+        }
+    }
+
+    &__intro {
         font-size: 0.96rem;
         line-height: 1.7;
         color: #4b5563;
     }
-}
 
-.fh-steps {
-    list-style: none;
-    padding-left: 0;
-    counter-reset: fh-step;
-    max-width: 44rem;
-}
+    &__controls {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
 
-.fh-steps li {
-    counter-increment: fh-step;
-    position: relative;
-    padding-left: 2.2rem;
-    margin-bottom: 0.9rem;
-    font-size: 0.96rem;
-    line-height: 1.7;
-    color: #374151;
+        @media (max-width: 900px) {
+            justify-content: flex-start;
+        }
+    }
 
-    &::before {
-        content: counter(fh-step);
-        position: absolute;
-        left: 0;
-        top: 0.1rem;
-        width: 1.4rem;
-        height: 1.4rem;
+    &__nav {
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        color: #111827;
         border-radius: 999px;
-        border: 1px solid rgba($primary, 0.5);
+        padding: 0.42rem 0.9rem;
+        font-size: 0.82rem;
+        cursor: pointer;
+        transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+            background 0.18s ease-out, color 0.18s ease-out;
+
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+            background: #f9fafb;
+        }
+
+        &:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+    }
+
+    &__nav--primary {
+        background: $primary;
+        color: #ffffff;
+        border-color: transparent;
+
+        &:hover {
+            background: $primary;
+        }
+    }
+
+    &__progress {
+        position: relative;
+        width: 120px;
+        height: 6px;
+        margin-left: 0.2rem;
+    }
+
+    &__progress-track {
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.25);
+    }
+
+    &__progress-fill {
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: $primary;
+        transform-origin: left center;
+    }
+
+    &__steps {
+        list-style: none;
+        padding-left: 0;
+        max-width: 56rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    &__step {
+        margin: 0;
+    }
+
+    &__step-btn {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        border-radius: 1.1rem;
+        padding: 0.9rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.9rem;
+        cursor: pointer;
+        text-align: left;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease,
+            background 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+            border-color: rgba($primary, 0.28);
+            background: #fbfbfb;
+        }
+    }
+
+    &__step-btn--active {
+        border-color: rgba($primary, 0.55);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+    }
+
+    &__step-left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+    }
+
+    &__badge {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 999px;
+        border: 1px solid rgba($primary, 0.35);
         color: $primary;
         font-size: 0.75rem;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         background: #ffffff;
+        flex: 0 0 auto;
     }
+
+    &__step-btn--active &__badge {
+        background: rgba($primary, 0.08);
+        border-color: rgba($primary, 0.55);
+    }
+
+    &__step-text {
+        font-size: 0.96rem;
+        line-height: 1.55;
+        color: #111827;
+        white-space: normal; // allow wrapping
+        overflow: visible; // no clipping
+    }
+
+
+    &__detail {
+        padding: 0 0.9rem;
+        margin-top: 0.45rem;
+
+        p {
+            margin: 0;
+            padding: 0.85rem 0.95rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(229, 231, 235, 1);
+            background: #ffffff;
+            color: #4b5563;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+        }
+    }
+}
+
+/* shared */
+.case-study-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #9ca3af;
+    margin-bottom: 0.6rem;
 }

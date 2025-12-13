@@ -6,10 +6,10 @@ const CaseStudyScrollIndicator = () => {
     const { scrollYProgress } = useScroll();
 
     return (
-        <motion.div className="fh-scroll-indicator" aria-hidden="true">
-            <div className="fh-scroll-indicator__track" />
+        <motion.div className="case-study-scroll-indicator" aria-hidden="true">
+            <div className="case-study-scroll-indicator__track" />
             <motion.div
-                className="fh-scroll-indicator__thumb"
+                className="case-study-scroll-indicator__thumb"
                 style={{ scaleY: scrollYProgress }}
             />
         </motion.div>

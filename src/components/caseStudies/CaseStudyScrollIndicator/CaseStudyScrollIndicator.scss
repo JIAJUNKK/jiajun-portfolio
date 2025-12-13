@@ -1,7 +1,7 @@
 // src/components/caseStudies/CaseStudyScrollIndicator/CaseStudyScrollIndicator.scss
 @use "../../../app/theme" as *;
 
-.fh-scroll-indicator {
+.case-study-scroll-indicator {
     position: fixed;
     right: 24px;
     top: 120px;
@@ -16,19 +16,19 @@
     @media (max-width: 768px) {
         display: none;
     }
-}
 
-.fh-scroll-indicator__track {
-    position: relative;
-    width: 100%;
-    border-radius: 999px;
-    background: rgba(148, 163, 184, 0.25);
-}
+    .case-study-scroll-indicator__track {
+        position: relative;
+        width: 100%;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.25);
+    }
 
-.fh-scroll-indicator__thumb {
-    position: absolute;
-    inset: 0;
-    transform-origin: top center;
-    border-radius: inherit;
-    background: $primary;
+    .case-study-scroll-indicator__thumb {
+        position: absolute;
+        inset: 0;
+        transform-origin: top center;
+        border-radius: inherit;
+        background: $primary;
+    }
 }
