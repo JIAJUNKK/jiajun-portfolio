@@ -1,5 +1,4 @@
 @use "../../app/theme" as *;
-@use "../../app/variable" as *;
 
 .experience {
     display: flex;
@@ -10,11 +9,11 @@
     margin: 0 auto;
 
     /* optional side breathing room */
-    padding-inline: clamp($mobile-side-padding, 6vw, 48px);
+    padding-inline: clamp($pad-mobile, 6vw, 48px);
 
     @include mobile {
         width: 100%;
-        padding-inline: $mobile-side-padding;
+        padding-inline: $pad-mobile;
     }
 
     .experience-header {

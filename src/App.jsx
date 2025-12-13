@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import FlemingHowlandPage from "./pages/FlemingHowland/FlemingHowlandPage";
 
 import "./app/base.scss";
+import "./app/layout.scss";
 
 const App = () => {
     return (

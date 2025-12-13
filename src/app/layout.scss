@@ -1,0 +1,44 @@
+/* src/app/layout.scss */
+@use "./theme" as *;
+
+:root {
+    --nav-offset: 224px;
+    --nav-h: 100px;
+    --vv-top: 0px;
+}
+
+section[id] {
+    scroll-margin-top: var(--nav-offset);
+}
+
+section {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 40%;
+
+    &:last-child {
+        margin-bottom: 20%;
+    }
+
+    @include mobile {
+        width: 100%;
+        margin-bottom: 100dvh;
+    }
+}
+
+/* Global glass slab that provides the blur for navbar + sticky header */
+#glass-slab {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-h);
+
+    background-color: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+    pointer-events: none;
+    z-index: 1000;
+    transform: translateY(var(--vv-top));
+}

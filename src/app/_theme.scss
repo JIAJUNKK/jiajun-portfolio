@@ -1,20 +1,36 @@
+/* src/app/_theme.scss */
+
+/* colors */
 $primary: #011f4b;
 $primary-text-color: #011f4b;
 $secondary: #415A77;
 $tertiary: #778DA9;
 $highlight: #005b96;
-
-$light: white;
-$light-text-color: #b3cde0;
-$light-background: white;
-$neutral-light: #E0E1DD;
-
 $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-$glass-gradient-top: rgba(255, 255, 255, 0.8); // was 0.8
-$glass-gradient-bot: rgba(255, 255, 255, 0.00); // keep
-$glass-bg: rgba(255, 255, 255, 0.04); // was 0.10
+$light: #fff;
+$light-background: #fff;
+$neutral-light: #E0E1DD;
 
+$glass-gradient-top: rgba(255, 255, 255, 0.8);
+$glass-gradient-bot: rgba(255, 255, 255, 0.00);
+$glass-bg: rgba(255, 255, 255, 0.04);
+
+/* typography */
+$fs-h1: clamp(32px, 6vw, 72px);
+$fs-h2: clamp(28px, 4.5vw, 48px);
+$fs-h3: clamp(26px, 4.2vw, 56px);
+$fs-h4: clamp(26px, 4.2vw, 30px);
+$fs-p: clamp(16px, 1.6vw, 20px);
+$fs-small: clamp(12px, 1.2vw, 14px);
+$fs-num: clamp(24px, 5vw, 42px);
+
+/* spacing (keep just what you actually use) */
+$pad-mobile: 20px;
+$pad-desktop: 50px;
+$mobile-margin: 0px;
+
+/* breakpoints */
 @mixin mobile {
     @media (max-width: 600px) {
         @content;
@@ -23,12 +39,6 @@ $glass-bg: rgba(255, 255, 255, 0.04); // was 0.10
 
 @mixin tablet {
     @media (max-width: 1024px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media (max-width: 1366px) {
         @content;
     }
 }

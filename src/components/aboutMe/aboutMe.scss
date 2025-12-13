@@ -1,5 +1,4 @@
 @use "../../app/theme" as *;
-@use "../../app/variable" as *;
 
 .about-us {
     display: flex;
@@ -27,7 +26,7 @@
             "card"
             "body";
         row-gap: 12px;
-        padding-inline: $mobile-side-padding;
+        padding-inline: $pad-mobile;
         align-items: start;
         justify-items: center;
     }
