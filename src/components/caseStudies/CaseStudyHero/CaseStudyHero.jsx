@@ -113,7 +113,7 @@ const CaseStudyHero = forwardRef(
                                         <p className="case-study-hero__label">
                                             Stack
                                         </p>
-                                        <div className="case-study-hero__stack-icons">
+                                        <div className="case-study-stack__icons">
                                             {stackIcons.map((icon) => {
                                                 if (typeof icon === "string") {
                                                     const hasExt =
@@ -166,7 +166,6 @@ const CaseStudyHero = forwardRef(
                     >
                         <motion.div
                             className="case-study-hero__image-frame"
-                            style={heroImageMotionStyle}
                         >
                             <img
                                 src={heroImageSrc}

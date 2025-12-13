@@ -94,7 +94,7 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
                         {stats.map((stat, index) => (
                             <motion.div
                                 key={index}
-                                className="case-study-results__item"
+                                className="case-study-card case-study-results__item"
                                 initial={{ opacity: 0, y: 12 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: 0.4 }}
@@ -111,7 +111,7 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
                                     </p>
 
                                     {stat.badge && (
-                                        <span className="case-study-results__badge">
+                                        <span className="case-study-pill case-study-results__badge">
                                             {stat.badge}
                                         </span>
                                     )}

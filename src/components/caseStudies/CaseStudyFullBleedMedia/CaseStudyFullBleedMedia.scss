@@ -1,18 +1,12 @@
 @use "../../../app/theme" as *;
 
 .case-study-fullbleed {
-    width: 100vw;
-    margin: 3.5rem 0;
-    position: relative;
 
     &--light {
-        background: #ffffff;
+        background: var(--cs-surface);
     }
 
     &__frame {
-        width: 100%;
-        max-height: 640px;
-        overflow: hidden;
 
         img,
         video {

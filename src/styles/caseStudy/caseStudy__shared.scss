@@ -1,0 +1,211 @@
+@use "../../app/theme" as *;
+
+/**
+ * Case Study shared design tokens + base UI primitives.
+ * Add `className="case-study"` at the page root (or main wrapper)
+ * so these tokens apply to the whole case study page.
+ */
+
+.case-study {
+    /* ---- Tokens ---- */
+    --cs-bg: #{$light-background};
+    --cs-surface: #ffffff;
+    --cs-text: #{$primary};
+
+    --cs-muted: #4b5563;
+    --cs-subtle: #6b7280;
+    --cs-faint: #9ca3af;
+
+    --cs-border: #e5e7eb;
+
+    --cs-radius-lg: 1.4rem;
+    --cs-radius-md: 1.2rem;
+    --cs-pill-radius: 999px;
+
+    --cs-shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.18);
+    --cs-shadow-md: 0 14px 30px rgba(15, 23, 42, 0.12);
+    --cs-shadow-sm: 0 10px 26px rgba(15, 23, 42, 0.08);
+
+    --cs-content-max: 1040px;
+
+    --cs-pad-x: 50px;
+    --cs-pad-y: 50px;
+
+    --cs-gap-section: 3.5rem;
+    --cs-gap-block: 1.6rem;
+
+    /* Optional: make the page background consistent */
+    background: var(--cs-bg);
+    --cs-accent: #{$primary};
+
+    color: var(--cs-text);
+}
+
+/* ---- Shared text patterns ---- */
+
+.case-study-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--cs-faint);
+    margin-bottom: 0.6rem;
+}
+
+
+.case-study p {
+    color: var(--cs-muted);
+}
+
+/* ---- Shared layout wrapper (your “inner” container) ---- */
+.case-study__inner {
+    max-width: var(--cs-content-max);
+    margin: 0 auto;
+    padding: var(--cs-pad-y) var(--cs-pad-x);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--cs-gap-section);
+
+    @media (max-width: 768px) {
+        --cs-pad-x: 32px;
+        --cs-pad-y: 32px;
+    }
+}
+
+/* If you want every CaseStudySection to align with the same rhythm */
+.case-study-section {
+    scroll-margin-top: 110px;
+    /* helps anchor jumps under navbar */
+}
+
+/* ---- Card primitive ---- */
+.case-study-card {
+    background: var(--cs-surface);
+    border: 1px solid var(--cs-border);
+    border-radius: var(--cs-radius-md);
+    box-shadow: var(--cs-shadow-md);
+}
+
+/* ---- Pill primitive (toggles / language pills / small controls) ---- */
+.case-study-pill {
+    border-radius: var(--cs-pill-radius);
+    border: 1px solid var(--cs-border);
+    background: var(--cs-surface);
+    color: $primary;
+    /* your theme primary */
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+        background 0.18s ease-out, color 0.18s ease-out;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--cs-shadow-sm);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $primary;
+        outline-offset: 2px;
+    }
+}
+
+.case-study-pill.is-active {
+    background: $primary;
+    color: #fff;
+    border-color: transparent;
+}
+
+/* Shared buttons (hero + footer) */
+.case-study-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.18s ease-out;
+    white-space: nowrap;
+
+    &--primary {
+        background: $primary;
+        color: #ffffff;
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.2);
+
+        &:hover {
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.25);
+            transform: translateY(-1px);
+        }
+    }
+
+    &--ghost {
+        background: #ffffff;
+        color: #111827;
+        border-color: #e5e7eb;
+
+        &:hover {
+            background: #f9fafb;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+/* ---- Full-bleed base ---- */
+.case-study-fullbleed {
+    width: 100vw;
+    margin: 3.5rem 0;
+    position: relative;
+}
+
+.case-study-fullbleed__frame {
+    width: 100%;
+    overflow: hidden;
+
+    img,
+    video {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.case-study-fullbleed__caption {
+    max-width: var(--cs-content-max);
+    margin: 0.7rem auto 0;
+    padding: 0 var(--cs-pad-x) 0.2rem;
+    font-size: 0.86rem;
+    color: var(--cs-subtle);
+}
+
+/* ---- Tech stack icon row ---- */
+.case-study-stack {
+    margin-top: 0.4rem;
+}
+
+.case-study-stack__icons {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    margin-top: 0.35rem;
+
+    img {
+        height: 45px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+        opacity: 0.92;
+        transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+
+        &:hover {
+            transform: translateY(-1px) scale(1.03);
+            opacity: 1;
+        }
+    }
+}

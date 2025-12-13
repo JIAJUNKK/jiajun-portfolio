@@ -1,119 +1,103 @@
-@use "../../../app/theme" as *;
+/* src/components/caseStudies/CaseStudyImageSwitcher/CaseStudyImageSwitcher.scss */
 
 .case-study-image-switcher {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 768px) {
-        padding: 32px;
+    &__inner {
+        width: 100%;
     }
-}
 
-.case-study-image-switcher__inner {
-    width: 100%;
-}
+    &__content {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        column-gap: 2.5rem;
+        align-items: center;
 
-/* two-column layout */
-.case-study-image-switcher__content {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    column-gap: 2.5rem;
-    align-items: center;
-
-    @media (max-width: 900px) {
-        grid-template-columns: 1fr;
-        row-gap: 1.8rem;
+        @media (max-width: 900px) {
+            grid-template-columns: 1fr;
+            row-gap: 1.8rem;
+        }
     }
-}
 
-.case-study-image-switcher__main {
-    position: relative;
-    border-radius: 1.4rem;
-}
+    /* LEFT */
+    &__main {
+        position: relative;
+        overflow: hidden;
+        /* important for image stack */
+    }
 
-/* fixed aspect ratio */
-.case-study-image-switcher__img-stack {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-}
+    &__img-stack {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
 
-.case-study-image-switcher__img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-}
+    &__img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
 
-.case-study-image-switcher__img.is-active {
-    opacity: 1;
-}
+        &.is-active {
+            opacity: 1;
+        }
+    }
 
-/* badge */
-.case-study-image-switcher__badge {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    padding: 0.25rem 0.8rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $light;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(148, 163, 184, 0.5);
-}
+    &__badge {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.25rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(148, 163, 184, 0.5);
+    }
 
-/* RIGHT COLUMN */
-.case-study-image-switcher__side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.9rem;
-}
+    /* RIGHT */
+    &__side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+    }
 
-.case-study-image-switcher__caption {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: $secondary;
-}
+    &__caption {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: var(--cs-subtle);
+    }
 
-/* controls */
-.case-study-image-switcher__controls {
-    margin-top: 0.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-}
+    &__controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        width: 100%;
+    }
 
-.case-study-image-switcher__pill {
-    border: none;
-    background: $light-background;
-    color: $primary;
-    border-radius: 999px;
-    padding: 5px 10px;
-    font-size: 0.8rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+    /* shared pill handles visuals + hover + active
+     this class only adds layout tweaks */
+    &__pill {
+        justify-content: flex-start;
+        width: 100px;
+    }
 
-.case-study-image-switcher__pill-code {
-    font-weight: bold;
-    text-transform: uppercase;
-}
+    &__pill-code {
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+    }
 
-.case-study-image-switcher__pill-label {
-    font-size: 16px;
-}
-
-.case-study-image-switcher__pill--active {
-    background: $primary;
-    color: $light;
+    &__pill-label {
+        font-size: 0.85rem;
+    }
 }

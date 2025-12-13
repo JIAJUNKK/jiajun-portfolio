@@ -49,11 +49,10 @@ const CaseStudyStoryTwoColumn = ({
                                     key={card.id || index}
                                     type="button"
                                     className={
-                                        "case-study-story__toggle-pill" +
-                                        (activeIndex === index
-                                            ? " case-study-story__toggle-pill--active"
-                                            : "")
+                                        "case-study-pill case-study-story__toggle-pill" +
+                                        (activeIndex === index ? " is-active" : "")
                                     }
+
                                     onClick={() => setActiveIndex(index)}
                                 >
                                     <span className="case-study-story__toggle-label">
@@ -81,10 +80,8 @@ const CaseStudyStoryTwoColumn = ({
                                         <motion.article
                                             key={card.id || index}
                                             className={
-                                                "case-study-story__card" +
-                                                (isActive
-                                                    ? " case-study-story__card--active"
-                                                    : " case-study-story__card--back")
+                                                "case-study-card case-study-story__card" +
+                                                (isActive ? " is-active" : " is-back")
                                             }
                                             initial={false}
                                             animate={{

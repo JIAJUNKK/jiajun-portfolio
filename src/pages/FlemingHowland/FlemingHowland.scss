@@ -1,15 +1,6 @@
 // src/pages/FlemingHowland.scss
 @use "../../app/theme" as *;
-
-/* Only this page hides the native scrollbar */
-body.fh-no-scrollbar {
-    overflow-y: auto;
-    scrollbar-width: none;
-}
-
-body.fh-no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
+@use "../../styles/caseStudy/caseStudy__shared.scss" as *;
 
 .fh-page {
     min-height: 100vh;

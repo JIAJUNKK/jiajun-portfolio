@@ -21,7 +21,7 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
                 <div className="case-study-image-switcher__inner">
                     <div className="case-study-image-switcher__content">
                         {/* LEFT – image stack */}
-                        <div className="case-study-image-switcher__main">
+                        <div className="case-study-card case-study-image-switcher__main">
                             <div className="case-study-image-switcher__img-stack">
                                 {images.map((img, index) => (
                                     <img
@@ -55,10 +55,8 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
                                         key={img.src}
                                         type="button"
                                         className={
-                                            "case-study-image-switcher__pill" +
-                                            (index === activeIndex
-                                                ? " case-study-image-switcher__pill--active"
-                                                : "")
+                                            "case-study-pill case-study-image-switcher__pill" +
+                                            (index === activeIndex ? " is-active" : "")
                                         }
                                         onClick={() => setActiveIndex(index)}
                                     >

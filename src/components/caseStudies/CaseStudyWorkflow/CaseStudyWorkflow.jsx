@@ -38,7 +38,7 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
                         <div className="case-study-workflow__controls">
                             <button
                                 type="button"
-                                className="case-study-workflow__nav"
+                                className="case-study-button case-study-workflow__nav"
                                 onClick={goPrev}
                                 disabled={activeIndex === 0}
                             >
@@ -47,7 +47,7 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
 
                             <button
                                 type="button"
-                                className="case-study-workflow__nav case-study-workflow__nav--primary"
+                                className="case-study-button case-study-button--primary case-study-workflow__nav"
                                 onClick={goNext}
                                 disabled={activeIndex === total - 1}
                             >
@@ -77,8 +77,8 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
                             <motion.button
                                 type="button"
                                 className={
-                                    "case-study-workflow__step-btn" +
-                                    (isActive ? " case-study-workflow__step-btn--active" : "")
+                                    "case-study-card case-study-workflow__step-btn" +
+                                    (isActive ? " is-active" : "")
                                 }
                                 onClick={() => setActiveIndex(index)}
                                 whileHover={{ y: -2 }}

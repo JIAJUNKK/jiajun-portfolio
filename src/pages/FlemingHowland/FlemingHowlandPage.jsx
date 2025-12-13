@@ -36,7 +36,7 @@ const FlemingHowlandPage = () => {
     );
 
     const SCALE_START = 0.14;   // matches your opacity/clip reveal
-    const SCALE_END = 0.5;
+    const SCALE_END = 0.4;
     const SCALE_MAX = 1.4;
 
     const heroImageScale = useTransform(
@@ -73,7 +73,7 @@ const FlemingHowlandPage = () => {
     const heroImageBorderRadius = useTransform(
         heroScrollYProgress,
         [0, 1],
-        [24, 0] // px
+        [0, 0] // px
     );
 
     const heroImageMotionStyle = {
@@ -87,7 +87,7 @@ const FlemingHowlandPage = () => {
 
 
     return (
-        <main className="fh-page">
+        <main className="fh-page case-study">
             <CaseStudyScrollIndicator />
 
             <div className="fh-page__inner">
