@@ -77,10 +77,34 @@ export const FLEMING_HOWLAND_CASE_STUDY = {
         caption:
             "Four language variants of the same product story, generated and checked through the Python + Weglot translation workflow.",
         images: [
-            { src: "/caseStudies/FH/FH-ENG.png", label: "English", shortLabel: "EN", code: "EN" },
-            { src: "/caseStudies/FH/FH-ES.png", label: "Spanish", shortLabel: "ES", code: "ES" },
-            { src: "/caseStudies/FH/FH-FR.png", label: "French", shortLabel: "FR", code: "FR" },
-            { src: "/caseStudies/FH/FH-DE.png", label: "German", shortLabel: "DE", code: "DE" },
+            {
+                src: "/caseStudies/FH/FH-ENG.png",
+                srcMobile: "/caseStudies/FH/FH-ENG-mobile.png",
+                label: "English",
+                shortLabel: "EN",
+                code: "EN",
+            },
+            {
+                src: "/caseStudies/FH/FH-ES.png",
+                srcMobile: "/caseStudies/FH/FH-ES-mobile.png",
+                label: "Spanish",
+                shortLabel: "ES",
+                code: "ES",
+            },
+            {
+                src: "/caseStudies/FH/FH-FR.png",
+                srcMobile: "/caseStudies/FH/FH-FR-mobile.png",
+                label: "French",
+                shortLabel: "FR",
+                code: "FR",
+            },
+            {
+                src: "/caseStudies/FH/FH-DE.png",
+                srcMobile: "/caseStudies/FH/FH-DE-mobile.png",
+                label: "German",
+                shortLabel: "DE",
+                code: "DE",
+            },
         ],
     },
 

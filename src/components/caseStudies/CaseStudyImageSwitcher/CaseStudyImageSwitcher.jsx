@@ -1,16 +1,55 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyImageSwitcher.scss";
 
+const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return window.matchMedia(query).matches;
+    });
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const mql = window.matchMedia(query);
+        const onChange = (e) => setMatches(e.matches);
+
+        if (mql.addEventListener) mql.addEventListener("change", onChange);
+        else mql.addListener(onChange);
+
+        return () => {
+            if (mql.removeEventListener) mql.removeEventListener("change", onChange);
+            else mql.removeListener(onChange);
+        };
+    }, [query]);
+
+    return matches;
+};
+
 const CaseStudyImageSwitcher = ({ images = [], caption }) => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const active = images[activeIndex] || images[0];
+
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
     const ref = useRef(null);
     const inView = useInView(ref, { amount: 0.3, once: false });
 
-    if (!active) return null;
+    if (!images || images.length === 0) return null;
+
+    const active = images[activeIndex] || images[0];
+
+    const getSrc = (img) => {
+        if (!img) return "";
+        if (isMobile && img.srcMobile) return img.srcMobile;
+        return img.src;
+    };
+
+    const getAlt = (img) => {
+        if (!img) return "";
+        if (isMobile && img.altMobile) return img.altMobile;
+        return img.alt || img.label || "";
+    };
 
     return (
         <CaseStudySection>
@@ -28,9 +67,9 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
                             <div className="case-study-image-switcher__img-stack">
                                 {images.map((img, index) => (
                                     <img
-                                        key={img.src}
-                                        src={img.src}
-                                        alt={img.alt || img.label}
+                                        key={img.src + (img.srcMobile || "")}
+                                        src={getSrc(img)}
+                                        alt={getAlt(img)}
                                         className={
                                             "case-study-image-switcher__img" +
                                             (index === activeIndex ? " is-active" : "")
@@ -53,7 +92,7 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
                             <div className="case-study-image-switcher__controls">
                                 {images.map((img, index) => (
                                     <button
-                                        key={img.src}
+                                        key={img.src + (img.srcMobile || "")}
                                         type="button"
                                         className={
                                             "case-study-pill case-study-image-switcher__pill" +
