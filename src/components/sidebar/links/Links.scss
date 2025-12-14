@@ -305,3 +305,56 @@
     opacity: 0.30;
     transform: translateX(0);
 }
+
+/* ==========================
+   Mobile: show ONE panel only + pill toggle
+   ========================== */
+
+.rb-mobilePillWrap {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .rb-mobilePillWrap {
+        display: block;
+        grid-column: 1 / -1;
+        padding: 2px 2px 10px;
+    }
+
+    .rb-pill {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+
+        padding: 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.22);
+        border: 1px solid rgba(1, 31, 75, 0.10);
+        backdrop-filter: blur(12px) saturate(150%);
+        -webkit-backdrop-filter: blur(12px) saturate(150%);
+    }
+
+    .rb-pillBtn {
+        height: 38px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        background: transparent;
+
+        color: rgba(1, 31, 75, 0.75);
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: -0.01em;
+        cursor: pointer;
+    }
+
+    .rb-pillBtn.is-active {
+        background: rgba(255, 255, 255, 0.38);
+        border-color: rgba(1, 31, 75, 0.12);
+        color: $primary;
+    }
+
+    /* you already collapse to 1fr at 900px; this prevents unused spacing */
+    .rb-mega {
+        gap: 10px;
+    }
+}
