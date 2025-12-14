@@ -1,0 +1,184 @@
+@use "../../../styles/theme" as *;
+
+/* footer */
+.cs-footer-cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 50px 30px;
+    margin-top: 42px;
+
+    background:
+        linear-gradient(180deg, $glass-gradient-top 0%, $glass-gradient-bot 100%),
+        $glass-bg;
+
+    border: 1px solid rgba(1, 31, 75, 0.14);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+    box-shadow:
+        0 18px 50px rgba(1, 31, 75, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+    @include mobile {
+        padding: 28px 18px;
+        border-radius: 18px;
+    }
+
+    /* ---------------- Background / ambient layers ---------------- */
+    .cs-footer-cta__bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+
+        .cs-footer-cta__orb {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 999px;
+            filter: blur(20px);
+            animation: cs-orb-drift 9s ease-in-out infinite alternate;
+        }
+
+        .cs-footer-cta__orb--a {
+            top: -120px;
+            left: -110px;
+            background: rgba(0, 91, 150, 0.3);
+            /* $highlight */
+            animation-duration: 12s;
+        }
+
+        .cs-footer-cta__orb--b {
+            bottom: -140px;
+            right: -120px;
+            background: rgba(65, 90, 119, 0.3);
+            /* $secondary */
+            animation-duration: 12s;
+        }
+
+        .cs-footer-cta__orb--c {
+            top: 30%;
+            right: -140px;
+            width: 220px;
+            height: 220px;
+            background: rgba(119, 141, 169, 0.3);
+            /* $tertiary */
+            animation-duration: 14s;
+        }
+
+        .cs-footer-cta__sheen {
+            position: absolute;
+            inset: -50%;
+            background: linear-gradient(120deg,
+                    transparent 34%,
+                    rgba(255, 255, 255, 0.22) 48%,
+                    transparent 62%);
+            transform: rotate(10deg);
+            opacity: 0.8;
+        }
+
+        .cs-footer-cta__grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+            mix-blend-mode: soft-light;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+            background-size: 220px 220px;
+        }
+    }
+
+    /* ---------------- Inner content ---------------- */
+    .cs-footer-cta__inner {
+        position: relative;
+        z-index: 2;
+
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 22px;
+        align-items: center;
+
+        @include mobile {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        /* copy block */
+        .cs-footer-cta__copy {
+            max-width: 64ch;
+
+            .cs-footer-cta__badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 12px;
+                border-radius: 999px;
+                font-weight: 600;
+                font-size: 0.92rem;
+                color: $primary;
+
+                background: rgba(255, 255, 255, 0.42);
+                border: 1px solid rgba(1, 31, 75, 0.12);
+                box-shadow: 0 10px 26px rgba(1, 31, 75, 0.08);
+            }
+
+            .cs-footer-cta__title {
+                margin: 12px 0 8px;
+                font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+                line-height: 1.2;
+                color: $primary;
+            }
+
+            .cs-footer-cta__text {
+                margin: 0;
+                line-height: 1.55;
+                color: rgba(1, 31, 75, 0.78);
+            }
+        }
+
+        /* actions */
+        .cs-footer-cta__actions {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            justify-content: flex-end;
+
+            @include mobile {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .cs-footer-cta__primary {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                position: relative;
+                overflow: hidden;
+                border-radius: 999px;
+            }
+        }
+    }
+}
+
+/* ---------------- Motion ---------------- */
+@keyframes cs-orb-drift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(28px, -22px, 0) scale(1.08);
+    }
+
+    100% {
+        transform: translate3d(-18px, 18px, 0) scale(1.04);
+    }
+}
+
+
+/* ---------------- Accessibility ---------------- */
+@media (prefers-reduced-motion: reduce) {
+    .cs-footer-cta .cs-footer-cta__bg .cs-footer-cta__orb {
+        animation: none !important;
+    }
+}
