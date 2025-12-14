@@ -32,14 +32,18 @@ const Navbar = () => {
         const compute = () => {
             ticking = false;
 
-            // ✅ Query *inside* compute so it works even if Projects mounts later
+            // ✅ If menu is open, Sidebar controls slab height. Don't override it.
+            if (document.body.classList.contains("menu-open")) {
+                nav?.classList.add("over-projects"); // optional: keep navbar seam-less while menu open
+                return;
+            }
+
             const container = document.querySelector(".portfolio");
             const progress = document.querySelector(".portfolio .progress");
 
             const nh = navH();
             const ph = progress?.offsetHeight ? progress.offsetHeight : 0;
 
-            // If we're not on the Projects area/page, reset to navbar-only slab
             if (!container || !progress) {
                 slab.style.height = `${nh}px`;
                 nav?.classList.remove("over-projects");
@@ -48,16 +52,14 @@ const Navbar = () => {
             }
 
             const c = container.getBoundingClientRect();
-
-            // Is the projects header sticky?
             const stuck = c.top <= nh && c.bottom >= nh + ph;
 
-            // Resize slab: cover navbar only, or navbar + sticky header
             slab.style.height = stuck ? `${nh + ph}px` : `${nh}px`;
 
             nav?.classList.toggle("over-projects", stuck);
             progress?.classList.toggle("is-stuck", stuck);
         };
+
 
         const onScrollOrResize = () => {
             if (!ticking) {
@@ -68,12 +70,14 @@ const Navbar = () => {
 
         window.addEventListener("scroll", onScrollOrResize, { passive: true });
         window.addEventListener("resize", onScrollOrResize);
+        window.addEventListener("nav-recompute", compute);
 
         compute(); // initial
 
         return () => {
             window.removeEventListener("scroll", onScrollOrResize);
             window.removeEventListener("resize", onScrollOrResize);
+            window.removeEventListener("nav-recompute", compute);
         };
     }, []);
 

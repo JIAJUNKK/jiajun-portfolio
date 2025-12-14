@@ -1,0 +1,307 @@
+@use "../../../styles/theme" as *;
+
+/* =========================================================
+   Apple-ish Mega Menu
+   - 2 columns, no collapse
+   - Active column gets more width
+   - Underlined headers + thin separators
+   - Caret only on hover
+   - Panels + gap between columns
+   ========================================================= */
+
+.rb-mega {
+    width: min(980px, 92vw);
+    margin: 0 auto;
+
+    background: rgba(255, 255, 255, 0.52);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border-radius: 22px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    /* NEW: spacing between the two areas */
+    padding: 12px;
+    gap: 12px;
+
+    /* IMPORTANT: panel handles clipping */
+    overflow: visible;
+}
+
+/* Active column takes more space */
+.rb-mega--active-left {
+    grid-template-columns: 1.25fr 0.75fr;
+}
+
+.rb-mega--active-right {
+    grid-template-columns: 0.75fr 1.25fr;
+}
+
+@media (max-width: 900px) {
+
+    .rb-mega,
+    .rb-mega--active-left,
+    .rb-mega--active-right {
+        grid-template-columns: 1fr;
+    }
+
+    .rb-mega {
+        gap: 10px;
+        padding: 10px;
+    }
+}
+
+.rb-col {
+    min-width: 0;
+}
+
+/* Remove the old divider since we now use a gap */
+.rb-col--right {
+    border-left: 0;
+}
+
+@media (max-width: 900px) {
+    .rb-col--right {
+        border-top: 0;
+    }
+}
+
+/* NEW: panel wrapper per column */
+.rb-panel {
+    border: 1px solid rgba(1, 31, 75, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Header with underline */
+.rb-head {
+    padding: 16px 22px 12px;
+    border-bottom: 1px solid rgba(1, 31, 75, 0.08);
+}
+
+.rb-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    color: $primary;
+}
+
+
+/* ========== Left column rows ========== */
+.rb-rows {
+    display: grid;
+}
+
+.rb-rows--two {
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 520px) {
+    .rb-rows--two {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Row base */
+.rb-row {
+    text-decoration: none;
+    color: $primary;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 16px 22px;
+    min-height: 56px;
+
+    background: transparent;
+    transition: background-color 0.16s ease;
+}
+
+/* separators (2-col aware) */
+.rb-rows--two>.rb-row:nth-child(n + 3) {
+    border-top: 1px solid rgba(1, 31, 75, 0.06);
+}
+
+.rb-rows--two>.rb-row:nth-child(2n) {
+    border-left: 1px solid rgba(1, 31, 75, 0.06);
+}
+
+@media (max-width: 520px) {
+    .rb-rows--two>.rb-row:nth-child(2n) {
+        border-left: 0;
+    }
+
+    .rb-rows--two>.rb-row:nth-child(n + 2) {
+        border-top: 1px solid rgba(1, 31, 75, 0.06);
+    }
+}
+
+/* Hover / active */
+.rb-row:hover {
+    background: rgba(1, 31, 75, 0.04);
+}
+
+.rb-row.is-active {
+    background: rgba(1, 31, 75, 0.06);
+}
+
+.rb-rowText {
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+/* ========== Right column: search + case studies ========== */
+.rb-searchRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* CHANGE: match your row rhythm */
+    padding: 8px 22px;
+    min-height: 56px;
+
+    border-bottom: 1px solid rgba(1, 31, 75, 0.08);
+}
+
+.rb-search {
+    flex: 1;
+    border: 1px solid rgba(1, 31, 75, 0.08);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    /* CHANGE: consistent input height */
+    height: 40px;
+    padding: 0 14px;
+
+    color: $primary;
+    outline: none;
+    font-size: 0.95rem;
+
+    &::placeholder {
+        opacity: 0.45;
+    }
+
+    &:focus {
+        background: rgba(255, 255, 255, 0.50);
+        border-color: rgba(1, 31, 75, 0.14);
+    }
+}
+
+.rb-count {
+    /* CHANGE: match input height */
+    min-width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 999px;
+    background: rgba(1, 31, 75, 0.06);
+    color: rgba(1, 31, 75, 0.6);
+
+    font-weight: 650;
+    font-size: 0.85rem;
+}
+
+/* list */
+.rb-csList {
+    display: flex;
+    flex-direction: column;
+
+    max-height: min(420px, 50vh);
+    overflow-y: auto;
+}
+
+.rb-csRow {
+    text-decoration: none;
+    color: $primary;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 16px 22px;
+    background: transparent;
+    transition: background-color 0.16s ease;
+}
+
+.rb-csRow+.rb-csRow {
+    border-top: 1px solid rgba(1, 31, 75, 0.06);
+}
+
+.rb-csRow:hover {
+    background: rgba(1, 31, 75, 0.04);
+}
+
+.rb-csRow.is-active {
+    background: rgba(1, 31, 75, 0.06);
+}
+
+.rb-csMain {
+    min-width: 0;
+}
+
+.rb-csTitle {
+    font-size: 1.05rem;
+    font-weight: 720;
+    letter-spacing: -0.01em;
+}
+
+.rb-csMeta {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    opacity: 0.62;
+}
+
+/* tags */
+.rb-tags {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.rb-tag {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(1, 31, 75, 0.05);
+    color: rgba(1, 31, 75, 0.75);
+}
+
+/* empty */
+.rb-empty {
+    padding: 16px 22px;
+    font-size: 0.92rem;
+    opacity: 0.65;
+}
+
+/* ========== caret: hidden until hover ========== */
+.rb-caret {
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.rb-row:hover .rb-caret,
+.rb-csRow:hover .rb-caret {
+    opacity: 0.55;
+    transform: translateX(0);
+}
+
+.rb-row.is-active .rb-caret,
+.rb-csRow.is-active .rb-caret {
+    opacity: 0.30;
+    transform: translateX(0);
+}

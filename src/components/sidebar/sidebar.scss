@@ -2,7 +2,7 @@
 
 .sidebar-toggle {
     position: fixed;
-    top: 24px;
+    top: calc(24px + var(--vv-top));
     left: 24px;
     z-index: 11000;
     line-height: 0;
@@ -10,13 +10,13 @@
     .sidebar-toggle-btn {
         width: 50px;
         height: 50px;
-        border-radius: 50%;
+        border-radius: 999px;
         border: none;
         cursor: pointer;
         display: grid;
         place-items: center;
-        transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
-        background-color: transparent;
+        background: transparent;
+        transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
         &:active {
             transform: translateY(0.5px);
@@ -28,58 +28,52 @@
     position: fixed;
     inset: 0;
     z-index: 10000;
-    pointer-events: none;
+}
 
+.sidebar-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0);
+}
+
+/**
+ * ✅ IMPORTANT:
+ * The glass look is provided by #glass-slab only (like Projects).
+ * So this dropdown is transparent and just “content on the slab”.
+ */
+.sidebar-bg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: calc(var(--nav-h) + var(--vv-top));
+    z-index: 10001;
+
+    /* no extra surface */
+    background: transparent;
+    border: 0;
+    box-shadow: $box-shadow;
+
+    /* spacing similar to reactbits mega menu */
+    padding: 18px 0 22px;
+
+    /* allow scrolling if needed */
+    max-height: calc(100dvh - (var(--nav-h) + var(--vv-top)));
+    overflow: auto;
+
+    /* remove any hairline seam */
+    margin-top: -1px;
+}
+
+.sidebar-panel {
+    width: min(980px, 92vw);
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+}
+
+@include mobile {
     .sidebar-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: min(420px, 86vw); // desktop/tablet default
-        background:
-            linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot),
-            $glass-bg;
-        color: $primary-text-color;
-        border-right: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: $box-shadow;
-
-        -webkit-backdrop-filter: blur(14px) saturate(140%);
-        backdrop-filter: blur(14px) saturate(140%);
-
-        overflow: hidden;
-        will-change: clip-path;
-        pointer-events: auto;
-
-        .links {
-            min-height: 100dvh;
-            display: grid;
-            place-content: center;
-            justify-items: center;
-            gap: 24px;
-            padding: 28px;
-            text-align: center;
-
-            a {
-                font-size: $fs-h2; // ← use h1 scale
-                line-height: 1.05;
-                color: $primary-text-color;
-                text-decoration: none;
-                display: inline-block;
-            }
-        }
-    }
-
-    // Full-screen on mobile
-    @include mobile {
-        .sidebar-bg {
-            width: 100vw; // cover full width
-            height: 100dvh; // cover full height including mobile UI chrome
-            border-right: none; // no edge seam on full-screen
-            box-shadow: none;
-        }
-
-        .links {
-            padding: 40px 24px; // a bit more breathing room
-        }
+        padding: 14px 0 18px;
     }
 }

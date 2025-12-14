@@ -26,19 +26,37 @@ section {
     }
 }
 
-/* Global glass slab that provides the blur for navbar + sticky header */
+:root {
+    --glass-filter: blur(18px) saturate(160%);
+    --glass-tint: rgba(255, 255, 255, 0.01);
+    --menu-h: 0px;
+    /* NEW */
+}
+
+/* Global glass slab that provides the blur for navbar + dropdown */
 #glass-slab {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--nav-h);
 
-    background-color: rgba(255, 255, 255, 0.01);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    /* ✅ extendable */
+    height: calc(var(--nav-h) + var(--menu-h));
+
+    background-color: var(--glass-tint);
+    backdrop-filter: var(--glass-filter);
+    -webkit-backdrop-filter: var(--glass-filter);
 
     pointer-events: none;
     z-index: 1000;
     transform: translateY(var(--vv-top));
+}
+
+/* When menu is closed, menu height is 0 */
+body:not(.menu-open) {
+    --menu-h: 0px;
+}
+
+body.menu-open #glass-slab {
+    height: calc(var(--nav-h) + var(--menu-h));
 }

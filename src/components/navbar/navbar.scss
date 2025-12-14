@@ -65,3 +65,8 @@
         }
     }
 }
+
+body.menu-open .navbar {
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+}
