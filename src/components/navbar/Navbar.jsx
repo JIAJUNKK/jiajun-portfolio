@@ -15,7 +15,7 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        // 2) Create a single fixed glass slab if not present
+        // Create the slab once
         let slab = document.getElementById("glass-slab");
         if (!slab) {
             slab = document.createElement("div");
@@ -24,27 +24,37 @@ const Navbar = () => {
         }
 
         const nav = document.querySelector(".navbar");
-        const container = document.querySelector(".portfolio");          // Projects wrapper
-        const progress = document.querySelector(".portfolio .progress"); // sticky header
 
         const navH = () => (nav?.offsetHeight ? nav.offsetHeight : 100);
-        const progH = () => (progress?.offsetHeight ? progress.offsetHeight : 0);
 
         let ticking = false;
+
         const compute = () => {
             ticking = false;
 
+            // ✅ Query *inside* compute so it works even if Projects mounts later
+            const container = document.querySelector(".portfolio");
+            const progress = document.querySelector(".portfolio .progress");
+
             const nh = navH();
-            const c = container?.getBoundingClientRect();
-            const ph = progH();
+            const ph = progress?.offsetHeight ? progress.offsetHeight : 0;
+
+            // If we're not on the Projects area/page, reset to navbar-only slab
+            if (!container || !progress) {
+                slab.style.height = `${nh}px`;
+                nav?.classList.remove("over-projects");
+                progress?.classList.remove("is-stuck");
+                return;
+            }
+
+            const c = container.getBoundingClientRect();
 
             // Is the projects header sticky?
-            const stuck = !!(c && c.top <= nh && c.bottom >= nh + ph);
+            const stuck = c.top <= nh && c.bottom >= nh + ph;
 
-            // 3) Resize slab: cover navbar only, or navbar + sticky header
+            // Resize slab: cover navbar only, or navbar + sticky header
             slab.style.height = stuck ? `${nh + ph}px` : `${nh}px`;
 
-            // visual tweak: drop navbar shadow when sticky header is present
             nav?.classList.toggle("over-projects", stuck);
             progress?.classList.toggle("is-stuck", stuck);
         };
@@ -58,6 +68,7 @@ const Navbar = () => {
 
         window.addEventListener("scroll", onScrollOrResize, { passive: true });
         window.addEventListener("resize", onScrollOrResize);
+
         compute(); // initial
 
         return () => {
@@ -65,6 +76,7 @@ const Navbar = () => {
             window.removeEventListener("resize", onScrollOrResize);
         };
     }, []);
+
 
     useEffect(() => {
         if (!window.visualViewport) return;
