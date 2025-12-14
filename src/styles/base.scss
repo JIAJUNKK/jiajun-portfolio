@@ -22,3 +22,14 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+@include mobile {
+    html {
+        scroll-behavior: auto;
+    }
+
+    body {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}
