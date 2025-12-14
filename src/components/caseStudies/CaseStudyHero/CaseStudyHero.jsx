@@ -1,7 +1,31 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./CaseStudyHero.scss";
+
+const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return window.matchMedia(query).matches;
+    });
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const mql = window.matchMedia(query);
+        const onChange = (e) => setMatches(e.matches);
+
+        if (mql.addEventListener) mql.addEventListener("change", onChange);
+        else mql.addListener(onChange);
+
+        return () => {
+            if (mql.removeEventListener) mql.removeEventListener("change", onChange);
+            else mql.removeListener(onChange);
+        };
+    }, [query]);
+
+    return matches;
+};
 
 const renderCta = (cta, variant) => {
     if (!cta) return null;
@@ -42,12 +66,25 @@ const CaseStudyHero = forwardRef(
             stackIcons = [],
             primaryCta,
             secondaryCta,
+
             heroImageSrc,
             heroImageAlt,
+            heroImageSrcMobile,
+            heroImageAltMobile,
+
             heroImageMotionStyle,
         },
         ref
     ) => {
+        const isMobile = useMediaQuery("(max-width: 768px)");
+
+        const imgSrc =
+            isMobile && heroImageSrcMobile ? heroImageSrcMobile : heroImageSrc;
+
+        const imgAlt =
+            (isMobile && heroImageAltMobile ? heroImageAltMobile : heroImageAlt) ||
+            title;
+
         const hasMeta =
             (metaItems && metaItems.length > 0) ||
             (stackIcons && stackIcons.length > 0);
@@ -116,8 +153,7 @@ const CaseStudyHero = forwardRef(
                                         <div className="case-study-stack__icons">
                                             {stackIcons.map((icon) => {
                                                 if (typeof icon === "string") {
-                                                    const hasExt =
-                                                        icon.includes(".");
+                                                    const hasExt = icon.includes(".");
                                                     const filename = hasExt
                                                         ? icon
                                                         : `${icon}.svg`;
@@ -159,18 +195,19 @@ const CaseStudyHero = forwardRef(
                     </motion.div>
                 </div>
 
-                {heroImageSrc && (
+                {imgSrc && (
                     <motion.div
                         className="case-study-hero__image-wrap"
                         style={heroImageMotionStyle}
                     >
                         <motion.div
                             className="case-study-hero__image-frame"
+                            style={{
+                                borderRadius: heroImageMotionStyle?.borderRadius,
+                                overflow: "hidden",
+                            }}
                         >
-                            <img
-                                src={heroImageSrc}
-                                alt={heroImageAlt || title}
-                            />
+                            <img src={imgSrc} alt={imgAlt} />
                         </motion.div>
                     </motion.div>
                 )}
