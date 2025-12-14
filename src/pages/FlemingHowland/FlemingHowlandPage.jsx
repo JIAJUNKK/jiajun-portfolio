@@ -1,6 +1,6 @@
 // src/pages/FlemingHowlandPage.jsx
-import { useRef, useEffect, useState } from "react";
-import { useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect, useMemo } from "react";
+import { useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 import CaseStudyHero from "../../components/caseStudies/CaseStudyHero/CaseStudyHero";
 import CaseStudyResultsStrip from "../../components/caseStudies/CaseStudyResultsStrip/CaseStudyResultsStrip";
@@ -40,78 +40,77 @@ const useMediaQuery = (query) => {
 const FlemingHowlandPage = () => {
     const heroRef = useRef(null);
     const isMobile = useMediaQuery("(max-width: 768px)");
+    const reduceMotion = useReducedMotion();
 
-    useEffect(() => {
-        document.body.classList.add("fh-no-scrollbar");
-        return () => {
-            document.body.classList.remove("fh-no-scrollbar");
-        };
-    }, []);
+    // Desktop only: scroll-linked hero animation.
+    // Mobile: no scroll-linked transforms (fixes “draggy” scroll after refresh).
+    const enableScrollFx = !isMobile && !reduceMotion;
 
     const { scrollYProgress: heroScrollYProgress } = useScroll({
         target: heroRef,
         offset: ["start start", "end start"],
     });
 
-    const heroImageY = useTransform(
-        heroScrollYProgress,
-        [0, 0.5, 1],
-        isMobile ? [0, -24, -80] : [0, -40, -120]
-    );
+    // Desktop transforms (only used when enableScrollFx = true)
+    const heroImageY = useTransform(heroScrollYProgress, [0, 0.5, 1], [0, -40, -120]);
 
     const SCALE_START = 0.14;
     const SCALE_END = 0.4;
     const SCALE_MAX_DESKTOP = 1.4;
-    const SCALE_MAX_MOBILE = 1.25;
 
     const heroImageScale = useTransform(
         heroScrollYProgress,
         [0, SCALE_START, SCALE_END, 1],
-        isMobile
-            ? [1, 1, SCALE_MAX_MOBILE, SCALE_MAX_MOBILE]
-            : [1, 1, SCALE_MAX_DESKTOP, SCALE_MAX_DESKTOP]
+        [1, 1, SCALE_MAX_DESKTOP, SCALE_MAX_DESKTOP]
     );
 
     const heroImageX = useTransform(heroScrollYProgress, [0, 1], [0, 0]);
 
-    const heroImageOpacity = useTransform(
-        heroScrollYProgress,
-        isMobile ? [0, 0.1, 0.18] : [0, 0.14, 0.2],
-        [0, 0, 1]
-    );
+    const heroImageOpacity = useTransform(heroScrollYProgress, [0, 0.14, 0.2], [0, 0, 1]);
 
-    const heroImageClip = useTransform(
-        heroScrollYProgress,
-        isMobile ? [0, 0.12, 0.22, 0.6] : [0, 0.14, 0.26, 0.6],
-        isMobile
-            ? [
-                "inset(100% 0% 0% 0% round 20px)",
-                "inset(100% 0% 0% 0% round 20px)",
-                "inset(0% 0% 0% 0% round 20px)",
-                "inset(0% 0% 0% 0% round 0px)",
-            ]
-            : [
-                "inset(100% 0% 0% 0% round 24px)",
-                "inset(100% 0% 0% 0% round 24px)",
-                "inset(0% 0% 0% 0% round 24px)",
-                "inset(0% 0% 0% 0% round 0px)",
-            ]
-    );
+    const heroImageClip = useTransform(heroScrollYProgress, [0, 0.14, 0.26, 0.6], [
+        "inset(100% 0% 0% 0% round 24px)",
+        "inset(100% 0% 0% 0% round 24px)",
+        "inset(0% 0% 0% 0% round 24px)",
+        "inset(0% 0% 0% 0% round 0px)",
+    ]);
 
-    const heroImageBorderRadius = useTransform(
-        heroScrollYProgress,
-        [0, 0.6],
-        isMobile ? [20, 0] : [24, 0]
-    );
+    const heroImageBorderRadius = useTransform(heroScrollYProgress, [0, 0.6], [24, 0]);
 
-    const heroImageMotionStyle = {
-        opacity: heroImageOpacity,
-        clipPath: heroImageClip,
-        y: heroImageY,
-        x: heroImageX,
-        scale: heroImageScale,
-        borderRadius: heroImageBorderRadius,
-    };
+    const heroImageMotionStyle = useMemo(() => {
+        // Mobile / reduced-motion: STATIC styles (no scroll-driven updates)
+        if (!enableScrollFx) {
+            return {
+                opacity: 1,
+                y: 0,
+                x: 0,
+                scale: 1,
+                borderRadius: isMobile ? 20 : 24,
+                // no clipPath
+                willChange: "auto",
+            };
+        }
+
+        // Desktop: full effect
+        return {
+            opacity: heroImageOpacity,
+            clipPath: heroImageClip,
+            y: heroImageY,
+            x: heroImageX,
+            scale: heroImageScale,
+            borderRadius: heroImageBorderRadius,
+            willChange: "transform",
+        };
+    }, [
+        enableScrollFx,
+        isMobile,
+        heroImageOpacity,
+        heroImageClip,
+        heroImageY,
+        heroImageX,
+        heroImageScale,
+        heroImageBorderRadius,
+    ]);
 
     const cs = FLEMING_HOWLAND_CASE_STUDY;
 
@@ -131,15 +130,10 @@ const FlemingHowlandPage = () => {
                 />
 
                 <CaseStudyResultsStrip {...cs.results} />
-
                 <CaseStudyStoryTwoColumn {...cs.story1} />
-
                 <CaseStudyImageSwitcher {...cs.imageSwitcher} />
-
                 <CaseStudyWorkflow {...cs.workflow} />
-
                 <CaseStudyStoryTwoColumn {...cs.story2} />
-
                 <CaseStudyFooterCta {...cs.footerCta} />
             </div>
         </main>
