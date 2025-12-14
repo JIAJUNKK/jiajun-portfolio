@@ -70,8 +70,8 @@ export default function Links({ closeSidebar = () => { } }) {
     const caseStudyNav = useMemo(
         () => [
             { label: "Back to Home", type: "route", to: "/#Home" },
-            { label: "Back to Projects", type: "route", to: "/#Projects" },
-            { label: "Contact", type: "route", to: "/#Contact" },
+            // { label: "Back to Projects", type: "route", to: "/#Projects" },
+            { label: "Contact Jia Jun", type: "route", to: "/#Contact" },
         ],
         []
     );
