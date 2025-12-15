@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import "./CircularText.css";
 
 const getRotationTransition = (duration, from, loop = true) => ({
@@ -185,7 +185,7 @@ const CircularText = ({
     );
 
     return (
-        <motion.div
+        <m.div
             ref={containerRef}
             initial={{ rotate: 0 }}
             className={`circular-text ${className}`}
@@ -208,7 +208,7 @@ const CircularText = ({
                     </span>
                 );
             })}
-        </motion.div>
+        </m.div>
     );
 };
 

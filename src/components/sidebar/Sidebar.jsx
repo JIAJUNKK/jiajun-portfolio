@@ -1,7 +1,7 @@
 // src/components/sidebar/Sidebar.jsx
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Links from "./links/Links";
 import ToggleButton from "./toggleButton/ToggleButton";
 import "./sidebar.scss";
@@ -68,7 +68,7 @@ const SidebarOverlay = ({ open, closeSidebar }) => {
     return createPortal(
         <AnimatePresence initial={false}>
             {open && (
-                <motion.div
+                <m.div
                     className="sidebar-overlay"
                     initial="closed"
                     animate="open"
@@ -84,7 +84,7 @@ const SidebarOverlay = ({ open, closeSidebar }) => {
                     />
 
                     {/* Full-width dropdown attached to navbar */}
-                    <motion.div
+                    <m.div
                         ref={menuRef}
                         className="sidebar-bg"
                         initial="closed"
@@ -98,8 +98,8 @@ const SidebarOverlay = ({ open, closeSidebar }) => {
                         <div className="sidebar-panel">
                             <Links closeSidebar={closeSidebar} />
                         </div>
-                    </motion.div>
-                </motion.div>
+                    </m.div>
+                </m.div>
             )}
         </AnimatePresence>,
         document.body

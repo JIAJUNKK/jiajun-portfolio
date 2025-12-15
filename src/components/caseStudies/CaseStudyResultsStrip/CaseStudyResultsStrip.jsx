@@ -1,6 +1,6 @@
 // src/components/caseStudies/CaseStudyResultsStrip/CaseStudyResultsStrip.jsx
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyResultsStrip.scss";
 
@@ -34,7 +34,7 @@ const renderGraph = (graph) => {
             <div className="case-study-results__graph case-study-results__graph--spark">
                 <div className="case-study-results__spark">
                     {Array.from({ length: count }).map((_, index) => (
-                        <motion.span
+                        <m.span
                             key={index}
                             className="case-study-results__spark-bar"
                             initial={{ scaleY: 0.4, opacity: 0.4 }}
@@ -56,7 +56,7 @@ const renderGraph = (graph) => {
     // pulse / fallback
     return (
         <div className="case-study-results__graph case-study-results__graph--pulse">
-            <motion.div
+            <m.div
                 className="case-study-results__pulse"
                 initial={{ scale: 0.8, opacity: 0.6 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -68,7 +68,7 @@ const renderGraph = (graph) => {
                 }}
             >
                 <span />
-            </motion.div>
+            </m.div>
         </div>
     );
 };
@@ -81,7 +81,7 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
         <CaseStudySection className="case-study-results">
             <div ref={ref} className="case-study-results__layout">
                 {/* LEFT */}
-                <motion.div
+                <m.div
                     className="case-study-results__left"
                     initial={{ opacity: 0, x: -32 }}
                     animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -32 }}
@@ -95,7 +95,7 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
 
                     <div className="case-study-results__figures">
                         {stats.map((stat, index) => (
-                            <motion.div
+                            <m.div
                                 key={index}
                                 className="case-study-card case-study-results__item"
                                 initial={{ opacity: 0, y: 12 }}
@@ -127,13 +127,13 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
                                 )}
 
                                 {renderGraph(stat.graph)}
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* RIGHT */}
-                <motion.div
+                <m.div
                     className="case-study-results__right"
                     initial={{ opacity: 0, x: 32 }}
                     animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 32 }}
@@ -150,7 +150,7 @@ const CaseStudyResultsStrip = ({ eyebrow, title, intro, stats = [] }) => {
                             {intro}
                         </p>
                     )}
-                </motion.div>
+                </m.div>
             </div>
         </CaseStudySection>
     );

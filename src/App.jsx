@@ -1,23 +1,55 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { LazyMotion, domAnimation } from "framer-motion";
 
 import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
-import FlemingHowlandPage from "./pages/FlemingHowland/FlemingHowlandPage";
+import { scrollToHash } from "./utils/scrollToHash";
+import { installViewportVars } from "./utils/viewportVars";
 
 import "./styles/base.scss";
 import "./styles/layout.scss";
 
-const App = () => {
-    return (
-        <Router>
-            <Navbar />
+const FlemingHowlandPage = lazy(() => import("./pages/FlemingHowland/FlemingHowlandPage"));
 
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/projects/fleming-howland" element={<FlemingHowlandPage />} />
-                {/* later: more routes */}
-            </Routes>
-        </Router>
+function ScrollToHashOnRouteChange() {
+    const location = useLocation();
+
+    useEffect(() => {
+        if ("scrollRestoration" in window.history) {
+            window.history.scrollRestoration = "manual";
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!location.hash) return;
+
+        scrollToHash(location.hash);
+        const t = setTimeout(() => scrollToHash(location.hash), 250);
+        return () => clearTimeout(t);
+    }, [location.pathname, location.hash]);
+
+    return null;
+}
+
+const App = () => {
+    useEffect(() => {
+        return installViewportVars();
+    }, []);
+    return (
+        <LazyMotion features={domAnimation}>
+            <Router>
+                <Navbar />
+                <ScrollToHashOnRouteChange />
+
+                <Suspense fallback={null}>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/projects/fleming-howland" element={<FlemingHowlandPage />} />
+                    </Routes>
+                </Suspense>
+            </Router>
+        </LazyMotion>
     );
 };
 

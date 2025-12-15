@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import DecryptedText from "../../reactBitsComponent/DecryptedText/DecryptedText";
 import "./contact.scss";
@@ -37,11 +37,11 @@ const Contact = () => {
     };
 
     return (
-        <motion.div className="contact" variants={variants} initial="initial" whileInView="animate">
-            <motion.div className="textContainer" variants={variants}>
-                <motion.h1 variants={variants}>Let's work together</motion.h1>
+        <div className="contact" variants={variants} initial="initial" whileInView="animate">
+            <div className="textContainer" variants={variants}>
+                <h1>Let's work together</h1>
 
-                <motion.div className="item" variants={variants}>
+                <div className="item" variants={variants}>
                     <h2>Mail</h2>
                     <DecryptedText
                         text="kongjiajun040103@gmail.com"
@@ -55,9 +55,9 @@ const Contact = () => {
                         maxIterations={10}
                         sequential
                     />
-                </motion.div>
+                </div>
 
-                <motion.div className="item" variants={variants}>
+                <div className="item" variants={variants}>
                     <h2>Phone</h2>
                     <DecryptedText
                         text="+44 07917 997 042"
@@ -71,11 +71,11 @@ const Contact = () => {
                         maxIterations={10}
                         sequential
                     />
-                </motion.div>
-            </motion.div>
+                </div>
+            </div>
 
             <div className="formContainer">
-                <motion.form
+                <form
                     ref={formRef}
                     onSubmit={sendEmail}
                     initial={{ opacity: 0 }}
@@ -92,9 +92,9 @@ const Contact = () => {
                         {error && "Something went wrong 🥲"}
                         {success && "Message sent successfully ✅"}
                     </div>
-                </motion.form>
+                </form>
             </div>
-        </motion.div>
+        </div>
     );
 };
 

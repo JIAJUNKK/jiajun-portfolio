@@ -1,6 +1,6 @@
 // src/components/caseStudies/CaseStudyStoryTwoColumn/CaseStudyStoryTwoColumn.jsx
 import { useMemo, useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyStoryTwoColumn.scss";
 
@@ -45,7 +45,7 @@ const CaseStudyStoryTwoColumn = ({
             <div ref={sectionRef} className="case-study-story__layout">
                 {/* LEFT: prose / story copy */}
                 {hasIntro && (
-                    <motion.div
+                    <m.div
                         className="case-study-story__prose"
                         initial={{ opacity: 0, x: -28 }}
                         animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -28 }}
@@ -56,11 +56,11 @@ const CaseStudyStoryTwoColumn = ({
                         {introParagraphs.map((text, index) => (
                             <p key={index}>{text}</p>
                         ))}
-                    </motion.div>
+                    </m.div>
                 )}
 
                 {/* RIGHT: stacked cards */}
-                <motion.div
+                <m.div
                     className="case-study-story__card-column"
                     initial={{ opacity: 0, x: 28 }}
                     animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 28 }}
@@ -101,7 +101,7 @@ const CaseStudyStoryTwoColumn = ({
                                     const isActive = depth === 0;
 
                                     return (
-                                        <motion.article
+                                        <m.article
                                             key={card.id || index}
                                             className={
                                                 "case-study-card case-study-story__card" +
@@ -135,13 +135,13 @@ const CaseStudyStoryTwoColumn = ({
                                                         )}
                                                 </div>
                                             )}
-                                        </motion.article>
+                                        </m.article>
                                     );
                                 })}
                             </div>
                         )}
                     </div>
-                </motion.div>
+                </m.div>
             </div>
         </CaseStudySection>
     );

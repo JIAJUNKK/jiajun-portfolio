@@ -35,6 +35,12 @@
     touch-action: none;
 }
 
+@media (pointer: coarse) {
+    .pc-card-wrapper {
+        touch-action: pan-y;
+    }
+}
+
 .pc-card-wrapper::before {
     content: '';
     position: absolute;

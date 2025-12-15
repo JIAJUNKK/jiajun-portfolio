@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import "./CaseStudyFullBleedMedia.scss";
 
 const CaseStudyFullBleedMedia = ({ children, caption, className = "" }) => {
     return (
-        <motion.figure
+        <m.figure
             className={`case-study-fullbleed ${className}`}
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -17,7 +17,7 @@ const CaseStudyFullBleedMedia = ({ children, caption, className = "" }) => {
                     {caption}
                 </figcaption>
             )}
-        </motion.figure>
+        </m.figure>
     );
 };
 

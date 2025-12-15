@@ -33,3 +33,14 @@ a {
         overscroll-behavior: contain;
     }
 }
+
+@include tablet {
+    html {
+        scroll-behavior: auto;
+    }
+
+    body {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}

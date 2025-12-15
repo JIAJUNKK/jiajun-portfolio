@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./CaseStudyFooterCta.scss";
@@ -36,7 +36,7 @@ const CaseStudyFooterCta = ({
     );
 
     return (
-        <motion.footer
+        <m.footer
             ref={ref}
             className="cs-footer-cta"
             initial="hidden"
@@ -45,26 +45,26 @@ const CaseStudyFooterCta = ({
         >
             {/* Ambient layers */}
             <div className="cs-footer-cta__bg" aria-hidden="true">
-                <motion.span
+                <m.span
                     className="cs-footer-cta__orb cs-footer-cta__orb--a"
                     initial={false}
                     animate={inView ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ duration: 0.35, ease }}
                 />
-                <motion.span
+                <m.span
                     className="cs-footer-cta__orb cs-footer-cta__orb--b"
                     initial={false}
                     animate={inView ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ duration: 0.35, ease, delay: 0.06 }}
                 />
-                <motion.span
+                <m.span
                     className="cs-footer-cta__orb cs-footer-cta__orb--c"
                     initial={false}
                     animate={inView ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ duration: 0.35, ease, delay: 0.12 }}
                 />
 
-                <motion.span
+                <m.span
                     className="cs-footer-cta__sheen"
                     initial={{ x: "-35%", opacity: 0 }}
                     animate={inView ? { x: "35%", opacity: 1 } : { x: "-35%", opacity: 0 }}
@@ -76,7 +76,7 @@ const CaseStudyFooterCta = ({
             </div>
 
             <div className="cs-footer-cta__inner">
-                <motion.div className="cs-footer-cta__copy" variants={variants.item}>
+                <m.div className="cs-footer-cta__copy" variants={variants.item}>
                     {badge && (
                         <span className="cs-footer-cta__badge">
                             {badge}
@@ -85,17 +85,17 @@ const CaseStudyFooterCta = ({
 
                     <h3 className="cs-footer-cta__title">{title}</h3>
                     <p className="cs-footer-cta__text">{text}</p>
-                </motion.div>
+                </m.div>
 
-                <motion.div className="cs-footer-cta__actions" variants={variants.item}>
-                    <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
+                <m.div className="cs-footer-cta__actions" variants={variants.item}>
+                    <m.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
                         <Link to={secondaryTo} className="fh-button fh-button--ghost">
                             {secondaryLabel}
                         </Link>
-                    </motion.div>
+                    </m.div>
 
                     {primaryHref && (
-                        <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
+                        <m.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
                             <a
                                 href={primaryHref}
                                 target="_blank"
@@ -107,11 +107,11 @@ const CaseStudyFooterCta = ({
                                     ↗
                                 </span>
                             </a>
-                        </motion.div>
+                        </m.div>
                     )}
-                </motion.div>
+                </m.div>
             </div>
-        </motion.footer>
+        </m.footer>
     );
 };
 
