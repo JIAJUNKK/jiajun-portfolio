@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyWorkflow.scss";
 
@@ -31,7 +31,7 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
     return (
         <CaseStudySection className="case-study-workflow">
             <div ref={ref}>
-                <motion.div
+                <m.div
                     className="case-study-workflow__header"
                     initial={{ opacity: 0, y: 18 }}
                     animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
@@ -66,7 +66,7 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
 
                                 <div className="case-study-workflow__progress" aria-hidden="true">
                                     <div className="case-study-workflow__progress-track" />
-                                    <motion.div
+                                    <m.div
                                         className="case-study-workflow__progress-fill"
                                         initial={false}
                                         animate={{ scaleX: progress }}
@@ -76,9 +76,9 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
                             </div>
                         )}
                     </div>
-                </motion.div>
+                </m.div>
 
-                <motion.ol
+                <m.ol
                     className="case-study-workflow__steps"
                     initial={{ opacity: 0, y: 22 }}
                     animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
@@ -93,7 +93,7 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
 
                         return (
                             <li key={item.id} className="case-study-workflow__step">
-                                <motion.button
+                                <m.button
                                     type="button"
                                     className={
                                         "case-study-card case-study-workflow__step-btn" +
@@ -113,11 +113,11 @@ const CaseStudyWorkflow = ({ eyebrow, title, intro, steps = [] }) => {
                                             {item.label}
                                         </span>
                                     </div>
-                                </motion.button>
+                                </m.button>
                             </li>
                         );
                     })}
-                </motion.ol>
+                </m.ol>
             </div>
         </CaseStudySection>
     );

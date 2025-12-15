@@ -1,18 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { LazyMotion, domAnimation } from "framer-motion";
 
 import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
-import FlemingHowlandPage from "./pages/FlemingHowland/FlemingHowlandPage";
 import { scrollToHash } from "./utils/scrollToHash";
+import { installViewportVars } from "./utils/viewportVars";
 
 import "./styles/base.scss";
 import "./styles/layout.scss";
 
+const FlemingHowlandPage = lazy(() => import("./pages/FlemingHowland/FlemingHowlandPage"));
+
 function ScrollToHashOnRouteChange() {
     const location = useLocation();
 
-    // prevent browser restoration fighting your manual scroll
     useEffect(() => {
         if ("scrollRestoration" in window.history) {
             window.history.scrollRestoration = "manual";
@@ -22,14 +24,8 @@ function ScrollToHashOnRouteChange() {
     useEffect(() => {
         if (!location.hash) return;
 
-        // run now
         scrollToHash(location.hash);
-
-        // run again shortly after (beats late "scroll to top" effects & layout shifts)
-        const t = setTimeout(() => {
-            scrollToHash(location.hash);
-        }, 250);
-
+        const t = setTimeout(() => scrollToHash(location.hash), 250);
         return () => clearTimeout(t);
     }, [location.pathname, location.hash]);
 
@@ -37,17 +33,23 @@ function ScrollToHashOnRouteChange() {
 }
 
 const App = () => {
+    useEffect(() => {
+        return installViewportVars();
+    }, []);
     return (
-        <Router>
-            <Navbar />
-            <ScrollToHashOnRouteChange />
+        <LazyMotion features={domAnimation}>
+            <Router>
+                <Navbar />
+                <ScrollToHashOnRouteChange />
 
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/projects/fleming-howland" element={<FlemingHowlandPage />} />
-                {/* later: more routes */}
-            </Routes>
-        </Router>
+                <Suspense fallback={null}>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/projects/fleming-howland" element={<FlemingHowlandPage />} />
+                    </Routes>
+                </Suspense>
+            </Router>
+        </LazyMotion>
     );
 };
 

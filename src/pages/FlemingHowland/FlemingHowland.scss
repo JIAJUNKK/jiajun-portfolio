@@ -5,7 +5,7 @@
 .fh-page {
     min-height: 100vh;
     color: $primary;
-
+    background-color: white;
     /* Helps mobile browsers keep scrolling smooth during heavy transforms */
     overscroll-behavior-y: none;
 }

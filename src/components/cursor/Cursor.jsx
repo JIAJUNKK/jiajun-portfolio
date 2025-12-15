@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { m, useSpring } from "framer-motion";
+import useCoarsePointer from "../../hooks/useCoarsePointer";
 import "./cursor.scss";
 
 const Cursor = () => {
+    const coarse = useCoarsePointer();
+    if (coarse) return null;
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     const springX = useSpring(0, { stiffness: 200, damping: 20, mass: 0.4 });
@@ -20,7 +23,7 @@ const Cursor = () => {
     }, [springX, springY]);
 
     return (
-        <motion.div
+        <m.div
             className="cursor"
             style={{
                 x: springX,

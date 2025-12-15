@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { m, useScroll, useSpring, useTransform } from "framer-motion";
 import { projects } from "../../constants";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +26,7 @@ const Single = ({ project }) => {
                         <img src={project.img} alt="" />
                     </div>
 
-                    <motion.div className="textContainer" style={{ y }}>
+                    <m.div className="textContainer" style={{ y }}>
                         <h2>{project.title}</h2>
 
                         <ul>
@@ -54,7 +54,7 @@ const Single = ({ project }) => {
                             )}
                         </div>
 
-                    </motion.div>
+                    </m.div>
 
                 </div>
             </div>
@@ -80,7 +80,7 @@ const Projects = () => {
             <div id="projects-sentinel" aria-hidden="true" />
             <div className="progress">
                 <h1>Projects</h1>
-                <motion.div style={{ scaleX }} className="progressBar" />
+                <m.div style={{ scaleX }} className="progressBar" />
             </div>
 
             <div className="list">   {/* <- add class */}

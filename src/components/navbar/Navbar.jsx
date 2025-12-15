@@ -1,7 +1,7 @@
 import "./navbar.scss";
 import Sidebar from "../sidebar/Sidebar";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const Navbar = () => {
     useEffect(() => {
@@ -109,13 +109,13 @@ const Navbar = () => {
         <div className="navbar">
             <Sidebar />
             <div className="wrapper">
-                <motion.span
+                <m.span
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
                 >
                     Jia Jun
-                </motion.span>
+                </m.span>
 
                 <div className="social">
                     <a href="https://www.instagram.com/jiajunkk" target="_blank" rel="noreferrer noopener">

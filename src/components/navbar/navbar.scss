@@ -17,6 +17,11 @@
     box-shadow: $box-shadow;
     transform: translateY(var(--vv-top));
 
+    @include mobile {
+        top: calc(env(safe-area-inset-top) + var(--vv-top));
+        background: white;
+    }
+
     &.over-projects {
         /* Seamless with slab when sticky header is present */
         border-bottom: 0 !important;

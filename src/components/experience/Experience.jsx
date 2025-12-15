@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import "./experience.scss";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { m, useScroll, useSpring, useTransform } from "framer-motion";
 import { experiences } from "../../constants";
 
 import {

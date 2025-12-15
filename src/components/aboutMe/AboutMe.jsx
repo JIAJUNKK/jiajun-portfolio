@@ -2,13 +2,16 @@ import { useEffect, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProfileCard from "../../reactBitsComponent/ProfileCard/ProfileCard";
+import useCoarsePointer from "../../hooks/useCoarsePointer";
 import "./aboutMe.scss";
 
 ScrollTrigger.config({ ignoreMobileResize: true });
-if (ScrollTrigger.isTouch) ScrollTrigger.normalizeScroll(true);
+// if (ScrollTrigger.isTouch) ScrollTrigger.normalizeScroll(true);
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutMe = () => {
+    const coarse = useCoarsePointer();
+
     const textRef = useRef(null);
     const navOffset = () => (document.querySelector(".navbar")?.offsetHeight || 0) + 12;
 
@@ -105,10 +108,10 @@ const AboutMe = () => {
                         contactText="Contact Me"
                         avatarUrl="/JiaJun.png"
                         iconUrl="/iconpattern.png"
-                        showBehindGradient={false}
+                        showBehindGradient={!coarse}
                         showUserInfo={true}
-                        enableTilt={true}
-                        enableMobileTilt={true}
+                        enableTilt={!coarse}
+                        enableMobileTilt={false}
                         onContactClick={() => smoothScrollTo("Contact")}
                     />
                 </div>

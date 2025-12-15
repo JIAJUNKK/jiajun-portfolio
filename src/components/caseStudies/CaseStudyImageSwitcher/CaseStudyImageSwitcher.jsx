@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import CaseStudySection from "../CaseStudySection/CaseStudySection";
 import "./CaseStudyImageSwitcher.scss";
 
@@ -53,7 +53,7 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
 
     return (
         <CaseStudySection>
-            <motion.figure
+            <m.figure
                 ref={ref}
                 className="case-study-image-switcher"
                 initial={{ opacity: 0, y: 60 }}
@@ -112,7 +112,7 @@ const CaseStudyImageSwitcher = ({ images = [], caption }) => {
                         </div>
                     </div>
                 </div>
-            </motion.figure>
+            </m.figure>
         </CaseStudySection>
     );
 };

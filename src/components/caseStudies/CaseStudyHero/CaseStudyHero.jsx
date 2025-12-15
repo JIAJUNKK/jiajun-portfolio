@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import "./CaseStudyHero.scss";
 
 const useMediaQuery = (query) => {
@@ -92,7 +92,7 @@ const CaseStudyHero = forwardRef(
         return (
             <header ref={ref} className="case-study-hero">
                 <div className="case-study-hero__intro">
-                    <motion.div
+                    <m.div
                         className="case-study-hero__tagline"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -108,9 +108,9 @@ const CaseStudyHero = forwardRef(
                                 {metaLine}
                             </span>
                         )}
-                    </motion.div>
+                    </m.div>
 
-                    <motion.div
+                    <m.div
                         className="case-study-hero__grid"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -192,15 +192,15 @@ const CaseStudyHero = forwardRef(
                                 )}
                             </div>
                         )}
-                    </motion.div>
+                    </m.div>
                 </div>
 
                 {imgSrc && (
-                    <motion.div
+                    <m.div
                         className="case-study-hero__image-wrap"
                         style={heroImageMotionStyle}
                     >
-                        <motion.div
+                        <m.div
                             className="case-study-hero__image-frame"
                             style={{
                                 borderRadius: heroImageMotionStyle?.borderRadius,
@@ -208,8 +208,8 @@ const CaseStudyHero = forwardRef(
                             }}
                         >
                             <img src={imgSrc} alt={imgAlt} />
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
                 )}
             </header>
         );

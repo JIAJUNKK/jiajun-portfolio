@@ -1,6 +1,6 @@
 import "./hero.scss";
 import CircularText from "../../reactBitsComponent/CircularText/CircularText";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { textVariants } from "../../constants/motion";
 import { useRef } from "react";
 
@@ -10,20 +10,20 @@ const Hero = () => {
     return (
         <div className="hero">
             <div className="wrapper">
-                <motion.div
+                <m.div
                     className="textContainer"
                     variants={textVariants}
                     initial="initial"
                     animate="animate"
                 >
-                    <motion.h1 variants={textVariants}>Full Stack Developer 👋🏻</motion.h1>
-                    <motion.h3 variants={textVariants}>
+                    <m.h1 variants={textVariants}>Full Stack Developer 👋🏻</m.h1>
+                    <m.h3 variants={textVariants}>
                         Hi, I'm Jia Jun. A full stack developer from 🇲🇾
-                    </motion.h3>
-                </motion.div>
+                    </m.h3>
+                </m.div>
             </div>
 
-            <motion.div
+            <m.div
                 className="imageContainer"
                 variants={textVariants}
                 initial="initial"
@@ -38,7 +38,7 @@ const Hero = () => {
                     gap={20}               /* distance from image edge to ring */
                 />
                 <img ref={imgRef} src="/hero.png" alt="Portrait" />
-            </motion.div>
+            </m.div>
         </div>
     );
 };
