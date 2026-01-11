@@ -158,20 +158,35 @@ const CaseStudyFeatureGroupScroller = ({
         const navOffset = stickyTop + 86;
         const thresholds = [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1];
 
+        const MIN_RATIO = 0.001; // treat "0-ish" as not visible
+
         const obs = new IntersectionObserver(
             (entries) => {
                 for (const e of entries) {
                     const idx = Number(e.target.dataset.idx);
-                    mobileRatios.current.set(idx, e.isIntersecting ? e.intersectionRatio : 0);
+                    const ratio = e.isIntersecting ? e.intersectionRatio : 0;
+                    mobileRatios.current.set(idx, ratio);
                 }
 
+                // ✅ Find best ONLY if something is actually visible
                 let bestIdx = last.current.idx;
-                let bestRatio = -1;
+                let bestRatio = mobileRatios.current.get(bestIdx) ?? 0;
+
                 for (const [idx, ratio] of mobileRatios.current.entries()) {
                     if (ratio > bestRatio) {
                         bestRatio = ratio;
                         bestIdx = idx;
                     }
+                }
+
+                // ✅ If nothing is intersecting (all ratios ~0), keep current index
+                if (bestRatio <= MIN_RATIO) {
+                    // still update local progress if you want
+                    if (Math.abs(0 - last.current.l) > 0.01) {
+                        last.current.l = 0;
+                        setLocalProgress(0);
+                    }
+                    return;
                 }
 
                 const nextIdx = clamp(bestIdx, 0, steps - 1);
@@ -194,6 +209,7 @@ const CaseStudyFeatureGroupScroller = ({
             },
             { root: null, threshold: thresholds, rootMargin: `-${navOffset}px 0px -55% 0px` }
         );
+
 
         els.forEach((el) => obs.observe(el));
         return () => obs.disconnect();

@@ -31,7 +31,7 @@ const CaseStudyStoryTwoColumn = ({
 
     // In-view trigger (Option C)
     const sectionRef = useRef(null);
-    const inView = useInView(sectionRef, { amount: 0.35, once: false });
+    const inView = useInView(sectionRef, { amount: 0.12, once: false });
 
     // Keep activeIndex safe if cards length changes
     useEffect(() => {
