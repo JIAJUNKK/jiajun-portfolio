@@ -37,7 +37,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="contact" variants={variants} initial="initial" whileInView="animate">
+        <div className="contact" variants={variants} initial="initial">
             <div className="textContainer" variants={variants}>
                 <h1>Let's work together</h1>
 
@@ -79,7 +79,6 @@ const Contact = () => {
                     ref={formRef}
                     onSubmit={sendEmail}
                     initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
                 >
                     <input type="text" name="user_name" placeholder="Name" autoComplete="name" required />
                     <input type="email" name="user_email" placeholder="Email" autoComplete="email" required />
