@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { m, useScroll, useSpring, useTransform } from "framer-motion";
 import { projects } from "../../constants";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import './projects.scss';
 
@@ -10,12 +11,13 @@ const Single = ({ project }) => {
     const ref = useRef();
     const liveDemoExist = (project.liveDemoLink && project.liveDemoLink !== "");
     const sourceCodeExist = (project.githubLink && project.githubLink !== "");
+    const caseStudyExist = (project.type === "route" && project.to);
 
     const { scrollYProgress } = useScroll({
         target: ref,
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], [-390, 200]);
+    const y = useTransform(scrollYProgress, [0, 1], [-390, 50]);
 
     return (
         <section className="project-section">
@@ -27,7 +29,13 @@ const Single = ({ project }) => {
                     </div>
 
                     <m.div className="textContainer" style={{ y }}>
-                        <h2>{project.title}</h2>
+                        {caseStudyExist ? (
+                            <Link className="titleLink" to={project.to}>
+                                <h2>{project.title}</h2>
+                            </Link>
+                        ) : (
+                            <h2>{project.title}</h2>
+                        )}
 
                         <ul>
                             {project.description.map((desc, index) => (
@@ -41,15 +49,23 @@ const Single = ({ project }) => {
                         </ul>
 
                         <div className="button-container">
+                            {caseStudyExist && (
+                                <Link className="pillButton pillPrimary" to={project.to}>
+                                    <span>View Details</span>
+                                    <FontAwesomeIcon icon={faChevronRight} />
+                                </Link>
+                            )}
+
                             {sourceCodeExist && (
-                                <a className="source-code-button-container" href={project.githubLink} target="_blank">
+                                <a className="pillButton pillGhost" href={project.githubLink} target="_blank" rel="noreferrer">
                                     <h3>Source Code {'</>'}</h3>
                                 </a>
                             )}
 
                             {liveDemoExist && (
-                                <a className="source-code-button-container" href={project.liveDemoLink} target="_blank">
-                                    <h3>Live Demo <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></h3>
+                                <a className="pillButton pillGhost" href={project.liveDemoLink} target="_blank" rel="noreferrer">
+                                    <span>Live Demo</span>
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                                 </a>
                             )}
                         </div>

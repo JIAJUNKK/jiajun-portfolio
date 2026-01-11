@@ -1,0 +1,310 @@
+/* CaseStudyResponsiveGallery.scss */
+@use "../../../styles/theme" as *;
+
+.case-study-responsive-gallery {
+    &__grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "header stage"
+            "info   stage";
+        align-items: start;
+    }
+
+    &__header {
+        grid-area: header;
+        margin: 0;
+        align-self: start;
+    }
+
+    &__eyebrow {
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: $fs-small;
+        color: $tertiary;
+        margin: 0 0 0.35rem;
+    }
+
+    &__title {
+        margin: 0 0 0.5rem;
+        font-size: $fs-h4;
+        line-height: 1.1;
+        color: $primary-text-color;
+    }
+
+    &__subtitle {
+        margin: 0;
+        color: $secondary;
+        line-height: 1.7;
+        max-width: 64ch;
+        font-size: $fs-p;
+    }
+
+    /* LEFT card */
+    &__info {
+        grid-area: info;
+        overflow: hidden;
+
+        &.is-sticky {
+            position: sticky;
+            top: var(--stickyTop);
+            z-index: 10;
+        }
+    }
+
+    &__infoTop {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.95rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        background: linear-gradient(to bottom, $glass-gradient-top, $glass-gradient-bot);
+    }
+
+    &__pill {
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        font-size: $fs-small;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $light;
+        background: rgba(1, 31, 75, 0.88);
+        border: 1px solid rgba(119, 141, 169, 0.55);
+        white-space: nowrap;
+        line-height: 1;
+    }
+
+    &__count {
+        font-size: $fs-small;
+        color: $secondary;
+        margin-right: auto;
+        white-space: nowrap;
+    }
+
+    &__nav {
+        display: flex;
+        gap: 0.55rem;
+        align-items: center;
+    }
+
+    &__navBtn {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        background: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        font-size: 1.2rem;
+        line-height: 1;
+
+        &:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+    }
+
+    &__infoBody {
+        padding: 0.95rem 0.95rem 0.2rem;
+        background-color: var(--glass-tint);
+        backdrop-filter: var(--glass-filter);
+        -webkit-backdrop-filter: var(--glass-filter);
+    }
+
+    &__screenTitle {
+        margin: 0;
+        font-size: $fs-p;
+        color: $primary-text-color;
+    }
+
+    &__screenNote {
+        margin: 0.35rem 0 0;
+        color: $secondary;
+        line-height: 1.65;
+        font-size: $fs-p;
+    }
+
+    &__dots {
+        display: flex;
+        gap: 0.35rem;
+        align-items: center;
+        padding: 0.8rem 0.95rem 1rem;
+        background-color: var(--glass-tint);
+        backdrop-filter: var(--glass-filter);
+        -webkit-backdrop-filter: var(--glass-filter);
+    }
+
+    &__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        border: 0;
+        cursor: pointer;
+        background: $tertiary;
+        transition: width 0.18s ease, background 0.18s ease;
+
+        &.is-active {
+            width: 18px;
+            background: $highlight;
+        }
+    }
+
+    /* RIGHT stage (desktop) */
+    &__stage {
+        grid-area: stage;
+        display: grid;
+        place-items: center;
+        justify-self: end;
+        width: 100%;
+    }
+
+    &__stageInner {
+        width: 100%;
+        position: relative;
+    }
+
+    &__stageMeta {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        align-items: center;
+        z-index: 20;
+        pointer-events: none;
+    }
+
+    &__stageCount {
+        padding: 0.28rem 0.6rem;
+        border-radius: 999px;
+        font-size: $fs-small;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $light;
+        background: rgba(1, 31, 75, 0.82);
+        border: 1px solid rgba(119, 141, 169, 0.5);
+        backdrop-filter: blur(10px);
+        white-space: nowrap;
+    }
+
+    &__fan {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        transform: translateX(var(--deckShiftX, 0px));
+    }
+
+    /* phone */
+    &__phone {
+        position: relative;
+        max-height: 75vh;
+        aspect-ratio: 9 / 19.5;
+        width: auto;
+
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: $light-background;
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.14);
+
+        padding-top: 5px;
+        display: block;
+        cursor: grab;
+        touch-action: pan-y;
+        -webkit-tap-highlight-color: transparent;
+        will-change: transform, opacity;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    &__notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 20px;
+        border-radius: 999px;
+        background: #000;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        margin-top: 10px;
+        object-fit: cover;
+        display: block;
+        -webkit-user-drag: none;
+    }
+
+    &__phoneLabel {
+        position: absolute;
+        left: 14px;
+        bottom: 14px;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        font-size: $fs-small;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $light;
+        background: rgba(1, 31, 75, 0.86);
+        border: 1px solid rgba(119, 141, 169, 0.5);
+        pointer-events: none;
+        z-index: 4;
+        max-width: calc(100% - 28px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* ================== MOBILE LAYOUT ================== */
+    @include mobile {
+        &__grid {
+            display: none;
+        }
+
+        &__mobile {
+            display: block;
+        }
+
+        &__info.is-sticky {
+            margin-top: 0.9rem;
+            background-color: var(--glass-tint);
+            backdrop-filter: var(--glass-filter);
+            -webkit-backdrop-filter: var(--glass-filter);
+        }
+
+        &__phoneList {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        &__phoneWrap {
+            scroll-margin-top: calc(var(--stickyTop) + var(--infoH) + 16px);
+        }
+
+        &__fan {
+            transform: translateX(0px);
+        }
+
+        /* On mobile list, make each phone a fixed height */
+        &__phone {
+            cursor: default;
+            max-height: none;
+            aspect-ratio: unset;
+        }
+    }
+
+    /* Tablet (<=1024) keep desktop grid, but make shift smaller visually if needed */
+    @include tablet {
+        &__fan {
+            transform: translateX(var(--deckShiftX, 0px));
+        }
+    }
+}

@@ -115,10 +115,10 @@ const FlemingHowlandPage = () => {
     const cs = FLEMING_HOWLAND_CASE_STUDY;
 
     return (
-        <main className="fh-page case-study">
+        <main className="cs-page case-study">
             <CaseStudyScrollIndicator />
 
-            <div className="fh-page__inner">
+            <div className="cs-page__inner">
                 <CaseStudyHero
                     ref={heroRef}
                     {...cs.hero}

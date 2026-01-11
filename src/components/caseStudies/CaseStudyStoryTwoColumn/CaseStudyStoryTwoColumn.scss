@@ -11,6 +11,17 @@
             grid-template-columns: minmax(0, 1fr);
             gap: 2rem;
         }
+
+    }
+
+
+    &__layout__is-left-only {
+        grid-template-columns: 1fr !important;
+
+        .case-study-story__prose {
+            max-width: none;
+            /* = unset but safer */
+        }
     }
 
     &__prose {

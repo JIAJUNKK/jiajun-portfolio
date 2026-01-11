@@ -8,7 +8,7 @@ const CaseStudySection = ({ className = "", children }) => {
             className={`case-study-section ${className}`}
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, amount: 0.08 }}
             transition={{ duration: 0.6, ease: [0.19, 0.6, 0.22, 1] }}
         >
             {children}

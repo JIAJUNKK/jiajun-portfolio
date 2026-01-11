@@ -159,7 +159,6 @@
 
 /* ---- Full-bleed base ---- */
 .case-study-fullbleed {
-    width: 100vw;
     margin: 3.5rem 0;
     position: relative;
 }
@@ -182,30 +181,4 @@
     padding: 0 var(--cs-pad-x) 0.2rem;
     font-size: 0.86rem;
     color: var(--cs-subtle);
-}
-
-/* ---- Tech stack icon row ---- */
-.case-study-stack {
-    margin-top: 0.4rem;
-}
-
-.case-study-stack__icons {
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
-    margin-top: 0.35rem;
-
-    img {
-        height: 45px;
-        width: auto;
-        display: block;
-        object-fit: contain;
-        opacity: 0.92;
-        transition: transform 0.18s ease-out, opacity 0.18s ease-out;
-
-        &:hover {
-            transform: translateY(-1px) scale(1.03);
-            opacity: 1;
-        }
-    }
 }

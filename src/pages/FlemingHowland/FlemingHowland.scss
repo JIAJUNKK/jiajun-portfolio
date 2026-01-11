@@ -2,7 +2,7 @@
 @use "../../styles/theme" as *;
 @use "../../styles/caseStudy/caseStudy__shared.scss" as *;
 
-.fh-page {
+.cs-page {
     min-height: 100vh;
     color: $primary;
     background-color: white;
@@ -10,44 +10,11 @@
     overscroll-behavior-y: none;
 }
 
-.fh-page__inner {
+.cs-page__inner {
     margin: 0 auto;
     padding: 50px;
 
     @media (max-width: 768px) {
         padding: $pad-mobile;
     }
-}
-
-/* FOOTER */
-
-.fh-footer {
-    margin-top: 2rem;
-    padding-top: 2.1rem;
-    border-top: 1px solid #e5e7eb;
-    display: flex;
-    justify-content: space-between;
-    gap: 1.4rem;
-    align-items: center;
-
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-.fh-footer__title {
-    font-weight: 600;
-    margin-bottom: 0.2rem;
-}
-
-.fh-footer__text {
-    font-size: 0.95rem;
-    color: #4b5563;
-}
-
-.fh-footer__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
 }

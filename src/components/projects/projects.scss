@@ -19,7 +19,7 @@ section#Projects {
         font-size: 36px;
 
         /* Must be above the slab so text stays crisp */
-        z-index: 0;
+        z-index: 20;
 
         /* IMPORTANT: no blur/tint here — the slab handles it */
         background: transparent;
@@ -34,6 +34,7 @@ section#Projects {
         .progressBar {
             height: 10px;
             background-color: $tertiary;
+            border-radius: 999px;
         }
 
     }
@@ -102,7 +103,7 @@ section#Projects {
 
                 h2 {
                     font-size: 50px;
-                    color: $tertiary;
+                    color: $primary-text-color;
 
                     @include mobile {
                         font-size: 36px;
@@ -123,29 +124,53 @@ section#Projects {
                 .button-container {
                     display: flex;
                     flex-direction: row;
-                    justify-content: space-between;
-                    padding: 4%;
-                    gap: 30px;
+                    justify-content: flex-start;
+                    padding: 0;
+                    gap: 12px;
 
-                    .source-code-button-container {
-                        display: flex;
+                    .pillButton {
+                        display: inline-flex;
                         align-items: center;
-                        justify-content: space-around;
+                        gap: 10px;
                         cursor: pointer;
-                        border: 2px solid $primary;
-                        border-radius: 10px;
-                        height: 50px;
-                        width: 50%;
-                        transition: background-color 0.5s, color 0.5s;
+                        text-decoration: none;
+                        border-radius: 999px;
+                        height: 44px;
+                        padding: 0 16px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        letter-spacing: -0.01em;
+                        transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
 
                         &:hover {
-                            background-color: $primary;
-                            color: $light;
+                            transform: translateY(-1px);
                         }
 
-                        @include mobile {
-                            width: auto;
-                            padding: 1px;
+                        &:active {
+                            transform: translateY(0px);
+                            opacity: 0.9;
+                        }
+                    }
+
+                    .pillPrimary {
+                        background: $highlight;
+                        border: 1px solid $highlight;
+                        color: $light;
+
+                        &:hover {
+                            background: $primary;
+                            border: 1px solid $primary;
+                        }
+                    }
+
+                    .pillGhost {
+                        background: $glass-bg;
+                        border: 1px solid $highlight;
+                        color: $primary-text-color;
+
+                        &:hover {
+                            background: rgba($light, 0.85);
+                            border-color: $primary;
                         }
                     }
                 }
