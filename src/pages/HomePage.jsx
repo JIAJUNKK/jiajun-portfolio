@@ -8,16 +8,16 @@ import Hero from "../components/hero/Hero";
 import Experience from "../components/experience/Experience";
 import Projects from "../components/projects/Projects";
 import TechStack from "../components/techstack/TechStack";
-import Cursor from "../components/cursor/Cursor";
+// import Cursor from "../components/cursor/Cursor";
 
 const HomePage = () => {
     const coarse = useCoarsePointer();
 
     return (
         <div>
-            {/* Cursor is not useful on touch + often causes RAF/perf cost */}
+            {/* Cursor is not useful on touch + often causes RAF/perf cost 
             {!coarse && <Cursor />}
-
+            */}
             <section id="Home">
                 <Hero />
                 <TechStack />
