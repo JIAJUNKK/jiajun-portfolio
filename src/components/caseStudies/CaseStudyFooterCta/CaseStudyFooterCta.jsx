@@ -15,7 +15,11 @@ const CaseStudyFooterCta = ({
     badge = "Available for projects",
 }) => {
     const ref = useRef(null);
-    const inView = useInView(ref, { amount: 0.35, once: false });
+    const inView = useInView(ref, {
+        amount: 0.1,
+        margin: "0px 0px 25% 0px",
+        once: false,
+    });
 
     const variants = useMemo(
         () => ({

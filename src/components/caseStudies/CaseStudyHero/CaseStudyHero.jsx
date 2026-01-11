@@ -150,7 +150,7 @@ const CaseStudyHero = forwardRef(
                                         <p className="case-study-hero__label">
                                             Stack
                                         </p>
-                                        <div className="case-study-stack__icons">
+                                        <div className="case-study-hero__stack-icons">
                                             {stackIcons.map((icon) => {
                                                 if (typeof icon === "string") {
                                                     const hasExt = icon.includes(".");

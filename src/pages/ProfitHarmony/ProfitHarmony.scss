@@ -1,0 +1,20 @@
+// src/pages/FlemingHowland.scss
+@use "../../styles/theme" as *;
+@use "../../styles/caseStudy/caseStudy__shared.scss" as *;
+
+.cs-page {
+    min-height: 100vh;
+    color: $primary;
+    background-color: white;
+    /* Helps mobile browsers keep scrolling smooth during heavy transforms */
+    overscroll-behavior-y: none;
+}
+
+.cs-page__inner {
+    margin: 0 auto;
+    padding: 50px;
+
+    @media (max-width: 768px) {
+        padding: $pad-mobile;
+    }
+}
