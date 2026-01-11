@@ -1,32 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useIsMobile } from "../../../hooks/useIsMobile";
+import { HOME_SECTIONS, CASE_STUDY_NAV, projects } from "../../../constants/index";
 import "./Links.scss";
 
 const navOffset = () => (document.querySelector(".navbar")?.offsetHeight || 0) + 12;
-
-function useIsMobile(breakpoint = 900) {
-    const [isMobile, setIsMobile] = useState(() => {
-        if (typeof window === "undefined") return false;
-        return window.matchMedia(`(max-width: ${breakpoint}px)`).matches;
-    });
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-
-        const mql = window.matchMedia(`(max-width: ${breakpoint}px)`);
-        const onChange = (e) => setIsMobile(e.matches);
-
-        if (mql.addEventListener) mql.addEventListener("change", onChange);
-        else mql.addListener(onChange);
-
-        return () => {
-            if (mql.removeEventListener) mql.removeEventListener("change", onChange);
-            else mql.removeListener(onChange);
-        };
-    }, [breakpoint]);
-
-    return isMobile;
-}
 
 export default function Links({ closeSidebar = () => { } }) {
     const location = useLocation();
@@ -36,52 +14,27 @@ export default function Links({ closeSidebar = () => { } }) {
     const onCaseStudy = location.pathname.startsWith("/projects/");
     const currentHash = (location.hash || "").replace("#", "");
 
-    const isMobile = useIsMobile(900);
+    const isMobile = useIsMobile(768);
 
-    // ---------- Sections ----------
-    const homeSections = useMemo(
-        () => [
-            { label: "Home", type: "section", id: "Home" },
-            { label: "What I do", type: "section", id: "What-I-Do" },
-            { label: "Experience", type: "section", id: "Experience" },
-            { label: "Projects", type: "section", id: "Projects" },
-            { label: "About", type: "section", id: "About" },
-            { label: "Contact", type: "section", id: "Contact" },
-        ],
-        []
-    );
-
-    // ---------- Case studies ----------
-    const caseStudies = useMemo(
-        () => [
-            {
-                label: "Fleming Howland",
+    const caseStudies = useMemo(() => {
+        return projects
+            .filter((p) => !!p.to && p.to.startsWith("/projects/"))
+            .map((p) => ({
+                label: p.title,
                 type: "route",
-                to: "/projects/fleming-howland",
-                meta: "Translation workflow · WordPress",
-                tags: ["WordPress", "Workflow"],
-            },
-            // add more later...
-        ],
-        []
-    );
+                to: p.to,
+                meta: p.meta ?? (Array.isArray(p.description) ? p.description[0] : ""),
+                tags: p.tags ?? [],
+            }));
+    }, []);
 
-    // On case study page, left column becomes "Navigate"
-    const caseStudyNav = useMemo(
-        () => [
-            { label: "Back to Home", type: "route", to: "/#Home" },
-            // { label: "Back to Projects", type: "route", to: "/#Projects" },
-            { label: "Contact Jia Jun", type: "route", to: "/#Contact" },
-        ],
-        []
-    );
 
     const leftColumn = useMemo(() => {
         if (onCaseStudy) {
-            return { title: "Navigate", items: caseStudyNav, kind: "rows" };
+            return { title: "Navigate", items: CASE_STUDY_NAV, kind: "rows" };
         }
-        return { title: "On this page", items: homeSections, kind: "rows-2col" };
-    }, [onCaseStudy, caseStudyNav, homeSections]);
+        return { title: "On this page", items: HOME_SECTIONS, kind: "rows-2col" };
+    }, [onCaseStudy, CASE_STUDY_NAV, HOME_SECTIONS]);
 
     const rightColumn = useMemo(() => {
         return { title: "Case studies", items: caseStudies, kind: "caseStudies" };
