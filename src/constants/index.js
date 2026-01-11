@@ -107,7 +107,7 @@ export const experiences = [
 
 export const projects = [
     {
-        id: 1,
+        id: "fleming-howland",
         title: "Fleming Howland",
         img: "/projects/FlemingHowland.png",
         description: [
@@ -115,22 +115,22 @@ export const projects = [
             "Developed reusable blocks for website."
         ],
         liveDemoLink: "https://fleminghowland.com/",
+        type: "route",
+        to: "/projects/fleming-howland",
     },
     {
-        id: 2,
-        title: "7 Mantap",
-        img: "/projects/7Mantap.png",
+        id: "profit-harmony",
+        title: "Profit Harmony",
+        img: "/projects/ProfitHarmony.png",
         description: [
-            "Leveraged REST API to establish connection to the MongoDB.",
-            "Integrated with Stripe's API to facilitate secure checkout.",
-            "Enhanced UX by interpreting the users' data in the database.",
-            "Empowered users with comprehensive post-purchase support, including email confirmations, access to order history for tracking, and the ability to manage personal details seamlessly.",
+            "Built a Stripe-powered membership community platform with Firebase automation for onboarding, gated content access, and subscription management."
         ],
-        githubLink: "https://github.com/JIAJUNKK/7Mantap",
-        // liveDemoLink: "https://7mantap.vercel.app/",
+        liveDemoLink: "https://profitharmony.com/",
+        type: "route",
+        to: "/projects/profit-harmony",
     },
     {
-        id: 3,
+        id: "j-expense",
         title: "J Expense",
         img: "/projects/J-Expense.png",
         description: [
@@ -142,28 +142,18 @@ export const projects = [
         ],
         liveDemoLink: "https://j-expense-tracker.vercel.app/",
     },
-    {
-        id: 4,
-        title: "Health Buddy",
-        img: "/projects/healthBuddy.png",
-        description: [
-            "Finalised the UI/UX requirements and implemented those as a design lead of a team of 5",
-            "Set up Firebase server for Health Buddy's backend.",
-            "Enable real time update to track users' progress with maximum delay of 1 second.",
-        ],
-        githubLink: "https://github.com/JIAJUNKK/HealthBuddy",
-    },
-    {
-        id: 5,
-        title: "Bomb Sweeper",
-        img: "/projects/bombSweeper.png",
-        description: [
-            "Implemented the famous bomb sweeper game using Java.Swing.",
-            "Enhanced the code's efficiency using recursion.",
-            "Implemented adaptive difficulty algorithm for a balanced gaming experience, increasing player engagement by 50% and extending average playtime by 30%, catering to all player skill levels.",
-        ],
-        githubLink: "https://github.com/JIAJUNKK/BombSweeper",
-    },
 ];
 
-export default { SERVICES, experiences, projects }
+export const HOME_SECTIONS = [
+    { label: "Home", type: "section", id: "Home" },
+    { label: "What I do", type: "section", id: "What-I-Do" },
+    { label: "Experience", type: "section", id: "Experience" },
+    { label: "Projects", type: "section", id: "Projects" },
+    { label: "About", type: "section", id: "About" },
+    { label: "Contact", type: "section", id: "Contact" },
+];
+
+export const CASE_STUDY_NAV = [
+    { label: "Back to Projects", type: "route", to: "/#Projects" },
+    { label: "Contact Jia Jun", type: "route", to: "/#Contact" },
+];
