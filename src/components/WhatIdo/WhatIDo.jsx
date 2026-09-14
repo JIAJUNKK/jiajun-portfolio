@@ -4,8 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SERVICES } from "../../constants";
 import "./WhatIDo.scss";
 
-ScrollTrigger.config({ ignoreMobileResize: true });      // GSAP 3.12+
-if (ScrollTrigger.isTouch) ScrollTrigger.normalizeScroll(true);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WhatIDo({ services = SERVICES }) {
@@ -14,137 +12,301 @@ export default function WhatIDo({ services = SERVICES }) {
     const cardsRef = useRef([]);
 
     useLayoutEffect(() => {
-        const NAV_H = document.querySelector(".navbar")?.offsetHeight || 100;
-        const OFFSET = NAV_H + 24;
+        const root = rootRef.current;
+        const stage = stageRef.current;
+        const cards = cardsRef.current.filter(Boolean);
 
-        const ready = async () => {
-            try { await (document.fonts?.ready ?? Promise.resolve()); } catch { }
-            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+        if (!root || !stage || !cards.length) return;
+
+        let frame = null;
+
+        // --------------------------------------------------
+        // Measurements
+        // --------------------------------------------------
+
+        const getViewportHeight = () =>
+            window.visualViewport?.height ?? window.innerHeight;
+
+        const getNavbarHeight = () =>
+            document
+                .querySelector(".navbar")
+                ?.getBoundingClientRect()
+                .height ?? 0;
+
+        const getPinOffset = () => getNavbarHeight();
+
+        const setStageHeight = () => {
+            const available =
+                getViewportHeight() - getPinOffset();
+
+            stage.style.height = `${Math.max(
+                300,
+                available
+            )}px`;
         };
 
-        let mm = null;
-        let ctx = null;
-        let killed = false;
+        /*
+         * Every header has the same CSS height,
+         * so measuring the first one is enough.
+         */
+        const getHeaderHeight = () => {
+            const header =
+                cards[0]?.querySelector(".rows__header");
 
-        const init = async () => {
-            await ready();
-            if (killed) return;
-            mm = gsap.matchMedia();
-            ctx = gsap.context(() => {
-                mm.add("(min-width: 1025px)", () => {
-                    const cards = cardsRef.current.filter(Boolean);
-                    if (!cards.length) return;
-
-                    const STACK_GAP = 90;
-                    const SCROLL_PER_CARD = 420;
-
-                    cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
-
-                    const tl = gsap.timeline({
-                        defaults: { ease: "power1.out" },
-                        scrollTrigger: {
-                            trigger: stageRef.current,
-                            start: () => `top top+=${OFFSET}`,
-                            // add extra runway so release feels natural
-                            end: () =>
-                                `+=${cards.length * SCROLL_PER_CARD + Math.round(window.innerHeight * 0.5)}`,
-                            scrub: 0.7,
-                            pin: true,
-                            pinSpacing: true,
-                            fastScrollEnd: false,
-                            anticipatePin: 1,
-                            invalidateOnRefresh: true,
-                        },
-                    });
-
-                    cards.forEach((card, i) => {
-                        tl.fromTo(
-                            card,
-                            { y: "110%", immediateRender: false },
-                            { y: i * STACK_GAP, duration: 0.9, ease: "power1.out" },
-                            i
-                        );
-                    });
-
-                    return () => tl.scrollTrigger?.kill();
-                });
-                // Mobile & tablets
-                mm.add("(max-width: 1024px)", () => {
-                    const cards = cardsRef.current.filter(Boolean);
-                    if (!cards.length) return;
-
-                    const STACK_GAP = 65;
-                    const SCROLL_PER_CARD = 420;
-
-                    cards.forEach((el, i) => (el.style.zIndex = String(100 + i)));
-
-                    const tl = gsap.timeline({
-                        defaults: { ease: "power1.out" },
-                        scrollTrigger: {
-                            trigger: stageRef.current,
-                            start: () => `top top+=${OFFSET}`,
-                            end: `+=${cards.length * SCROLL_PER_CARD}`,
-                            scrub: 0.8,
-                            pin: true,
-                            anticipatePin: 1,
-                            invalidateOnRefresh: true,
-                        },
-                    });
-
-                    cards.forEach((card, i) => {
-                        tl.fromTo(
-                            card,
-                            { y: "110%", immediateRender: false },
-                            { y: i * STACK_GAP, duration: 0.9, ease: "power1.out" },
-                            i
-                        );
-                    });
-
-                    return () => tl.scrollTrigger?.kill();
-                });
-            }, rootRef);
-
-            ScrollTrigger.refresh();
-            requestAnimationFrame(() => { if (!killed) ScrollTrigger.refresh(); });
+            return (
+                header?.getBoundingClientRect().height ??
+                64
+            );
         };
 
-        init();
+        /*
+         * Card 01 = 0
+         * Card 02 = 1 header down
+         * Card 03 = 2 headers down
+         */
+        const getCardRestY = (index) =>
+            index * getHeaderHeight();
+
+        /*
+         * One transition per incoming card.
+         */
+        const getScrollPerCard = () =>
+            gsap.utils.clamp(
+                320,
+                650,
+                getViewportHeight() * 0.72
+            );
+
+        setStageHeight();
+
+        // --------------------------------------------------
+        // GSAP
+        // --------------------------------------------------
+
+        const ctx = gsap.context(() => {
+            cards.forEach((card, index) => {
+                gsap.set(card, {
+                    zIndex: 100 + index,
+                    force3D: true,
+                });
+            });
+
+            /*
+             * First card is already on screen.
+             */
+            gsap.set(cards[0], {
+                y: 0,
+            });
+
+            /*
+             * Remaining cards wait immediately below
+             * the pinned stage.
+             */
+            gsap.set(cards.slice(1), {
+                y: () => stage.clientHeight,
+            });
+
+            if (cards.length === 1) return;
+
+            const timeline = gsap.timeline({
+                defaults: {
+                    ease: "none",
+                },
+
+                scrollTrigger: {
+                    trigger: stage,
+
+                    start: () =>
+                        `top top+=${getPinOffset()}`,
+
+                    /*
+                     * No fake dead-scroll after the final card.
+                     */
+                    end: () =>
+                        `+=${Math.round(
+                            (cards.length - 1) *
+                            getScrollPerCard()
+                        )}`,
+
+                    pin: true,
+                    pinSpacing: true,
+
+                    scrub: 0.35,
+
+                    anticipatePin: 1,
+
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            cards.slice(1).forEach((card, index) => {
+                const cardIndex = index + 1;
+
+                timeline.fromTo(
+                    card,
+                    {
+                        y: () => stage.clientHeight,
+                    },
+                    {
+                        /*
+                         * This is the key.
+                         *
+                         * Each new card stops exactly
+                         * one header below the previous.
+                         */
+                        y: () =>
+                            getCardRestY(cardIndex),
+
+                        duration: 1,
+                        ease: "none",
+                    },
+                    index
+                );
+            });
+        }, root);
+
+        // --------------------------------------------------
+        // Refresh handling
+        // --------------------------------------------------
+
+        const requestRefresh = () => {
+            if (frame) {
+                cancelAnimationFrame(frame);
+            }
+
+            frame = requestAnimationFrame(() => {
+                setStageHeight();
+
+                requestAnimationFrame(() => {
+                    ScrollTrigger.refresh();
+                });
+            });
+        };
+
+        const handleRefreshInit = () => {
+            setStageHeight();
+        };
+
+        ScrollTrigger.addEventListener(
+            "refreshInit",
+            handleRefreshInit
+        );
+
+        window.addEventListener(
+            "resize",
+            requestRefresh
+        );
+
+        window.visualViewport?.addEventListener(
+            "resize",
+            requestRefresh
+        );
+
+        document.fonts?.ready
+            ?.then(requestRefresh)
+            .catch(() => { });
+
+        requestRefresh();
 
         return () => {
-            killed = true;
-            ctx?.revert();
-            mm?.revert();
+            if (frame) {
+                cancelAnimationFrame(frame);
+            }
+
+            window.removeEventListener(
+                "resize",
+                requestRefresh
+            );
+
+            window.visualViewport?.removeEventListener(
+                "resize",
+                requestRefresh
+            );
+
+            ScrollTrigger.removeEventListener(
+                "refreshInit",
+                handleRefreshInit
+            );
+
+            ctx.revert();
         };
-    }, []);
+    }, [services.length]);
 
     return (
-        <div className="what-i-do-rows" ref={rootRef} aria-labelledby="what-title">
-            <div className="rows__stage" ref={stageRef}>
-                {services.map((s, i) => (
+        <section
+            ref={rootRef}
+            className="what-i-do-rows"
+            aria-labelledby="what-title"
+        >
+            <div
+                ref={stageRef}
+                className="rows__stage"
+            >
+                {services.map((service, index) => (
                     <article
-                        key={s.id}
+                        key={service.id}
                         className="rows__card"
-                        ref={(el) => (cardsRef.current[i] = el)}
+                        ref={(element) => {
+                            cardsRef.current[index] =
+                                element;
+                        }}
                     >
-                        <div className="rows__numRow">
-                            <span className="rows__num">{String(i + 1).padStart(2, "0")}</span>
-                        </div>
+                        <header className="rows__header">
+                            <span className="rows__num">
+                                {String(index + 1).padStart(
+                                    2,
+                                    "0"
+                                )}
+                            </span>
+
+                            <h3 className="rows__h3">
+                                {service.title}
+                            </h3>
+                        </header>
 
                         <div className="rows__content">
-                            <h3 className="rows__h3">{s.title}</h3>
-                            <p className="rows__body">{s.body}</p>
-                            <ul className="rows__bullets" role="list">
-                                {(s.bullets || []).map((b, j) => (
-                                    <li key={j} className="rows__bullet">
-                                        <span className="rows__bulletIndex">{String(j + 1).padStart(2, "0")}</span>
-                                        <span className="rows__bulletLabel">{b}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            <p className="rows__body">
+                                {service.body}
+                            </p>
+
+                            {!!service.bullets?.length && (
+                                <ul
+                                    className="rows__bullets"
+                                    role="list"
+                                >
+                                    {service.bullets.map(
+                                        (
+                                            bullet,
+                                            bulletIndex
+                                        ) => (
+                                            <li
+                                                key={
+                                                    bulletIndex
+                                                }
+                                                className="rows__bullet"
+                                            >
+                                                <span className="rows__bulletIndex">
+                                                    {String(
+                                                        bulletIndex +
+                                                        1
+                                                    ).padStart(
+                                                        2,
+                                                        "0"
+                                                    )}
+                                                </span>
+
+                                                <span className="rows__bulletLabel">
+                                                    {bullet}
+                                                </span>
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            )}
                         </div>
                     </article>
                 ))}
             </div>
-        </div>
+        </section>
     );
 }

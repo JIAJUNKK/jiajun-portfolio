@@ -1,137 +1,276 @@
 @use "../../styles/theme" as *;
 
-$left-col-min: 120px;
-$left-col-max: 220px;
-
 .what-i-do-rows {
     width: 100%;
-    margin: 0 auto;
-    padding: clamp(48px, 8vw, 120px) 0;
+    position: relative;
+
+    padding:
+        clamp(48px, 7vw, 100px) 0;
+
     color: $primary-text-color;
+}
 
-    .rows__stage {
-        position: relative;
-        height: 150svh;
-        width: 100%;
-        overflow: hidden;
 
-        .rows__card {
-            position: absolute;
-            inset: 0;
-            background: $light;
-            border-top: 1px solid $primary;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10vw;
-            padding-inline: $pad-mobile;
-            will-change: transform;
+/* ======================================================
+   STAGE
+   ====================================================== */
 
-            .rows__numRow {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 12px;
-                flex: 0 0 clamp($left-col-min, 22vw, $left-col-max);
-                min-width: clamp($left-col-min, 22vw, $left-col-max);
+.rows__stage {
+    position: relative;
 
-                @include mobile {
-                    min-width: 0;
-                }
+    width: 100%;
+    height: 100dvh;
 
-                .rows__num {
-                    font-size: $fs-num;
-                    font-weight: 600;
-                    letter-spacing: .02em;
-                }
-            }
+    overflow: hidden;
 
-            .rows__content {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-start;
-                flex: 1 1 auto;
-                min-width: 0;
+    background: $light;
+}
 
-                .rows__h3 {
-                    font-size: $fs-h3;
-                    line-height: 1.1;
-                    margin-bottom: 5vh;
-                }
 
-                .rows__body {
-                    font-size: $fs-p;
-                    margin: 0 0 18px 0;
-                }
+/* ======================================================
+   CARD
+   ====================================================== */
 
-                .rows__bullets {
-                    display: grid;
-                    gap: 14px;
-                    max-width: 68ch;
+.rows__card {
+    position: absolute;
+    inset: 0;
 
-                    .rows__bullet {
-                        display: grid;
-                        grid-template-columns: auto 1fr;
-                        align-items: center;
-                        gap: 14px;
-                        padding: 12px 0;
-                        border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    width: 100%;
+    height: 100%;
 
-                        .rows__bulletIndex {
-                            font-feature-settings: "tnum";
-                        }
+    background: $light;
 
-                        .rows__bulletLabel {
-                            font-weight: 600;
-                            font-size: $fs-p;
-                        }
-                    }
-                }
-            }
-        }
+    overflow: hidden;
+
+    border-top: 1px solid $primary;
+
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+
+/* ======================================================
+   HEADER
+
+   THIS is the visible piece of old cards.
+   All cards use the exact same header height.
+   ====================================================== */
+
+.rows__header {
+    /*
+     * This controls how much of every previous
+     * card remains visible.
+     */
+    height: clamp(64px,
+            8vh,
+            92px);
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(90px, 18vw) minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: clamp(24px,
+            6vw,
+            100px);
+
+    padding-inline:
+        clamp(20px, 6vw, 96px);
+
+    background: $light;
+}
+
+
+.rows__num {
+    font-size: $fs-num;
+    font-weight: 600;
+
+    line-height: 1;
+
+    letter-spacing: 0.02em;
+}
+
+
+.rows__h3 {
+    min-width: 0;
+
+    margin: 0;
+
+    font-size: $fs-h3;
+
+    line-height: 1;
+
+    /*
+     * Prevent a long title wrapping and changing
+     * the stack height.
+     */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ======================================================
+   BODY
+   ====================================================== */
+
+.rows__content {
+    height: calc(100% - clamp(64px, 8vh, 92px));
+
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(90px, 18vw) minmax(0, 1fr);
+
+    column-gap: clamp(24px,
+            6vw,
+            100px);
+
+    align-content: start;
+
+    padding:
+        clamp(24px, 4vh, 48px) clamp(20px, 6vw, 96px);
+}
+
+.rows__body,
+.rows__bullets {
+    grid-column: 2;
+}
+
+.rows__body {
+    width: 100%;
+    max-width: 68ch;
+
+    margin:
+        0 0 clamp(16px, 3vh, 28px);
+
+    font-size: $fs-p;
+    line-height: 1.5;
+}
+
+
+.rows__bullets {
+    width: 100%;
+    max-width: 68ch;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.rows__bullet {
+    display: grid;
+
+    grid-template-columns:
+        auto minmax(0, 1fr);
+
+    gap: 14px;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid rgba(0, 0, 0, 0.14);
+}
+
+
+.rows__bulletIndex {
+    white-space: nowrap;
+
+    font-feature-settings: "tnum";
+}
+
+
+.rows__bulletLabel {
+    min-width: 0;
+
+    font-size: $fs-p;
+    font-weight: 600;
+
+    line-height: 1.35;
+}
+
+
+/* ======================================================
+   TABLET / MOBILE
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .rows__header {
+        height: clamp(54px,
+                7vh,
+                68px);
+
+        grid-template-columns:
+            auto minmax(0, 1fr);
+
+        gap: 14px;
+
+        padding-inline: $pad-mobile;
     }
 
-    @include mobile {
-        .rows__stage {
-            height: 100svh;
-        }
+    .rows__h3 {
+        /*
+         * Still one line because the height of the
+         * header must remain predictable.
+         */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-        .rows__stage .rows__card {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            grid-template-rows: 0.1fr min-content auto;
-            gap: 8px 16px;
-            padding-top: 16px;
-            position: absolute;
-            inset: 0;
-        }
+    .rows__content {
+        height: calc(100% - clamp(54px, 7vh, 68px));
 
-        .rows__stage .rows__card .rows__numRow {
-            grid-column: 0.5;
-            grid-row: 1;
-        }
+        display: block;
 
-        .rows__stage .rows__card .rows__content {
-            display: contents;
-        }
+        padding:
+            clamp(20px, 4vh, 32px) $pad-mobile;
+    }
 
-        .rows__stage .rows__card .rows__content .rows__h3 {
-            grid-column: 2;
-            grid-row: 1;
-            margin: 0 0 8px 0;
-        }
+    .rows__body,
+    .rows__bullets {
+        width: 100%;
+        max-width: none;
+    }
+}
 
-        .rows__stage .rows__card .rows__content .rows__body {
-            grid-column: 1 / -1;
-            grid-row: 2;
-            margin: 0 0 12px 0;
-        }
 
-        .rows__stage .rows__card .rows__content .rows__bullets {
-            grid-column: 1 / -1;
-            grid-row: 3;
-        }
+/* ======================================================
+   SHORT VIEWPORTS
+   1168 × 545 etc.
+   ====================================================== */
+
+@media (max-height: 650px) {
+    .rows__header {
+        /*
+         * Make the visible strips smaller when
+         * vertical space is limited.
+         */
+        height: 54px;
+    }
+
+    .rows__content {
+        height: calc(100% - 54px);
+
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .rows__body {
+        line-height: 1.35;
+
+        margin-bottom: 10px;
+    }
+
+    .rows__bullet {
+        padding: 7px 0;
     }
 }
