@@ -24,8 +24,17 @@ export default function WhatIDo({ services = SERVICES }) {
         // Measurements
         // --------------------------------------------------
 
-        const getViewportHeight = () =>
+        const isMobileLike = () =>
+            window.matchMedia?.("(max-width: 600px), (pointer: coarse)")?.matches ?? false;
+
+        const readViewportHeight = () =>
             window.visualViewport?.height ?? window.innerHeight;
+
+        let layoutWidth = window.innerWidth;
+        let stableViewportHeight = readViewportHeight();
+
+        const getViewportHeight = () =>
+            isMobileLike() ? stableViewportHeight : readViewportHeight();
 
         const getNavbarHeight = () =>
             document
@@ -183,6 +192,24 @@ export default function WhatIDo({ services = SERVICES }) {
             });
         };
 
+        const handleResize = () => {
+            const nextWidth = window.innerWidth;
+
+            /*
+             * Mobile browsers resize visualViewport while the address bar hides
+             * and shows during touch scroll. Refreshing a pinned ScrollTrigger
+             * there changes pin spacing above later sections, which makes About
+             * visibly jump against the user's drag direction.
+             */
+            if (isMobileLike() && Math.abs(nextWidth - layoutWidth) < 1) {
+                return;
+            }
+
+            layoutWidth = nextWidth;
+            stableViewportHeight = readViewportHeight();
+            requestRefresh();
+        };
+
         const handleRefreshInit = () => {
             setStageHeight();
         };
@@ -194,12 +221,14 @@ export default function WhatIDo({ services = SERVICES }) {
 
         window.addEventListener(
             "resize",
-            requestRefresh
+            handleResize,
+            { passive: true }
         );
 
-        window.visualViewport?.addEventListener(
-            "resize",
-            requestRefresh
+        window.addEventListener(
+            "orientationchange",
+            handleResize,
+            { passive: true }
         );
 
         document.fonts?.ready
@@ -215,12 +244,12 @@ export default function WhatIDo({ services = SERVICES }) {
 
             window.removeEventListener(
                 "resize",
-                requestRefresh
+                handleResize
             );
 
-            window.visualViewport?.removeEventListener(
-                "resize",
-                requestRefresh
+            window.removeEventListener(
+                "orientationchange",
+                handleResize
             );
 
             ScrollTrigger.removeEventListener(

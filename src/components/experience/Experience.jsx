@@ -1,7 +1,6 @@
-import { useRef } from "react";
 import "./experience.scss";
-import { m, useScroll, useSpring, useTransform } from "framer-motion";
 import { experiences } from "../../constants";
+import useCoarsePointer from "../../hooks/useCoarsePointer";
 
 import {
     VerticalTimeline,
@@ -9,11 +8,12 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = ({ experience, visible = false }) => {
     return (
 
         <VerticalTimelineElement
             className="experience-card"
+            visible={visible}
             contentStyle={{
                 background: "white",
                 color: "#011f4b",
@@ -56,17 +56,7 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
-    const ref = useRef();
-
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["end end", "start start"],
-    });
-
-    const scaleX = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-    });
+    const coarse = useCoarsePointer();
 
     return (
         <div className="experience">
@@ -76,12 +66,14 @@ const Experience = () => {
             </div>
             <div className="vertical-time-line">
                 <VerticalTimeline
+                    animate={!coarse}
                     lineColor={'black'}
                 >
                     {experiences.map((experience, index) => (
                         <ExperienceCard
                             key={`experience-${index}`}
                             experience={experience}
+                            visible={coarse}
                         />
                     ))}
                 </VerticalTimeline>

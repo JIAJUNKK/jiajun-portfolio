@@ -94,11 +94,11 @@ section#Projects {
                 gap: 30px;
 
                 @include mobile {
-                    gap: 0px;
+                    gap: 20px;
                     transform: none !important;
                     padding: 10px;
-                    align-items: center;
-                    text-align: center;
+                    align-items: flex-start;
+                    text-align: left;
                 }
 
                 .titleLink {

@@ -1,18 +1,11 @@
 import { useRef, useState } from "react";
-import { m } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import DecryptedText from "../../reactBitsComponent/DecryptedText/DecryptedText";
+import useCoarsePointer from "../../hooks/useCoarsePointer";
 import "./contact.scss";
 
-const variants = {
-    initial: { y: 100, opacity: 0 },
-    animate: {
-        y: 0, opacity: 1,
-        transition: { duration: 0.5, staggerChildren: 0.1 },
-    },
-};
-
 const Contact = () => {
+    const coarse = useCoarsePointer();
     const formRef = useRef(null);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -37,11 +30,11 @@ const Contact = () => {
     };
 
     return (
-        <div className="contact" variants={variants} initial="initial">
-            <div className="textContainer" variants={variants}>
+        <div className="contact">
+            <div className="textContainer">
                 <h1>Let's work together</h1>
 
-                <div className="item" variants={variants}>
+                <div className="item">
                     <h2>Mail</h2>
                     <DecryptedText
                         text="kongjiajun040103@gmail.com"
@@ -50,14 +43,14 @@ const Contact = () => {
                         parentClassName="all-letters"
                         encryptedClassName="encrypted"
                         revealDirection="start"
-                        animateOn="view"
+                        animateOn={coarse ? "hover" : "view"}
                         speed={60}
                         maxIterations={10}
                         sequential
                     />
                 </div>
 
-                <div className="item" variants={variants}>
+                <div className="item">
                     <h2>Phone</h2>
                     <DecryptedText
                         text="+44 07917 997 042"
@@ -66,7 +59,7 @@ const Contact = () => {
                         parentClassName="all-letters"
                         encryptedClassName="encrypted"
                         revealDirection="start"
-                        animateOn="view"
+                        animateOn={coarse ? "hover" : "view"}
                         speed={60}
                         maxIterations={10}
                         sequential
@@ -78,7 +71,6 @@ const Contact = () => {
                 <form
                     ref={formRef}
                     onSubmit={sendEmail}
-                    initial={{ opacity: 0 }}
                 >
                     <input type="text" name="user_name" placeholder="Name" autoComplete="name" required />
                     <input type="email" name="user_email" placeholder="Email" autoComplete="email" required />

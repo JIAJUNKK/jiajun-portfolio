@@ -84,8 +84,19 @@
 
         @include mobile {
             width: 80%;
+            max-width: 320px;
             margin-bottom: 20%;
             top: unset;
+            overflow: clip;
+            padding: 14px;
+
+            img {
+                width: 82%;
+            }
+
+            .circular-text {
+                inset: 14px;
+            }
         }
 
     }
